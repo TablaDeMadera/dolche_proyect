@@ -132,7 +132,9 @@ public class TaskManager extends javax.swing.JFrame {
     }//GEN-LAST:event_capButtonActionPerformed
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
-        // TODO add your handling code here:
+        AdminSis adm = new AdminSis();
+        adm.setVisible(true);   
+        this.setVisible(false);
     }//GEN-LAST:event_adminButtonActionPerformed
 
     /**
