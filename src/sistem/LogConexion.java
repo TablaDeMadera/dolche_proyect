@@ -1,3 +1,5 @@
+package sistem;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -32,25 +34,25 @@ public class LogConexion {
          selectUser = connection.prepareStatement(
             "SELECT * FROM user WHERE username = ?");
          selectPass = connection.prepareStatement(
-            "SELECT * FROM user WHERE password = ?");           
+            "SELECT * FROM user WHERE password = ?");       
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
        }
    }
    
-   public boolean compare(String name, String code){
+   public String compare(String name, String code){
        ResultSet resultSet1 = null;
        ResultSet resultSet2 = null;
        try {
            selectUser.setString(1, name);
            selectPass.setString(1, code);
            resultSet1 = selectUser.executeQuery(); 
-           resultSet2= selectPass.executeQuery(); 
+           resultSet2 = selectPass.executeQuery(); 
         while (resultSet1.next()){
            if(resultSet1.getString("username").equals(name)){
                while(resultSet2.next()){
                    if(resultSet2.getString("password").equals(code)){
-                       return true;
+                       return resultSet1.getString("privilege");
                    }
                }
            }
@@ -70,7 +72,7 @@ public class LogConexion {
             close();
          }
       }
-       return false;
+       return null;
    }
    
     public void close(){
