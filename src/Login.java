@@ -1,3 +1,6 @@
+
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -43,13 +46,12 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/logo.png"))); // NOI18N
 
-        passwordField.addActionListener(new java.awt.event.ActionListener() {
+        jButton1.setText("Login");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                passwordFieldActionPerformed(evt);
+                jButton1ActionPerformed(evt);
             }
         });
-
-        jButton1.setText("Login");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -97,9 +99,28 @@ public class Login extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_passwordFieldActionPerformed
+        String user =  userField.getText();
+        String pass = passwordField.getText();
+        LogConexion conex = new LogConexion();
+        conex.open();
+        if(conex.compare(user, pass)){
+            conex.close();
+            JOptionPane.showMessageDialog(this,"ENTRADA CONCEDIDA",
+                         "System",JOptionPane.PLAIN_MESSAGE);
+            /* el siguiente codigo apagara esta ventana dando lugar a la de opciones
+            AdminSis administrador = new AdminSis();
+            administrador.setVisible(true);
+            this.setVisible(false);
+            */
+        }
+        else{
+            conex.close();
+            JOptionPane.showMessageDialog(this,"ENTRADA DENEGADA",
+                         "System",JOptionPane.PLAIN_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
