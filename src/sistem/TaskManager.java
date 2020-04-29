@@ -35,6 +35,9 @@ public class TaskManager extends javax.swing.JFrame {
                 reportButton.setEnabled(false);
                 viewerButton.setEnabled(false);
                 break;
+            case "7":
+                //modo absoluto
+                break;
             default:
                 break;
         }
