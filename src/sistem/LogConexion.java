@@ -14,13 +14,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Capital
  */
 public class LogConexion {
-   private static final String URL = "jdbc:mysql://127.0.0.1:3306/dolche?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+   private static  String URL;
    private static final String USERNAME = "root";
    private static final String PASSWORD = "";
    private Connection connection; 
@@ -28,15 +29,18 @@ public class LogConexion {
    private PreparedStatement selectPass; 
 
    
-   public void open(){
+   public void open(String PIN){
+       this.URL = PIN;
        try {
-           connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+         connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
          selectUser = connection.prepareStatement(
             "SELECT * FROM user WHERE username = ?");
          selectPass = connection.prepareStatement(
             "SELECT * FROM user WHERE password = ?");       
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           JOptionPane.showMessageDialog(null,"NO CONEXION CON BASE DE DATOS",
+                         "System",JOptionPane.PLAIN_MESSAGE);
        }
    }
    
