@@ -371,28 +371,14 @@ public class Capture extends javax.swing.JFrame {
         String p20 = smiField.getText();
         String p21 = sfiField.getText();
         
-        
-        String ip="", pr="", db="", URL;
-        Properties p = new Properties();
         LogConexion registrar = new LogConexion();
-        try {   
-            p.load(new FileReader("config.properties"));
-            ip = p.getProperty("ip");
-            pr = p.getProperty("port");
-            db = p.getProperty("base");
-            
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        URL="jdbc:mysql://"+ip+":"+pr+"/"+db+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        registrar.open(URL);
+        registrar.open();
         int p1 = registrar.getRId()+1;
         idLabel.setText(Integer.toString(p1));
         int p22 = registrar.getUId(susuario);
         registrar.addRegister(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12,
                 p13, p14, p15, p16, p17, p18, p19, p20, p21, p22);
+        registrar.close();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

@@ -29,7 +29,6 @@ import javax.swing.*;
         
 public class Login extends javax.swing.JFrame {
     public String level;
-    public String cx_config;
     public String URL;
     public String usuario;
     //public static String URL = "jdbc:mysql://127.0.0.1:3306/dolche?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -133,23 +132,8 @@ public class Login extends javax.swing.JFrame {
         String user =  userField.getText();
         usuario = userField.getText();
         String pass = passField.getText();
-        Properties p = new Properties();
-        String ip = "";
-        String pr = "";
-        String db = "";
-        try {   
-            p.load(new FileReader("config.properties"));
-            ip = p.getProperty("ip");
-            pr = p.getProperty("port");
-            db = p.getProperty("base");
-            URL="jdbc:mysql://"+ip+":"+pr+"/"+db+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
         LogConexion conex = new LogConexion();
-        conex.open(URL);
+        conex.open();
         level=conex.compare(user, pass);
         if(level!=null){
             conex.close();
@@ -172,11 +156,10 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         JOPtionPaneTest conex = new JOPtionPaneTest();
         try {
-            cx_config = conex.display();
+            conex.display();
         } catch (IOException ex) {
             Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
-        URL = "jdbc:mysql://"+cx_config+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
@@ -226,13 +209,14 @@ public class Login extends javax.swing.JFrame {
 }
 
 class JOPtionPaneTest{
-    public static String conn;
-    public static String display() throws IOException{
+    public static void display() throws IOException{
         Properties p = new Properties();
         p.load(new FileReader("config.properties"));
         JTextField ipfield = new JTextField(p.getProperty("ip"));
         JTextField portfield = new JTextField(p.getProperty("port"));
         JTextField dbfield = new JTextField(p.getProperty("base"));
+        JTextField usrfield = new JTextField(p.getProperty("username"));
+        JTextField pasfield = new JTextField(p.getProperty("password"));
         JPanel panel = new JPanel(new GridLayout(0,1));
         panel.add(new JLabel("Server ip:"));
         panel.add(ipfield);
@@ -240,19 +224,24 @@ class JOPtionPaneTest{
         panel.add(portfield);
         panel.add(new JLabel("Data Base:"));
         panel.add(dbfield);
+        panel.add(new JLabel("DB username:"));
+        panel.add(usrfield);
+        panel.add(new JLabel("DB password:"));
+        panel.add(pasfield);
+        
         int result = JOptionPane.showConfirmDialog(null, panel, "DB Conexión",
             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        
         if (result == JOptionPane.OK_OPTION){
-            conn = ipfield.getText()+":"+portfield.getText()+"/"+dbfield.getText();
             p.setProperty("ip",ipfield.getText());
             p.setProperty("port",portfield.getText());
             p.setProperty("base",dbfield.getText());
+            p.setProperty("username",usrfield.getText());
+            p.setProperty("password",pasfield.getText());
+            
             java.util.Date fecha = new Date();
             DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
             p.store(new FileWriter("config.properties"),dateFormat.format(fecha));
-            return conn;
-        }else{
-            return p.getProperty("ip")+":"+p.getProperty("port")+"/"+p.getProperty("base");
-            }
+        }
     }
 }

@@ -977,24 +977,9 @@ public class AdminSis extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Creador de nuevos usuarios
-        Properties p = new Properties();
-        String ip = "";
-        String pr = "";
-        String db = "";
         int level = 1;
-        try {   
-            p.load(new FileReader("config.properties"));
-            ip = p.getProperty("ip");
-            pr = p.getProperty("port");
-            db = p.getProperty("base");
-            URL="jdbc:mysql://"+ip+":"+pr+"/"+db+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
         LogConexion conex = new LogConexion();
-        conex.open(URL);
+        conex.open();
         switch (cprivilegeCombo.getSelectedIndex()){
                 case 0:
                     level = 1;

@@ -7,11 +7,15 @@ package sistem;
  */
 
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -22,8 +26,8 @@ import javax.swing.JOptionPane;
  */
 public class LogConexion {
    private static  String URL;
-   private static final String USERNAME = "root";
-   private static final String PASSWORD = "";
+   private static  String USERNAME;
+   private static  String PASSWORD;
    private Connection connection; 
    private PreparedStatement selectUser; 
    private PreparedStatement selectPass; 
@@ -32,8 +36,24 @@ public class LogConexion {
    private PreparedStatement insertUser;
 
    
-   public void open(String PIN){
-       this.URL = PIN;
+   public void open(){
+        Properties p = new Properties();
+        String ip = "";
+        String pr = "";
+        String db = "";
+        try {   
+            p.load(new FileReader("config.properties"));
+            ip = p.getProperty("ip");
+            pr = p.getProperty("port");
+            db = p.getProperty("base");
+            USERNAME = p.getProperty("username");
+            PASSWORD = p.getProperty("password");
+            URL="jdbc:mysql://"+ip+":"+pr+"/"+db+"?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
        try {
          connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
          selectUser = connection.prepareStatement(
