@@ -79,6 +79,11 @@ public class TaskManager extends javax.swing.JFrame {
         });
 
         staButton.setText("Stadistics");
+        staButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staButtonActionPerformed(evt);
+            }
+        });
 
         reportButton.setText("Report Gen");
         reportButton.addActionListener(new java.awt.event.ActionListener() {
@@ -151,6 +156,12 @@ public class TaskManager extends javax.swing.JFrame {
         adm.setVisible(true);   
         this.setVisible(false);
     }//GEN-LAST:event_adminButtonActionPerformed
+
+    private void staButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staButtonActionPerformed
+        Stadistic sta = new Stadistic();
+        sta.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_staButtonActionPerformed
 
     /**
      * @param args the command line arguments
