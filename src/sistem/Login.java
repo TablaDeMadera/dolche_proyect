@@ -31,6 +31,7 @@ public class Login extends javax.swing.JFrame {
     public String level;
     public String cx_config;
     public String URL;
+    public String usuario;
     //public static String URL = "jdbc:mysql://127.0.0.1:3306/dolche?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     /**
      * Creates new form Login
@@ -66,7 +67,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/logo.png"))); // NOI18N
 
-        jButton1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton1.setBackground(new java.awt.Color(204, 204, 204));
         jButton1.setText("Login");
         jButton1.setToolTipText("");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -130,6 +131,7 @@ public class Login extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         String user =  userField.getText();
+        usuario = userField.getText();
         String pass = passField.getText();
         Properties p = new Properties();
         String ip = "";
@@ -155,6 +157,7 @@ public class Login extends javax.swing.JFrame {
                          "System",JOptionPane.PLAIN_MESSAGE);
             TaskManager control = new TaskManager();
             control.setVisible(true);   
+            control.setCurrentUser(userField.getText());
             control.setPrivileges(level);
             this.setVisible(false);
         }
