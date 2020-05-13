@@ -7,7 +7,7 @@
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -120,7 +120,7 @@ CREATE TABLE `register` (
   PRIMARY KEY (`idregister`,`USER_iduser`),
   KEY `USER_iduser` (`USER_iduser`),
   CONSTRAINT `REGISTER_ibfk_1` FOREIGN KEY (`USER_iduser`) REFERENCES `user` (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -129,7 +129,7 @@ CREATE TABLE `register` (
 
 LOCK TABLES `register` WRITE;
 /*!40000 ALTER TABLE `register` DISABLE KEYS */;
-INSERT INTO `register` VALUES (1,'2020-01-01','HGT',20190102,2,'-',1.2,2.3,3.4,'BUENA',897653,3.2,'para mermelada','BUENO','CUMPLE','<10','<10','<10','<10','BUENO','BUENO',1);
+INSERT INTO `register` VALUES (1,'2020-01-01','HGT',20190102,2,'-',1.2,2.3,3.4,'BUENA',897653,3.2,'para mermelada','BUENO','CUMPLE','<10','<10','<10','<10','BUENO','BUENO',1),(2,'2020-05-12','HGJS',20200408,89,'-',542,2.1,7.2,'GELATINOSA',7893.2,5.2,'AGRAGAR AZUCAR','REVISAR','FUNCIONA','<10','<5','<23','<32','ACEPTABLE','REPROCESAR',1),(3,'2020-05-12','KIY',20200907,99,'A HORNO',7.1,1.2,4.1,'CLARA',9832.1,1,'MAS FERMENTAR','BUENO','FUNCIONA','<10','<4','<25','<2','ACEPTABLE','ACEPTADO',1),(4,'2020-05-12','HAS',20190911,32,'-',2.3,21.1,2.3,'HORRIBLE',7865.2,43.1,'NINGUNA','BUENO','FUNCIONAL','<45','<12','<78','<10','BUENO','APROBADO',4);
 /*!40000 ALTER TABLE `register` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +174,7 @@ CREATE TABLE `user` (
   `password` varchar(45) NOT NULL,
   `privilege` int(11) NOT NULL,
   PRIMARY KEY (`iduser`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -183,9 +183,17 @@ CREATE TABLE `user` (
 
 LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
-INSERT INTO `user` VALUES (1,'Mario','123',1),(2,'Jose','123',3),(3,'Lupe','123',2);
+INSERT INTO `user` VALUES (1,'Mario','123',1),(2,'Jose','123',3),(3,'Lupe','123',2),(4,'God','123',7),(5,'Luis','123',2),(6,'AMiguel','123',7),(7,'ARafael','123',7),(8,'AGabriel','123',7),(9,'AChamuel','123',7),(10,'AUriel','123',7),(11,'AZadquiel','123',7),(12,'AJofiel','123',7),(13,'Berta','123',1);
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'dolche'
+--
+
+--
+-- Dumping routines for database 'dolche'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -196,4 +204,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-17 15:58:54
+-- Dump completed on 2020-05-13 13:36:04

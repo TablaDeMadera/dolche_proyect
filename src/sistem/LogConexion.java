@@ -29,6 +29,7 @@ public class LogConexion {
    private PreparedStatement selectPass; 
    private PreparedStatement insertCapture; 
    private PreparedStatement getidUser;
+   private PreparedStatement insertUser;
 
    
    public void open(String PIN){
@@ -47,6 +48,9 @@ public class LogConexion {
                  "estatus_final, USER_iduser) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
          getidUser = connection.prepareStatement(
                  "SELECT * FROM user WHERE username = ?");
+         insertUser = connection.prepareStatement (
+            "INSERT INTO user"+
+                    "(username, password, privilege) VALUES (?, ?, ?)");
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
            JOptionPane.showMessageDialog(null,"NO CONEXION CON BASE DE DATOS",
@@ -166,6 +170,22 @@ public class LogConexion {
            insertCapture.setInt(22, u_id);
            
            result = insertCapture.executeUpdate();
+           
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+   
+   public int addUser(String name, String pass, int privilege){
+       int result = 0;
+       try {
+           insertUser.setString(1, name);
+           insertUser.setString(2, pass);
+           insertUser.setInt(3, privilege);
+           
+           result = insertUser.executeUpdate();
            
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
