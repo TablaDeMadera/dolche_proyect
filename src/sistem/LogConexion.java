@@ -32,6 +32,8 @@ public class LogConexion {
    private PreparedStatement selectUser; 
    private PreparedStatement selectPass; 
    private PreparedStatement insertCapture; 
+   private PreparedStatement insertPar;
+   private PreparedStatement insertMic;
    private PreparedStatement getidUser;
    private PreparedStatement insertUser;
 
@@ -59,13 +61,24 @@ public class LogConexion {
          selectUser = connection.prepareStatement(
             "SELECT * FROM user WHERE username = ?");
          selectPass = connection.prepareStatement(
-            "SELECT * FROM user WHERE password = ?");       
+            "SELECT * FROM user WHERE password = ?");    
+         
          insertCapture = connection.prepareStatement (
          "INSERT INTO register "+
                  "(idregister, fecha_analisis, clave, fecha_produccion, no_cocinada, "+
-                 "espec, brix, ph, consistencia, apariencia, viscosidad, acidez, observaciones, "+
-                 "estatus_fq, estatus_funcional, coliformes, cuenta_estandar, hongos, levaduras, estatus_micro, "+
-                 "estatus_final, USER_iduser) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                 "estatus_final, operador, USER_iduser, id_params, id_micro) "+
+                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+         
+         insertPar = connection.prepareStatement(
+         "INSERT INTO params "+
+                 "(id_params, espec, brix, ph, consistencia, apariencia, viscosidad, acidez, "+
+                 "observaciones, estatus_fq, estatus_funcional) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+         
+         insertMic = connection.prepareStatement(
+         "INSERT INTO micro "+
+                 "(id_micro, coliformes, cuenta_estandar, hongos, levaduras, estatus_micro) "+
+                 "VALUES (?, ?, ?, ?, ?, ?)");
+         
          getidUser = connection.prepareStatement(
                  "SELECT * FROM user WHERE username = ?");
          insertUser = connection.prepareStatement (
@@ -159,35 +172,20 @@ public class LogConexion {
    }
    
    public int addRegister(int idreg, String f_anal, String clave,
-           int f_prd, int n_cocina, String espec, float brix, float ph,
-           float consist, String aparen, float visco, float acidez,
-           String observ, String stat_fq, String stat_fun, String colifor,
-           String cuenta_std, String hongos, String leva, String stat_micro,
-           String stat_final, int u_id){
+           String f_prd, int n_cocina, String stat_final, String opera,
+           int u_id, int idparam, int idmicro){
         int result = 0;
        try {
            insertCapture.setInt(1, idreg);
            insertCapture.setString(2, f_anal);
            insertCapture.setString(3, clave);
-           insertCapture.setInt(4, f_prd);
+           insertCapture.setString(4, f_prd);
            insertCapture.setInt(5, n_cocina);
-           insertCapture.setString(6, espec);
-           insertCapture.setFloat(7, brix);
-           insertCapture.setFloat(8, ph);
-           insertCapture.setFloat(9, consist);
-           insertCapture.setString(10, aparen);
-           insertCapture.setFloat(11, visco);
-           insertCapture.setFloat(12, acidez);
-           insertCapture.setString(13, observ);
-           insertCapture.setString(14, stat_fq);
-           insertCapture.setString(15, stat_fun);
-           insertCapture.setString(16, colifor);
-           insertCapture.setString(17, cuenta_std);
-           insertCapture.setString(18, hongos);
-           insertCapture.setString(19, leva);
-           insertCapture.setString(20, stat_micro);
-           insertCapture.setString(21, stat_final);
-           insertCapture.setInt(22, u_id);
+           insertCapture.setString(6, stat_final);
+           insertCapture.setString(7, opera);
+           insertCapture.setInt(8, u_id);
+           insertCapture.setInt(9, idparam);
+           insertCapture.setInt(10, idmicro);
            
            result = insertCapture.executeUpdate();
            
@@ -197,6 +195,51 @@ public class LogConexion {
        }
        return result;
    }
+   
+   public int addPara(int idparam, String espec, float brix, float ph,
+           float consis, String apa, float visco, float acid, String obs,
+           String stat_fq, String stat_fun){
+       int result = 0;
+       try{
+           insertPar.setInt(1, idparam);
+           insertPar.setString(2, espec);
+           insertPar.setFloat(3, brix);
+           insertPar.setFloat(4, ph);
+           insertPar.setFloat(5, consis);
+           insertPar.setString(6, apa);
+           insertPar.setFloat(7, visco);
+           insertPar.setFloat(8, acid);
+           insertPar.setString(9, obs);
+           insertPar.setString(10, stat_fq);
+           insertPar.setString(11, stat_fun);
+           
+           result = insertPar.executeUpdate();
+       }catch (SQLException ex){
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null,ex);
+           close();
+       }
+       return result;
+   }
+   
+   public int addMicro(int idmicro, String coli, String cuenta, String hongo,
+           String leva, String sta_micro){
+       int result = 0;
+       try{
+           insertMic.setInt(1, idmicro);
+           insertMic.setString(2, coli);
+           insertMic.setString(3, cuenta);
+           insertMic.setString(4, hongo);
+           insertMic.setString(5, leva);
+           insertMic.setString(6, sta_micro);
+           
+           result = insertMic.executeUpdate();
+       }catch (SQLException ex){
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+   
    
    public int addUser(String name, String pass, int privilege){
        int result = 0;
@@ -214,7 +257,7 @@ public class LogConexion {
        return result;
    }
    
-    public void close(){
+   public void close(){
       try {
          connection.close();
       } 

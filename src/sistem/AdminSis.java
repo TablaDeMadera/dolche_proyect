@@ -192,7 +192,7 @@ public class AdminSis extends javax.swing.JFrame {
 
         jLabel49.setText("-");
 
-        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/logo.png"))); // NOI18N
+        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout createUTAbLayout = new javax.swing.GroupLayout(createUTAb);
         createUTAb.setLayout(createUTAbLayout);
@@ -221,7 +221,7 @@ public class AdminSis extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(createUTAbLayout.createSequentialGroup()
                         .addComponent(showNextID)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                         .addComponent(jLabel49)
                         .addGap(279, 279, 279))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createUTAbLayout.createSequentialGroup()
@@ -286,7 +286,7 @@ public class AdminSis extends javax.swing.JFrame {
 
         jTextField6.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/logo.png"))); // NOI18N
+        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout modifyUTabLayout = new javax.swing.GroupLayout(modifyUTab);
         modifyUTab.setLayout(modifyUTabLayout);
@@ -310,7 +310,7 @@ public class AdminSis extends javax.swing.JFrame {
                     .addComponent(jTextField3))
                 .addGap(25, 25, 25)
                 .addComponent(jButton2)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyUTabLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel52)
@@ -360,7 +360,7 @@ public class AdminSis extends javax.swing.JFrame {
 
         jLabel48.setText("-");
 
-        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/logo.png"))); // NOI18N
+        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout eraseUTabLayout = new javax.swing.GroupLayout(eraseUTab);
         eraseUTab.setLayout(eraseUTabLayout);
@@ -389,7 +389,7 @@ public class AdminSis extends javax.swing.JFrame {
                     .addGroup(eraseUTabLayout.createSequentialGroup()
                         .addGap(79, 79, 79)
                         .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(163, 163, 163))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, eraseUTabLayout.createSequentialGroup()
@@ -539,7 +539,7 @@ public class AdminSis extends javax.swing.JFrame {
 
         jTextField27.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/logo.png"))); // NOI18N
+        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout modifyRTabLayout = new javax.swing.GroupLayout(modifyRTab);
         modifyRTab.setLayout(modifyRTabLayout);
@@ -610,7 +610,7 @@ public class AdminSis extends javax.swing.JFrame {
                                         .addComponent(jButton7)))
                                 .addGap(50, 50, 50))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyRTabLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                                 .addComponent(jLabel54)
                                 .addContainerGap())))))
         );
@@ -704,7 +704,7 @@ public class AdminSis extends javax.swing.JFrame {
 
         jButton8.setText("Delete");
 
-        jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/logo.png"))); // NOI18N
+        jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout eraseRTabLayout = new javax.swing.GroupLayout(eraseRTab);
         eraseRTab.setLayout(eraseRTabLayout);
@@ -722,7 +722,7 @@ public class AdminSis extends javax.swing.JFrame {
                             .addGroup(eraseRTabLayout.createSequentialGroup()
                                 .addGap(189, 189, 189)
                                 .addComponent(jButton8)))
-                        .addGap(0, 105, Short.MAX_VALUE))
+                        .addGap(0, 77, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, eraseRTabLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel55)))
@@ -774,7 +774,7 @@ public class AdminSis extends javax.swing.JFrame {
 
         jLabel50.setText("-");
 
-        jLabel56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/logo.png"))); // NOI18N
+        jLabel56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout createATabLayout = new javax.swing.GroupLayout(createATab);
         createATab.setLayout(createATabLayout);
@@ -804,7 +804,7 @@ public class AdminSis extends javax.swing.JFrame {
                             .addGroup(createATabLayout.createSequentialGroup()
                                 .addGap(151, 151, 151)
                                 .addComponent(jButton9)))
-                        .addGap(0, 139, Short.MAX_VALUE))
+                        .addGap(0, 111, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createATabLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel56)))
@@ -862,7 +862,7 @@ public class AdminSis extends javax.swing.JFrame {
         jButton11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton11.setText("Erase");
 
-        jLabel57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/logo.png"))); // NOI18N
+        jLabel57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
 
         javax.swing.GroupLayout eraseATabLayout = new javax.swing.GroupLayout(eraseATab);
         eraseATab.setLayout(eraseATabLayout);
@@ -901,7 +901,7 @@ public class AdminSis extends javax.swing.JFrame {
                             .addGroup(eraseATabLayout.createSequentialGroup()
                                 .addGap(175, 175, 175)
                                 .addComponent(jButton11)))
-                        .addGap(0, 142, Short.MAX_VALUE))
+                        .addGap(0, 114, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, eraseATabLayout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(jLabel57)))
