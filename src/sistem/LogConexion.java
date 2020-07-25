@@ -36,6 +36,7 @@ public class LogConexion {
    private PreparedStatement insertMic;
    private PreparedStatement getidUser;
    private PreparedStatement insertUser;
+   private PreparedStatement dateSearch;
 
    
    public void open(){
@@ -84,6 +85,15 @@ public class LogConexion {
          insertUser = connection.prepareStatement (
             "INSERT INTO user"+
                     "(username, password, privilege) VALUES (?, ?, ?)");
+         
+         dateSearch = connection.prepareStatement (
+                 "SELECT idregister, operador, clave, no_cocinada, estatus_final, estatus_fq, estatus_funcional, estatus_micro FROM register "
+                         + "INNER JOIN params "
+                         + "ON register.id_params = params.id_params "
+                         + "INNER JOIN micro "
+                         + "ON register.id_micro = micro.id_micro "
+                         + "WHERE fecha_analisis = ?"
+         );
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
            JOptionPane.showMessageDialog(null,"NO CONEXION CON BASE DE DATOS",
@@ -255,6 +265,37 @@ public class LogConexion {
            close();
        }
        return result;
+   }
+   
+   public String[][] getReg(String fecha){
+       String [][] dato = new String [8][100];
+       ResultSet resultSet = null;
+       try {
+           dateSearch.setString(1, fecha);
+           resultSet = dateSearch.executeQuery(); 
+           int i = 0;
+           while (resultSet.next()){
+               dato[0][i]=resultSet.getString(1);
+               dato[1][i]=resultSet.getString(2);
+               dato[2][i]=resultSet.getString(3);
+               dato[3][i]=resultSet.getString(4);
+               dato[4][i]=resultSet.getString(5);
+               dato[5][i]=resultSet.getString(6);
+               dato[6][i]=resultSet.getString(7);
+               dato[7][i]=resultSet.getString(8);
+               i++;
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+       } finally{
+           try {
+               resultSet.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+               close();
+           }
+       }
+       return dato;
    }
    
    public void close(){

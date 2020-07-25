@@ -95,6 +95,11 @@ public class TaskManager extends javax.swing.JFrame {
         });
 
         viewerButton.setText("Viewer");
+        viewerButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewerButtonActionPerformed(evt);
+            }
+        });
 
         levelLabel.setFont(new java.awt.Font("Tahoma", 0, 8)); // NOI18N
 
@@ -174,6 +179,12 @@ public class TaskManager extends javax.swing.JFrame {
         sta.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_staButtonActionPerformed
+
+    private void viewerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewerButtonActionPerformed
+        Viewer vie = new Viewer();
+        vie.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_viewerButtonActionPerformed
 
     /**
      * @param args the command line arguments
