@@ -97,7 +97,7 @@ public class Viewer extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void search_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_buttonActionPerformed
-        String p1 = null, p2 = null;
+        String p1 = null;
         String[][] qryRes = null;
         String []data = new String[8];
 

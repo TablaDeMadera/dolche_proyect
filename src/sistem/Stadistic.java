@@ -5,6 +5,14 @@
  */
 package sistem;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Capital
@@ -16,7 +24,8 @@ public class Stadistic extends javax.swing.JFrame {
      */
     public Stadistic() {
         initComponents();
-        this.setLocationRelativeTo(null);
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
 
     /**
@@ -31,156 +40,312 @@ public class Stadistic extends javax.swing.JFrame {
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
         buttonGroup3 = new javax.swing.ButtonGroup();
-        jButton1 = new javax.swing.JButton();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cal_button = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox3 = new javax.swing.JCheckBox();
-        jCheckBox4 = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
-        jTextField1 = new javax.swing.JTextField();
+        ff_chooser = new com.toedter.calendar.JDateChooser();
+        fi_chooser = new com.toedter.calendar.JDateChooser();
+        clave_field = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        desc_area = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        table2 = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        c_brix = new javax.swing.JCheckBox();
+        c_ph = new javax.swing.JCheckBox();
+        c_cons = new javax.swing.JCheckBox();
+        c_visc = new javax.swing.JCheckBox();
+        c_acid = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("KPI´s");
 
-        jButton1.setText("Graficar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        cal_button.setText("CALCULAR");
+        cal_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                cal_buttonActionPerformed(evt);
             }
         });
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "°Brix", "Ph", "Consistencia", "Viscocidad", "Acidez" }));
 
         jLabel1.setText("Fecha inicio");
 
         jLabel2.setText("Fecha final");
 
-        jCheckBox1.setText("Mínimos");
-        jCheckBox1.setToolTipText("");
-        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox1ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox2.setText("Máximos");
-        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox2ActionPerformed(evt);
-            }
-        });
-
-        jCheckBox3.setText("Promedios");
-        jCheckBox3.setToolTipText("");
-
-        jCheckBox4.setText("Desviación Estandar");
-        jCheckBox4.setToolTipText("");
-        jCheckBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCheckBox4ActionPerformed(evt);
-            }
-        });
-
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/logo.png"))); // NOI18N
 
         jLabel4.setText("Clave");
+
+        ff_chooser.setDateFormatString("yyyy-MM-dd");
+
+        fi_chooser.setDateFormatString("yyyy-MM-dd");
+
+        clave_field.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                clave_fieldActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Descripción");
+
+        desc_area.setColumns(20);
+        desc_area.setRows(5);
+        jScrollPane1.setViewportView(desc_area);
+
+        table2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(table2);
+
+        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+
+        c_brix.setBackground(new java.awt.Color(51, 51, 51));
+        c_brix.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        c_brix.setForeground(new java.awt.Color(255, 255, 255));
+        c_brix.setText("Brix");
+
+        c_ph.setBackground(new java.awt.Color(51, 51, 51));
+        c_ph.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        c_ph.setForeground(new java.awt.Color(255, 255, 255));
+        c_ph.setText("Ph");
+
+        c_cons.setBackground(new java.awt.Color(51, 51, 51));
+        c_cons.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        c_cons.setForeground(new java.awt.Color(255, 255, 255));
+        c_cons.setText("Consistencia");
+
+        c_visc.setBackground(new java.awt.Color(51, 51, 51));
+        c_visc.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        c_visc.setForeground(new java.awt.Color(255, 255, 255));
+        c_visc.setText("Viscocidad");
+
+        c_acid.setBackground(new java.awt.Color(51, 51, 51));
+        c_acid.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        c_acid.setForeground(new java.awt.Color(255, 255, 255));
+        c_acid.setText("Acidez");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(c_brix)
+                    .addComponent(c_ph)
+                    .addComponent(c_acid)
+                    .addComponent(c_visc)
+                    .addComponent(c_cons))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(c_brix)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(c_ph)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(c_cons)
+                .addGap(3, 3, 3)
+                .addComponent(c_visc)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 4, Short.MAX_VALUE)
+                .addComponent(c_acid))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jCheckBox4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1231, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel2)
-                                    .addComponent(jLabel4))
-                                .addGap(77, 77, 77)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jDateChooser2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jTextField1))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(32, 32, 32)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox3)
-                            .addComponent(jCheckBox2)
-                            .addComponent(jCheckBox1))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)))
-                .addGap(34, 34, 34))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addGap(76, 76, 76)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(ff_chooser, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(fi_chooser, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(clave_field, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(75, 75, 75)
+                        .addComponent(jLabel5)
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(cal_button, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
-                        .addComponent(jLabel1))
-                    .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel2)
-                    .addComponent(jDateChooser2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 185, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(clave_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel4)
+                                            .addComponent(jLabel5))
+                                        .addGap(23, 23, 23)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel1)
+                                            .addComponent(fi_chooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(20, 20, 20)
+                                                .addComponent(jLabel2))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addGap(18, 18, 18)
+                                                .addComponent(ff_chooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(48, 48, 48))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31))))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jCheckBox1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox2)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jCheckBox4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 2, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(20, 20, 20))
+                        .addGap(25, 25, 25)
+                        .addComponent(cal_button, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        Chart grafica = new Chart(this);
-        grafica.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void cal_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cal_buttonActionPerformed
 
-    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox1ActionPerformed
+        String fi = ((JTextField)fi_chooser.getDateEditor().getUiComponent()).getText();
+        String ff = ((JTextField)ff_chooser.getDateEditor().getUiComponent()).getText();
+        String clv = clave_field.getText();
+        String dscrip = desc_area.getText();
+        Date ahora = new Date();
+        SimpleDateFormat formateador = new SimpleDateFormat("yyyy-MM-dd");
+        String hoy = formateador.format(ahora);
+        System.out.println(hoy);
+        
+        if(!(clv.isBlank()||fi.isEmpty()||ff.isEmpty())){
+            float [] brix = new float[5];
+            float [] ph = new float[5];
+            float [] consist = new float[5];
+            float [] visco = new float[5];
+            float [] acid = new float[5];
+            
+            float [] min = null;
+            float [] max = null;
+            float [] prom = null;
+            float [] ds = null;
+            int ok = 0;
+            String [] last_kpi = new String[24];
+            float[][] sample = null;
 
-    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox2ActionPerformed
 
-    private void jCheckBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox4ActionPerformed
+            LogConexion reg_kpi = new LogConexion();
+            reg_kpi.open();
+            sample = reg_kpi.getSample(fi, ff, clv);
+            min = reg_kpi.getMin(fi, ff, clv);
+            max = reg_kpi.getMax(fi, ff, clv);
+            prom = reg_kpi.getProm(fi, ff, clv);
+            ds = reg_kpi.getDS(fi, ff, clv);
+            ok = reg_kpi.sKPI(hoy, min[0], min[1], min[2], min[3], min[4], 
+                    max[0], max[1], max[2], max[3], max[4], 
+                    prom[0], prom[1], prom[2], prom[3], prom[4],
+                            ds[0], ds[1], ds[2], ds[3], ds[4],
+                            clv, dscrip);
+            last_kpi = reg_kpi.gKPI();
+            reg_kpi.close();
+            
+            for(int i=0; i<sample.length; i++){
+                    brix[i]=sample[i][0];
+                    ph[i]=sample[i][1];
+                    consist[i]=sample[i][2];
+                    visco[i]=sample[i][3];
+                    acid[i]=sample[i][4];
+            }  
+
+
+            DefaultTableModel model = new DefaultTableModel();
+            model.addColumn("ID");
+            model.addColumn("Fecha");
+            model.addColumn("Min brix");
+            model.addColumn("Min ph");
+            model.addColumn("Min consistencia");
+            model.addColumn("Min viscocidad");
+            model.addColumn("Min acidez");
+            model.addColumn("Max brix");
+            model.addColumn("Max ph");
+            model.addColumn("Max consistencia");
+            model.addColumn("Max viscocidad");
+            model.addColumn("Max acidez");
+            model.addColumn("Prom brix");
+            model.addColumn("Prom ph");
+            model.addColumn("Prom consistencia");
+            model.addColumn("Prom viscocidad");
+            model.addColumn("Prom acidez");
+            model.addColumn("DS brix");
+            model.addColumn("DS ph");
+            model.addColumn("DS consistencia");
+            model.addColumn("DS viscocidad");
+            model.addColumn("DS acidez");
+            model.addColumn("Clave");
+            model.addColumn("Descripcion");
+            table2.setModel(model);
+            table2.setEnabled(false);
+            model.addRow(last_kpi);
+            
+            
+            if(c_brix.isSelected()){
+                Chart grafica1 = new Chart(this, "BRIX from "+fi+" to "+ff, brix, prom[0], ds[0]);
+                grafica1.setVisible(true);
+            }
+            if(c_ph.isSelected()){
+                Chart grafica2 = new Chart(this, "PH from "+fi+" to "+ff, ph, prom[1], ds[1]);
+                grafica2.setVisible(true);
+            }
+            if(c_cons.isSelected()){
+                Chart grafica3 = new Chart(this, "CONSISTENCY from "+fi+" to "+ff, consist, prom[2], ds[2]);
+                grafica3.setVisible(true);
+            }
+            if(c_visc.isSelected()){
+                Chart grafica4 = new Chart(this, "VISCOSITY from "+fi+" to "+ff, visco, prom[3], ds[3]);
+                grafica4.setVisible(true);
+            }
+            if(c_acid.isSelected()){
+                Chart grafica5 = new Chart(this, "ACIDITY from "+fi+" to "+ff, acid, prom[4], ds[4]);
+                grafica5.setVisible(true);
+            }
+            
+
+            }else{
+            JOptionPane.showMessageDialog(this,"FAVOR DE LLENAR LOS CAMPOS",
+                         "System",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_cal_buttonActionPerformed
+
+    private void clave_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clave_fieldActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jCheckBox4ActionPerformed
+    }//GEN-LAST:event_clave_fieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,18 +386,24 @@ public class Stadistic extends javax.swing.JFrame {
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.ButtonGroup buttonGroup3;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JCheckBox jCheckBox3;
-    private javax.swing.JCheckBox jCheckBox4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JCheckBox c_acid;
+    private javax.swing.JCheckBox c_brix;
+    private javax.swing.JCheckBox c_cons;
+    private javax.swing.JCheckBox c_ph;
+    private javax.swing.JCheckBox c_visc;
+    private javax.swing.JButton cal_button;
+    private javax.swing.JTextField clave_field;
+    private javax.swing.JTextArea desc_area;
+    private com.toedter.calendar.JDateChooser ff_chooser;
+    private com.toedter.calendar.JDateChooser fi_chooser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable table2;
     // End of variables declaration//GEN-END:variables
 }
