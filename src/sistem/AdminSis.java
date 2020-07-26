@@ -50,31 +50,31 @@ public class AdminSis extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         showNextID = new javax.swing.JLabel();
-        jLabel49 = new javax.swing.JLabel();
+        user_etiqueta = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
         modifyUTab = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        user_search_field = new javax.swing.JTextField();
         jButton2 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jButton3 = new javax.swing.JButton();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        u_res_1 = new javax.swing.JTextField();
+        u_res_2 = new javax.swing.JTextField();
+        u_res_3 = new javax.swing.JTextField();
         jLabel52 = new javax.swing.JLabel();
         eraseUTab = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
-        jTextField7 = new javax.swing.JTextField();
+        u_search_field = new javax.swing.JTextField();
         usrLb = new javax.swing.JLabel();
         privilegeLb = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        jLabel47 = new javax.swing.JLabel();
-        jLabel48 = new javax.swing.JLabel();
+        u_lb_1 = new javax.swing.JLabel();
+        u_lb_2 = new javax.swing.JLabel();
         jLabel53 = new javax.swing.JLabel();
         regCtrl = new javax.swing.JPanel();
         registerPane = new javax.swing.JTabbedPane();
@@ -190,9 +190,9 @@ public class AdminSis extends javax.swing.JFrame {
 
         jLabel5.setText("ID");
 
-        jLabel49.setText("-");
+        user_etiqueta.setText("-");
 
-        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
+        jLabel51.setIcon(new javax.swing.ImageIcon(getClass().getResource("logo.png"))); // NOI18N
 
         javax.swing.GroupLayout createUTAbLayout = new javax.swing.GroupLayout(createUTAb);
         createUTAb.setLayout(createUTAbLayout);
@@ -222,7 +222,7 @@ public class AdminSis extends javax.swing.JFrame {
                     .addGroup(createUTAbLayout.createSequentialGroup()
                         .addComponent(showNextID)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                        .addComponent(jLabel49)
+                        .addComponent(user_etiqueta)
                         .addGap(279, 279, 279))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, createUTAbLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -236,7 +236,7 @@ public class AdminSis extends javax.swing.JFrame {
                 .addGroup(createUTAbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(showNextID)
-                    .addComponent(jLabel49))
+                    .addComponent(user_etiqueta))
                 .addGap(38, 38, 38)
                 .addGroup(createUTAbLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cusernameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -274,19 +274,19 @@ public class AdminSis extends javax.swing.JFrame {
         jLabel9.setText("Privileges");
 
         jButton3.setText("Modify");
-
-        jTextField4.setBackground(new java.awt.Color(204, 204, 204));
-
-        jTextField5.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                jButton3ActionPerformed(evt);
             }
         });
 
-        jTextField6.setBackground(new java.awt.Color(204, 204, 204));
+        u_res_1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
+        u_res_2.setBackground(new java.awt.Color(204, 204, 204));
+
+        u_res_3.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel52.setIcon(new javax.swing.ImageIcon(getClass().getResource("logo.png"))); // NOI18N
 
         javax.swing.GroupLayout modifyUTabLayout = new javax.swing.GroupLayout(modifyUTab);
         modifyUTab.setLayout(modifyUTabLayout);
@@ -304,10 +304,10 @@ public class AdminSis extends javax.swing.JFrame {
                     .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(jButton3)
                         .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField5)
-                            .addComponent(jTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)))
-                    .addComponent(jTextField3))
+                            .addComponent(u_res_1)
+                            .addComponent(u_res_2)
+                            .addComponent(u_res_3, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)))
+                    .addComponent(user_search_field))
                 .addGap(25, 25, 25)
                 .addComponent(jButton2)
                 .addContainerGap(63, Short.MAX_VALUE))
@@ -321,21 +321,21 @@ public class AdminSis extends javax.swing.JFrame {
             .addGroup(modifyUTabLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(user_search_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(jButton2))
                 .addGap(63, 63, 63)
                 .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(u_res_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(u_res_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(u_res_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(58, 58, 58)
                 .addComponent(jButton3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
@@ -352,15 +352,25 @@ public class AdminSis extends javax.swing.JFrame {
         jLabel12.setText("Rol");
 
         jButton4.setText("Search");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton5.setText("Erase");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
-        jLabel47.setText("-");
+        u_lb_1.setText("-");
 
-        jLabel48.setText("-");
+        u_lb_2.setText("-");
 
-        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
+        jLabel53.setIcon(new javax.swing.ImageIcon(getClass().getResource("logo.png"))); // NOI18N
 
         javax.swing.GroupLayout eraseUTabLayout = new javax.swing.GroupLayout(eraseUTab);
         eraseUTab.setLayout(eraseUTabLayout);
@@ -384,11 +394,11 @@ public class AdminSis extends javax.swing.JFrame {
                                             .addComponent(usrLb))))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(eraseUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel47, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel48, javax.swing.GroupLayout.Alignment.TRAILING)))))
+                                    .addComponent(u_lb_1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(u_lb_2, javax.swing.GroupLayout.Alignment.TRAILING)))))
                     .addGroup(eraseUTabLayout.createSequentialGroup()
                         .addGap(79, 79, 79)
-                        .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(u_search_field, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
                 .addComponent(jButton4)
                 .addGap(163, 163, 163))
@@ -408,18 +418,18 @@ public class AdminSis extends javax.swing.JFrame {
                 .addGap(39, 39, 39)
                 .addGroup(eraseUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(u_search_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4))
                 .addGap(56, 56, 56)
                 .addGroup(eraseUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel47))
+                    .addComponent(u_lb_1))
                 .addGap(23, 23, 23)
                 .addGroup(eraseUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(usrLb)
                     .addGroup(eraseUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel12)
-                        .addComponent(jLabel48)))
+                        .addComponent(u_lb_2)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(privilegeLb)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
@@ -539,7 +549,7 @@ public class AdminSis extends javax.swing.JFrame {
 
         jTextField27.setBackground(new java.awt.Color(204, 204, 204));
 
-        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
+        jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("logo.png"))); // NOI18N
 
         javax.swing.GroupLayout modifyRTabLayout = new javax.swing.GroupLayout(modifyRTab);
         modifyRTab.setLayout(modifyRTabLayout);
@@ -704,7 +714,7 @@ public class AdminSis extends javax.swing.JFrame {
 
         jButton8.setText("Delete");
 
-        jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
+        jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("logo.png"))); // NOI18N
 
         javax.swing.GroupLayout eraseRTabLayout = new javax.swing.GroupLayout(eraseRTab);
         eraseRTab.setLayout(eraseRTabLayout);
@@ -774,7 +784,7 @@ public class AdminSis extends javax.swing.JFrame {
 
         jLabel50.setText("-");
 
-        jLabel56.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
+        jLabel56.setIcon(new javax.swing.ImageIcon(getClass().getResource("logo.png"))); // NOI18N
 
         javax.swing.GroupLayout createATabLayout = new javax.swing.GroupLayout(createATab);
         createATab.setLayout(createATabLayout);
@@ -862,7 +872,7 @@ public class AdminSis extends javax.swing.JFrame {
         jButton11.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jButton11.setText("Erase");
 
-        jLabel57.setIcon(new javax.swing.ImageIcon(getClass().getResource("/admininterfaz/logo.png"))); // NOI18N
+        jLabel57.setIcon(new javax.swing.ImageIcon(getClass().getResource("logo.png"))); // NOI18N
 
         javax.swing.GroupLayout eraseATabLayout = new javax.swing.GroupLayout(eraseATab);
         eraseATab.setLayout(eraseATabLayout);
@@ -978,8 +988,8 @@ public class AdminSis extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         //Creador de nuevos usuarios
         int level = 1;
-        LogConexion conex = new LogConexion();
-        conex.open();
+        int ok = 0;
+        int id = 0;
         switch (cprivilegeCombo.getSelectedIndex()){
                 case 0:
                     level = 1;
@@ -997,19 +1007,31 @@ public class AdminSis extends javax.swing.JFrame {
                     //System.out.println("CASO DEFAULT");
                     break;
         }
-        conex.addUser(cusernameField.getText(), cpasswordField.getText(), level);
-        JOptionPane.showMessageDialog(this,"USUARIO CREADO",
+        LogConexion conex = new LogConexion();
+        conex.open();
+        ok = conex.addUser(cusernameField.getText(), cpasswordField.getText(), level);
+        id = conex.getUId(cusernameField.getText());
+        conex.close();
+        user_etiqueta.setText(""+id);
+        if(ok != 0){
+            JOptionPane.showMessageDialog(this,"USUARIO CREADO",
                          "System",JOptionPane.PLAIN_MESSAGE);
-        
+        }else{
+            JOptionPane.showMessageDialog(this,"NO CREADO",
+                         "System",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        String [] ok = null;
+        LogConexion conex = new LogConexion();
+        conex.open();
+        ok = conex.searchUser(Integer.parseInt(user_search_field.getText()));
+        u_res_1.setText(ok[0]);
+        u_res_2.setText(ok[1]);
+        u_res_3.setText(ok[2]);
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
 
     private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
         // TODO add your handling code here:
@@ -1018,6 +1040,57 @@ public class AdminSis extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        //Modificador de usuarios
+        int ok = 0;
+        int id = Integer.parseInt(user_search_field.getText());
+        String name = u_res_1.getText();
+        String pass = u_res_2.getText();
+        int priv = Integer.parseInt(u_res_3.getText());
+        
+        LogConexion conex = new LogConexion();
+        conex.open();
+        ok = conex.changeUser(id, name, pass, priv);
+        conex.close();
+        
+        if(ok != 0){
+            JOptionPane.showMessageDialog(this,"USUARIO MODIFICADO",
+                         "System",JOptionPane.PLAIN_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this,"NO MODIFICADO!!",
+                         "System",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        String [] ok = null;
+        LogConexion conex = new LogConexion();
+        conex.open();
+        ok = conex.searchUser(Integer.parseInt(u_search_field.getText()));
+        u_lb_1.setText(ok[0]);
+        u_lb_2.setText(ok[2]);
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+        //Kill de usuarios
+        int ok = 0;
+        int id = Integer.parseInt(u_search_field.getText());        
+        LogConexion conex = new LogConexion();
+        conex.open();
+        ok = conex.deleUser(id);
+        conex.close();
+        
+        if(ok != 0){
+            JOptionPane.showMessageDialog(this,"USUARIO ELIMINADO",
+                         "System",JOptionPane.PLAIN_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this,"NO ELIMINADO!!",
+                         "System",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1121,9 +1194,6 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel44;
     private javax.swing.JLabel jLabel45;
     private javax.swing.JLabel jLabel46;
-    private javax.swing.JLabel jLabel47;
-    private javax.swing.JLabel jLabel48;
-    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
@@ -1157,13 +1227,8 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField27;
     private javax.swing.JTextField jTextField28;
     private javax.swing.JTextField jTextField29;
-    private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel modifyRTab;
@@ -1172,8 +1237,16 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JPanel regCtrl;
     private javax.swing.JTabbedPane registerPane;
     private javax.swing.JLabel showNextID;
+    private javax.swing.JLabel u_lb_1;
+    private javax.swing.JLabel u_lb_2;
+    private javax.swing.JTextField u_res_1;
+    private javax.swing.JTextField u_res_2;
+    private javax.swing.JTextField u_res_3;
+    private javax.swing.JTextField u_search_field;
     private javax.swing.JPanel userCtrl;
     private javax.swing.JTabbedPane userPane;
+    private javax.swing.JLabel user_etiqueta;
+    private javax.swing.JTextField user_search_field;
     private javax.swing.JLabel usrLb;
     // End of variables declaration//GEN-END:variables
 }

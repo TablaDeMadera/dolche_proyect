@@ -37,6 +37,9 @@ public class LogConexion {
    private PreparedStatement getidUser;
    private PreparedStatement insertUser;
    private PreparedStatement dateSearch;
+   private PreparedStatement userData;
+   private PreparedStatement userDelete;
+   private PreparedStatement userUpdate;
 
    
    public void open(){
@@ -94,6 +97,22 @@ public class LogConexion {
                          + "ON register.id_micro = micro.id_micro "
                          + "WHERE fecha_analisis = ?"
          );
+         
+         userData = connection.prepareStatement (
+                 "SELECT username, password, privilege from user "
+                         + "WHERE iduser = ?"
+         );
+         
+         userDelete = connection.prepareStatement (
+                 "DELETE from user WHERE iduser = ?"
+         );
+         
+         userUpdate = connection.prepareStatement (
+                 "UPDATE user SET username = ?, "
+                         + "password = ?, "
+                         + "privilege = ? WHERE iduser = ?"
+         );
+       
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
            JOptionPane.showMessageDialog(null,"NO CONEXION CON BASE DE DATOS",
@@ -257,9 +276,7 @@ public class LogConexion {
            insertUser.setString(1, name);
            insertUser.setString(2, pass);
            insertUser.setInt(3, privilege);
-           
            result = insertUser.executeUpdate();
-           
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
            close();
@@ -267,6 +284,51 @@ public class LogConexion {
        return result;
    }
    
+   public String[] searchUser(int numUser){
+       String [] dato = new String [3];
+       ResultSet resultSet = null;
+       try {
+           userData.setInt(1, numUser);
+           resultSet = userData.executeQuery();
+           while (resultSet.next()){
+               dato[0]=resultSet.getString(1);
+               dato[1]=resultSet.getString(2);
+               dato[2]=resultSet.getString(3);
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return dato;
+   } 
+   
+   public int changeUser(int id, String name, String pass, int priv){
+       int result = 0;
+       try {
+           userUpdate.setString(1, name);
+           userUpdate.setString(2, pass);
+           userUpdate.setInt(3, priv);
+           userUpdate.setInt(4, id);
+           result = userUpdate.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;     
+   }
+   
+   public int deleUser(int id){
+       int result = 0;
+       try {
+           userDelete.setInt(1, id);
+           result = userDelete.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+           
    public String[][] getReg(String fecha){
        String [][] dato = new String [8][100];
        ResultSet resultSet = null;
