@@ -19,8 +19,8 @@ public class Viewer extends javax.swing.JFrame {
      * Creates new form Viewer
      */
     public Viewer() {
-        this.setLocationRelativeTo(null);
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -39,7 +39,7 @@ public class Viewer extends javax.swing.JFrame {
         date_chooser = new com.toedter.calendar.JDateChooser();
         search_button = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Report Viewer");
 
         table1.setModel(new javax.swing.table.DefaultTableModel(
@@ -105,14 +105,14 @@ public class Viewer extends javax.swing.JFrame {
 
         
         DefaultTableModel model = new DefaultTableModel();
-        model.addColumn("ID");
-        model.addColumn("operador");
-        model.addColumn("clave");
+        model.addColumn("Id registro");
+        model.addColumn("Fecha analisis");
+        model.addColumn("Clave");
+        model.addColumn("Fecha producción");
         model.addColumn("#Cocinada");
         model.addColumn("Final Stat");
-        model.addColumn("FQ Stat");
-        model.addColumn("Funcional Stat");
-        model.addColumn("Micro Stat");
+        model.addColumn("Operador");
+        model.addColumn("Id usuario");
         table1.setModel(model);
         table1.setEnabled(false);
         

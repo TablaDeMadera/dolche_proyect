@@ -159,31 +159,34 @@ public class TaskManager extends javax.swing.JFrame {
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportButtonActionPerformed
         // TODO add your handling code here:
+        Reporter repo = new Reporter();
+        repo.setVisible(true);
     }//GEN-LAST:event_reportButtonActionPerformed
 
     private void capButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capButtonActionPerformed
         Capture_2 capt = new Capture_2();
         capt.setCurrentUser(susuario);
         capt.setVisible(true);   
-        this.setVisible(false);
+        //this.setVisible(false);
     }//GEN-LAST:event_capButtonActionPerformed
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
         AdminSis adm = new AdminSis();
         adm.setVisible(true);   
-        this.setVisible(false);
+        //this.setVisible(false);
     }//GEN-LAST:event_adminButtonActionPerformed
 
     private void staButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staButtonActionPerformed
         Stadistic sta = new Stadistic();
+        sta.setCurrentUser(susuario);
         sta.setVisible(true);
-        this.setVisible(false);
+        //this.setVisible(false);
     }//GEN-LAST:event_staButtonActionPerformed
 
     private void viewerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewerButtonActionPerformed
         Viewer vie = new Viewer();
         vie.setVisible(true);
-        this.setVisible(false);
+        //this.setVisible(false);
     }//GEN-LAST:event_viewerButtonActionPerformed
 
     /**

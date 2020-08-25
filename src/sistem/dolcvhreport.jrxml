@@ -1,0 +1,465 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="02017e4d-e386-4eb4-8ae1-ff1f62ab9d42">
+	<property name="ireport.zoom" value="0.9090909090909096"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="969"/>
+	<parameter name="idi" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     date_kpi, clave, description, fi, ff, desv_brix, desv_ph, desv_consistencia, desv_viscocidad, desv_acidez, prom_brix, prom_ph, prom_consistencia, 
+     prom_viscocidad, prom_acidez, g_brix, g_ph, g_consistencia, g_viscocidad, g_acidez,
+     prom_brix + desv_brix AS brix_sup_lim,
+     prom_brix - desv_brix AS brix_inf_lim,
+     prom_ph + desv_ph AS ph_sup_lim,
+     prom_ph - desv_ph AS ph_inf_lim,
+     prom_consistencia + desv_consistencia AS cons_sup_lim,
+     prom_consistencia - desv_consistencia AS cons_inf_lim,
+     prom_viscocidad + desv_viscocidad AS vis_sup_lim,
+     prom_viscocidad - desv_viscocidad AS vis_inf_lim,
+     prom_acidez + desv_acidez AS acid_sup_lim,
+     prom_acidez - desv_acidez AS acid_inf_lim 
+FROM kpis JOIN desviaciones JOIN promedios JOIN graficas 
+	ON kpis.id_desv = desviaciones.id_desv 
+	AND kpis.id_avg = promedios.id_avg
+	AND kpis.id_graphs = graficas.id_graphs
+WHERE
+	kpis.id_kpi = $P{idi}]]>
+	</queryString>
+	<field name="date_kpi" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="clave" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="description" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="fi" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ff" class="java.sql.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desv_brix" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desv_ph" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desv_consistencia" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desv_viscocidad" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="desv_acidez" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prom_brix" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prom_ph" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prom_consistencia" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prom_viscocidad" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="prom_acidez" class="java.lang.Float">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="g_brix" class="java.io.InputStream">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="g_ph" class="java.io.InputStream">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="g_consistencia" class="java.io.InputStream">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="g_viscocidad" class="java.io.InputStream">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="g_acidez" class="java.io.InputStream">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="brix_sup_lim" class="java.lang.Double"/>
+	<field name="brix_inf_lim" class="java.lang.Double"/>
+	<field name="ph_sup_lim" class="java.lang.Double"/>
+	<field name="ph_inf_lim" class="java.lang.Double"/>
+	<field name="cons_sup_lim" class="java.lang.Double"/>
+	<field name="cons_inf_lim" class="java.lang.Double"/>
+	<field name="vis_sup_lim" class="java.lang.Double"/>
+	<field name="vis_inf_lim" class="java.lang.Double"/>
+	<field name="acid_sup_lim" class="java.lang.Double"/>
+	<field name="acid_inf_lim" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="572" height="79" uuid="651c216d-eaa7-49c8-a24e-2f4608858a39"/>
+				<imageExpression><![CDATA["C:\\My Web Sites\\dolche_web\\dolche.com.mx\\imagenes\\conocee.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement x="45" y="0" width="191" height="79" uuid="24c8adb1-f53a-40e2-b8a2-fb2e9b4730d0"/>
+				<imageExpression><![CDATA["C:\\My Web Sites\\dolche_web\\dolche.com.mx\\imagenes\\logo.png"]]></imageExpression>
+			</image>
+			<rectangle>
+				<reportElement x="280" y="0" width="275" height="79" backcolor="#990033" uuid="fa333b57-afff-4673-a2ba-704519980bbf"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="280" y="0" width="275" height="44" forecolor="#FFFFFF" uuid="a72cc4aa-7265-47d7-b4b2-0eebf0ab0a1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Times New Roman" size="35" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Reporte ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="44" width="275" height="35" forecolor="#FFFFFF" uuid="abc91f05-b0fb-4656-956b-37c96ea785f0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="24"/>
+				</textElement>
+				<text><![CDATA[Parametros de Producción]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="53" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="3" width="100" height="23" uuid="f8ce730f-cc40-4a9f-a1dc-e05f35a9e5f9"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Fecha de cración:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="280" y="3" width="31" height="24" uuid="f2da1ab4-e93a-4f38-9ac9-e5de7e439d11"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[De:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="4" width="19" height="23" uuid="4af15085-2e03-4ab3-9814-02fa7bc2d2e3"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[A:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="-1" y="26" width="115" height="23" uuid="47a53f42-9ce2-4726-aee1-f580e5167eeb"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<text><![CDATA[Clave de producto:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="118" y="3" width="100" height="20" uuid="141b3584-e096-4f35-b6c6-ab8b6e642364"/>
+				<textFieldExpression><![CDATA[$F{date_kpi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="118" y="27" width="100" height="20" uuid="97f47c32-e710-45e0-9f36-d12c55179155"/>
+				<textFieldExpression><![CDATA[$F{clave}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="316" y="6" width="100" height="20" uuid="47d943e1-1512-4eca-a154-7d45e0cce1eb"/>
+				<textFieldExpression><![CDATA[$F{fi}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="457" y="7" width="100" height="20" uuid="83d43177-1859-4564-a80f-73be2c351cf1"/>
+				<textFieldExpression><![CDATA[$F{ff}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<line>
+				<reportElement x="5" y="0" width="550" height="1" uuid="465452c4-5ec7-46fc-9303-c5fb64e12819"/>
+			</line>
+			<staticText>
+				<reportElement x="6" y="1" width="100" height="20" uuid="a2410023-742c-466a-9238-6e7ac87c07bf">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Promedio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="132" y="1" width="100" height="20" uuid="5bf1ef77-b818-4878-8440-ba53faac5bdb">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desviación Estandar]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="269" y="1" width="100" height="20" uuid="d7ff5d70-4217-4d04-91f9-a93e8c214ed5">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Limite inferior]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="421" y="1" width="100" height="20" uuid="795481d2-4e30-4117-a24c-39caeb296c87">
+					<printWhenExpression><![CDATA[$V{PAGE_NUMBER}==1]]></printWhenExpression>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Limite Superior]]></text>
+			</staticText>
+			<line>
+				<reportElement x="6" y="21" width="550" height="1" uuid="7a893475-186e-4cb4-b074-28176564fd6c"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="46" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="23" backcolor="#660000" uuid="c2f2f9fd-e346-45bb-92de-1a43e8d7e652"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="258" y="3" width="38" height="20" forecolor="#FFFFFF" uuid="005639f9-667e-4b88-998e-509201a79168"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Brix]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="132" y="23" width="100" height="20" uuid="fb1dacc1-39ba-440f-8858-f01894d1b6ea"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{desv_brix}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="23" width="100" height="20" uuid="718e9318-825f-48e0-ad4e-d8c2f8d64ade"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{prom_brix}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="23" width="100" height="20" uuid="d996e78e-e38a-41d9-b303-d005b383293a"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{brix_sup_lim}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="23" width="100" height="20" uuid="77f03b4b-e1de-4a43-ab13-2cf9e36798c9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{brix_inf_lim}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="46">
+			<rectangle>
+				<reportElement x="1" y="0" width="555" height="23" backcolor="#660000" uuid="10fc5dfa-faf5-49a4-8ea8-b5156230da0e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="258" y="3" width="38" height="20" forecolor="#FFFFFF" uuid="d1415539-5b6c-429c-83f7-76ae1c055f52"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Ph]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="132" y="23" width="100" height="20" uuid="b238db82-bc4d-4a11-9e8b-824c865425ee"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{desv_ph}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="23" width="100" height="20" uuid="e3e61917-02b2-4445-8a21-840cff398ab3"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{prom_ph}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="23" width="100" height="20" uuid="029c4225-921a-4230-9f5e-eec0fa6e8312"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ph_sup_lim}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="23" width="100" height="20" uuid="66af86b3-a81b-4947-9cc4-3fdb1e2277fa"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{ph_inf_lim}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="45">
+			<rectangle>
+				<reportElement x="2" y="0" width="555" height="23" backcolor="#660000" uuid="290c659e-d693-4a44-830e-290ea47a701d"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="235" y="3" width="95" height="20" forecolor="#FFFFFF" uuid="37f4ad1d-6509-462d-aa2e-ce90089756bf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Consistencia]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="132" y="23" width="100" height="20" uuid="e98b5721-2a62-4998-b272-cfe2baadef81"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{desv_consistencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="23" width="100" height="20" uuid="56acb67e-b7c8-4def-b450-aabef3036e7c"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{prom_consistencia}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="23" width="100" height="20" uuid="c1914154-d2a8-443f-8243-698bd17f067b"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cons_sup_lim}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="23" width="100" height="20" uuid="29f0d261-30b0-4d02-8c55-52072c8c9f14"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{cons_inf_lim}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="45">
+			<rectangle>
+				<reportElement x="1" y="0" width="555" height="23" backcolor="#660000" uuid="bcb41e58-7cc1-41c9-a685-6e3ba56d3b12"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="241" y="0" width="85" height="20" forecolor="#FFFFFF" uuid="bc7be7ab-8809-403a-a833-8fa5cb693643"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Viscocidad]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="132" y="23" width="100" height="20" uuid="ff15846b-0017-405a-8da6-7b7a9419ef2e"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{desv_viscocidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="23" width="100" height="20" uuid="2a372a6c-72d8-4c0d-a656-a23bdd2f1b69"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{prom_viscocidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="23" width="100" height="20" uuid="b0df5890-26b2-4560-a414-5f9701ff3e08"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{vis_sup_lim}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="23" width="100" height="20" uuid="f00b4bf1-6d3b-469f-8c73-ae5779bb6322"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{vis_inf_lim}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="48">
+			<rectangle>
+				<reportElement x="0" y="0" width="555" height="23" backcolor="#660000" uuid="6bc60093-e173-4ab9-9baa-223b77dd5ec3"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="241" y="3" width="85" height="20" forecolor="#FFFFFF" uuid="09539d66-b975-411e-9e1b-489b15400a2d"/>
+				<textElement textAlignment="Center">
+					<font fontName="Times New Roman" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Acidez]]></text>
+			</staticText>
+			<line>
+				<reportElement x="6" y="43" width="555" height="1" uuid="015c01c3-1790-4e37-87e5-36eb1a1e7420"/>
+			</line>
+			<textField>
+				<reportElement x="132" y="23" width="100" height="20" uuid="fef0b56a-393d-4d06-aec1-231b211a102d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{desv_acidez}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="8" y="23" width="100" height="20" uuid="7fedf253-0c87-41a6-9eb8-6616405a3eb7"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{prom_acidez}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="23" width="100" height="20" uuid="e04deb77-6043-40d2-9356-c7138af878ff"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{acid_sup_lim}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="269" y="23" width="100" height="20" uuid="b02b8b76-b532-43c5-9cdd-b30e8b41e695"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{acid_inf_lim}]]></textFieldExpression>
+			</textField>
+		</band>
+		<band height="232">
+			<image scaleImage="FillFrame">
+				<reportElement x="76" y="0" width="407" height="232" uuid="82b48163-2f8e-4c67-9bfc-688f4ccce7bd"/>
+				<imageExpression><![CDATA[$F{g_brix}]]></imageExpression>
+			</image>
+		</band>
+		<band height="234">
+			<image scaleImage="FillFrame">
+				<reportElement x="76" y="1" width="406" height="232" uuid="717919c4-388b-4753-a907-ffc56e3132b5"/>
+				<imageExpression><![CDATA[$F{g_ph}]]></imageExpression>
+			</image>
+		</band>
+		<band height="237">
+			<image scaleImage="FillFrame">
+				<reportElement x="77" y="2" width="406" height="235" uuid="f325e53c-91f9-452d-b16a-e7f52b08e669"/>
+				<imageExpression><![CDATA[$F{g_viscocidad}]]></imageExpression>
+			</image>
+		</band>
+		<band height="238">
+			<image scaleImage="FillFrame">
+				<reportElement x="76" y="0" width="406" height="235" uuid="961c3209-6bad-4638-8bcf-0cf0695b2982"/>
+				<imageExpression><![CDATA[$F{g_consistencia}]]></imageExpression>
+			</image>
+		</band>
+		<band height="239">
+			<image scaleImage="FillFrame">
+				<reportElement x="77" y="0" width="406" height="235" uuid="5460cd49-5d77-4018-b169-07a75075205d"/>
+				<imageExpression><![CDATA[$F{g_acidez}]]></imageExpression>
+			</image>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="26" splitType="Stretch">
+			<elementGroup/>
+		</band>
+	</columnFooter>
+	<pageFooter>
+		<band height="38" splitType="Stretch">
+			<textField>
+				<reportElement x="419" y="13" width="80" height="22" uuid="36ffa143-2a11-49c3-b653-1ea5f5675167"/>
+				<textElement textAlignment="Right">
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="500" y="13" width="55" height="22" uuid="ea624fbc-b2a0-4f5e-b3d2-5d2db747f8af"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="6" y="6" width="555" height="1" uuid="8f8fdeb5-1f26-449c-ba4e-df668b3ac1b7"/>
+			</line>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="5" y="20" width="100" height="20" uuid="db09a158-41ba-41f3-9ecf-2ffd90369235"/>
+				<textElement>
+					<font fontName="Times New Roman" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOTA:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="-1" y="10" width="555" height="1" uuid="36e3c2fd-c0ee-4852-aae5-ec606a557c13"/>
+			</line>
+			<textField>
+				<reportElement x="62" y="20" width="501" height="50" uuid="900abadf-c8ac-42e8-b0b4-3c652c04b47a"/>
+				<textFieldExpression><![CDATA[$F{description}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

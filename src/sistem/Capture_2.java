@@ -92,7 +92,7 @@ public class Capture_2 extends javax.swing.JFrame {
 
         jLabel3.setText("Usuario");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Captura Registros");
 
         jLabel1.setText("ID");
@@ -454,7 +454,8 @@ public class Capture_2 extends javax.swing.JFrame {
     }//GEN-LAST:event_ph_fieldActionPerformed
 
     private void generar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generar_buttonActionPerformed
-        int p1, p8, p9, p25 = 0;
+        int p1, p8, p9 = 0;
+        int id = 0;
         //-----------------------------------
         String p2 = ((JTextField)f_anal_chooser.getDateEditor().getUiComponent()).getText();
         String p3 = clave_field.getText();
@@ -483,13 +484,17 @@ public class Capture_2 extends javax.swing.JFrame {
         LogConexion registrar = new LogConexion();
         
         registrar.open();
-        p1= registrar.getRId()+1;
-        id_reg_label.setText(Integer.toString(p1));
-        p8 = p9 = p1;
-        p25 = registrar.getUId(susuario);
-        int con1 = registrar.addPara(p8, p10, p11, p12, p13, p14, p15, p16, p17, p18,p19);
-        int con2 = registrar.addMicro(p9, p20, p21, p22, p23, p24);
-        int con3 = registrar.addRegister(p1, p2, p3, p4, p5, p6, p7, p25, p8, p9);
+        p1= registrar.getRId();
+        id = registrar.getUId(susuario);
+        id_reg_label.setText(Integer.toString(p1+1));
+        
+        int con1 = registrar.addPara(p10,p11,p12,p13,p14,p15,p16,p17,p18,p19);
+        int con2 = registrar.addMicro(p20,p21,p22,p23,p24);
+        
+        int a = registrar.getMiId();
+        int b = registrar.getPaId();
+        int con3 = registrar.addRegister(p2,p3,p4,p5,p6,p7,id,a,b);
+
         registrar.close();
         
         

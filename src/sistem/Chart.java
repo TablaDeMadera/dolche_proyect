@@ -5,8 +5,14 @@
  */
 package sistem;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JDialog;
 
 import javax.swing.JFrame;
@@ -18,6 +24,8 @@ import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.XYDataset;
@@ -31,20 +39,22 @@ public class Chart extends JDialog {
     public JFrame parentFrame;
     public String title;
     
-    public Chart(JFrame parentFrame,String tit, float [] ser, float prome, float dis){
+    public Chart(JFrame parentFrame,String tit, float [] ser, float prome, float dis, String name) throws IOException{
         super(parentFrame);
         this.title = tit;
         this.parentFrame = parentFrame;
         setTitle("KPI Graph");
-        setSize( 600, 600 );
+        setSize( 500, 500 );
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         XYDataset ds = createDataset(ser, prome, dis);
         JFreeChart chart = ChartFactory.createXYLineChart(title,
              "Muestra", "", ds, PlotOrientation.VERTICAL, true, true, false);
+        customizeChart(chart);
         ChartPanel cp = new ChartPanel(chart);
         getContentPane().add(cp);
         cp.setMaximumSize(new Dimension(cp.getParent().getWidth(), 0));
+        ChartUtils.saveChartAsPNG(new File("Graphics/ID_"+name+".png"),chart,500,500);
     }
  
     private static  XYDataset createDataset(float [] y, float prom, float desu) {
@@ -73,4 +83,20 @@ public class Chart extends JDialog {
         return ds;
     }
     
+    public void customizeChart(JFreeChart chart){
+        XYPlot plot = chart.getXYPlot();
+        XYLineAndShapeRenderer renderer =new XYLineAndShapeRenderer();
+        
+        renderer.setSeriesStroke(0,new BasicStroke(4.0f));
+        renderer.setSeriesStroke(0,new BasicStroke(4.0f));
+        renderer.setSeriesStroke(0,new BasicStroke(4.0f));
+        
+        plot.setRenderer(renderer);
+        
+        plot.setBackgroundPaint(Color.BLACK);
+        
+        plot.setRangeGridlinesVisible(true);
+        plot.setRangeGridlinePaint(Color.GRAY);
+        
+    }
 }

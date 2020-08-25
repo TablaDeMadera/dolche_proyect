@@ -7,9 +7,11 @@ package sistem;
  */
 
 
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -28,26 +30,36 @@ public class LogConexion {
    private static  String URL;
    private static  String USERNAME;
    private static  String PASSWORD;
-   private Connection connection; 
+   public Connection connection; 
    private PreparedStatement selectUser; 
    private PreparedStatement selectPass; 
    private PreparedStatement insertCapture; 
    private PreparedStatement insertPar;
    private PreparedStatement insertMic;
-   private PreparedStatement getidUser;
    private PreparedStatement insertUser;
    private PreparedStatement dateSearch;
    private PreparedStatement userData;
    private PreparedStatement userDelete;
    private PreparedStatement userUpdate;
-   private PreparedStatement minData;
-   private PreparedStatement maxData;
    private PreparedStatement promData;
    private PreparedStatement dsData;
-   private PreparedStatement kpiSet;
-   private PreparedStatement kpiGet;
+   private PreparedStatement insertKpi;
+   private PreparedStatement lstKpi;
+   private PreparedStatement kpiData;
    private PreparedStatement sample;
-
+   private PreparedStatement insertDesv;
+   private PreparedStatement insertProm;
+   private PreparedStatement insertGraf;
+   private PreparedStatement insertAlarm;
+   private PreparedStatement lstPrm;
+   private PreparedStatement lstDsv;
+   private PreparedStatement lstUser;
+   private PreparedStatement lstIdKpi;
+   private PreparedStatement lstIdPr;
+   private PreparedStatement lstIdDe;
+   private PreparedStatement lstIdGr;
+   private PreparedStatement lstIdPa;
+   private PreparedStatement lstIdMi;
    
    public void open(){
         Properties p = new Properties();
@@ -69,116 +81,148 @@ public class LogConexion {
         }
        try {
          connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
-         
+//-------------------------------------------------------------ALL SELECTS         
          selectUser = connection.prepareStatement(
-            "SELECT * FROM user WHERE username = ?");
+            "SELECT * FROM usuarios WHERE user_name = ?");
+         
+         lstUser = connection.prepareStatement(
+            "SELECT MAX(id_register) FROM registros");
+         
+         lstIdKpi = connection.prepareStatement(
+            "SELECT MAX(id_kpi) FROM kpis");
+         
+         lstIdPr= connection.prepareStatement(
+            "SELECT MAX(id_avg) FROM promedios");
+         
+         lstIdDe = connection.prepareStatement(
+            "SELECT MAX(id_desv) FROM desviaciones");
+         
+         lstIdGr = connection.prepareStatement(
+            "SELECT MAX(id_graphs) FROM graficas");
+         
+         lstIdPa = connection.prepareStatement(
+            "SELECT MAX(id_params) FROM params");
+         
+         lstIdMi = connection.prepareStatement(
+            "SELECT MAX(id_micro) FROM micros");
          
          selectPass = connection.prepareStatement(
-            "SELECT * FROM user WHERE password = ?");    
-         
-         insertCapture = connection.prepareStatement (
-         "INSERT INTO register "+
-                 "(idregister, fecha_analisis, clave, fecha_produccion, no_cocinada, "+
-                 "estatus_final, operador, USER_iduser, id_params, id_micro) "+
-                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-         
-         insertPar = connection.prepareStatement(
-         "INSERT INTO params "+
-                 "(id_params, espec, brix, ph, consistencia, apariencia, viscosidad, acidez, "+
-                 "observaciones, estatus_fq, estatus_funcional) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-         
-         insertMic = connection.prepareStatement(
-         "INSERT INTO micro "+
-                 "(id_micro, coliformes, cuenta_estandar, hongos, levaduras, estatus_micro) "+
-                 "VALUES (?, ?, ?, ?, ?, ?)");
-         
-         getidUser = connection.prepareStatement(
-                 "SELECT * FROM user WHERE username = ?");
-         
-         insertUser = connection.prepareStatement (
-            "INSERT INTO user"+
-                    "(username, password, privilege) VALUES (?, ?, ?)");
+            "SELECT * FROM usuarios WHERE password = ?");    
          
          dateSearch = connection.prepareStatement (
-                 "SELECT idregister, operador, clave, no_cocinada, estatus_final, estatus_fq, estatus_funcional, estatus_micro FROM register "
-                         + "INNER JOIN params "
-                         + "ON register.id_params = params.id_params "
-                         + "INNER JOIN micro "
-                         + "ON register.id_micro = micro.id_micro "
+                 "SELECT * FROM registros "
                          + "WHERE fecha_analisis = ?"
          );
          
          userData = connection.prepareStatement (
-                 "SELECT username, password, privilege from user "
-                         + "WHERE iduser = ?"
-         );
-         
-         userDelete = connection.prepareStatement (
-                 "DELETE from user WHERE iduser = ?"
-         );
-         
-         userUpdate = connection.prepareStatement (
-                 "UPDATE user SET username = ?, "
-                         + "password = ?, "
-                         + "privilege = ? WHERE iduser = ?"
+                 "SELECT user_name, name, password, privilege from usuarios "
+                         + "WHERE id_user = ?"
          );
          
          sample = connection.prepareStatement (
-                 "SELECT brix, ph, consistencia, viscosidad, acidez from register "
+                 "SELECT brix, ph, consistencia, viscosidad, acidez from registros "
                          + "inner join params "
-                         + "on register.id_params = params.id_params "
+                         + "on registros.id_params = params.id_params "
                          + "where clave = ? "
                          + "and fecha_analisis >= ? "
                          + "and fecha_analisis <= ?;"
          );
-         minData = connection.prepareStatement (
-                "SELECT MIN(brix), MIN(ph), MIN(consistencia), MIN(viscosidad), MIN(acidez) from register "
-                         + "inner join params "
-                         + "on register.id_params = params.id_params "
-                         + "where clave = ? "
-                         + "and fecha_analisis >= ? "
-                         + "and fecha_analisis <= ?;"
-         );
-         
-         maxData = connection.prepareStatement (
-                "SELECT MAX(brix), MAX(ph), MAX(consistencia), MAX(viscosidad), MAX(acidez) from register "
-                         + "inner join params "
-                         + "on register.id_params = params.id_params "
-                         + "where clave = ? "
-                         + "and fecha_analisis >= ? "
-                         + "and fecha_analisis <= ?;"
-         );
-         
+                  
          promData = connection.prepareStatement (
-                 "SELECT AVG(brix), AVG(ph), AVG(consistencia), AVG(viscosidad), AVG(acidez) from register "
+                 "SELECT AVG(brix), AVG(ph), AVG(consistencia), AVG(viscosidad), AVG(acidez) from registros "
                          + "inner join params "
-                         + "on register.id_params = params.id_params "
+                         + "on registros.id_params = params.id_params "
                          + "where clave = ? "
                          + "and fecha_analisis >= ? "
                          + "and fecha_analisis <= ?;"
          );
          
          dsData = connection.prepareStatement (
-                "SELECT STD(brix), STD(ph), STD(consistencia), STD(viscosidad), STD(acidez) from register "
+                "SELECT STD(brix), STD(ph), STD(consistencia), STD(viscosidad), STD(acidez) from registros "
                          + "inner join params "
-                         + "on register.id_params = params.id_params "
+                         + "on registros.id_params = params.id_params "
                          + "where clave = ? "
                          + "and fecha_analisis >= ? "
                          + "and fecha_analisis <= ?;"
          );
          
-         kpiSet = connection.prepareStatement (
-                 "INSERT INTO kpi "
-                         + "(date_kpi, min_brix, min_ph, min_consistencia, min_viscocidad, min_acidez, "
-                         + "max_brix, max_ph, max_consistencia, max_viscocidad, max_acidez, "
-                         + "prom_brix, prom_ph, prom_consistencia, prom_viscocidad, prom_acidez, "
-                         + "desv_brix, desv_ph, desv_consistencia, desv_viscocidad, desv_acidez, "
-                         + "clave, descripcion) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, "
-                         + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+         
+         lstKpi = connection.prepareStatement(
+         "SELECT id_kpi, date_kpi, clave, description, fi, ff FROM kpis ORDER BY id_kpi DESC LIMIT 1");
+         
+         lstPrm = connection.prepareStatement(
+         "SELECT prom_brix, prom_ph, prom_consistencia, prom_viscocidad, prom_acidez FROM promedios ORDER BY id_avg DESC LIMIT 1");
+         
+         lstDsv = connection.prepareStatement(       
+         "SELECT desv_brix, desv_ph, desv_consistencia, desv_viscocidad, desv_acidez FROM desviaciones ORDER BY id_desv DESC LIMIT 1");
+         
+         
+         kpiData = connection.prepareStatement(
+         "SELECT " +
+                    "id_kpi, date_kpi, clave, description, fi, ff, " +
+                    "prom_brix, prom_ph, prom_consistencia, prom_viscocidad, prom_acidez, " +
+                    "desv_brix, desv_ph, desv_consistencia, desv_viscocidad, desv_acidez " +
+                    "FROM kpis JOIN desviaciones JOIN promedios " +
+                    "ON kpis.id_desv = desviaciones.id_desv " +
+                    "AND kpis.id_avg = promedios.id_avg " +
+                    "WHERE " +
+                    "kpis.id_kpi = ?");
+         
+//-----------------------------------------------------------ALL INSERTS
+
+         insertCapture = connection.prepareStatement (
+         "INSERT INTO registros "+
+                 "(fecha_analisis, clave, fecha_produccion, no_cocinada, "+
+                 "estatus_final, operador, id_user, id_micro, id_params) "+
+                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+         
+         insertPar = connection.prepareStatement(
+         "INSERT INTO params "+
+                 "(espec, brix, ph, consistencia, apariencia, viscosidad, acidez, "+
+                 "observaciones, estatus_fq, estatus_funcional) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+         
+         insertMic = connection.prepareStatement(
+         "INSERT INTO micros "+
+                 "(coliformes, cuenta_estandar, hongos, levaduras, estatus_micro) "+
+                 "VALUES (?, ?, ?, ?, ?)");
+         
+         insertUser = connection.prepareStatement (
+            "INSERT INTO usuarios"+
+                    "(user_name, name, password, privilege) VALUES (?, ?, ?, ?)");
+         
+         insertKpi = connection.prepareStatement (
+                 "INSERT INTO kpis "
+                         + "(date_kpi, clave, description, fi, ff, id_user, id_avg, id_desv, id_graphs) "
+                         + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");        
+         
+         insertDesv = connection.prepareStatement(
+            "INSERT INTO desviaciones (desv_brix, desv_ph, desv_consistencia, desv_viscocidad, "
+                    + "desv_acidez) VALUES (?, ?, ?, ?, ?);");
+         
+         insertProm = connection.prepareStatement(
+            "INSERT INTO promedios (prom_brix, prom_ph, prom_consistencia, prom_viscocidad, "
+                    + "prom_acidez) VALUES (?, ?, ?, ?, ?)");
+         
+         insertGraf = connection.prepareStatement(
+            "INSERT INTO graficas (g_brix, g_ph, g_consistencia, g_viscocidad, g_acidez) "
+                    + "VALUES (?, ?, ?, ?, ?)");
+         
+         insertAlarm = connection.prepareStatement(
+            "INSERT INTO alarmas (create_date, parameter_target, low_limit, high_limit, description, shot, shot_date) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?)");
+                 
+//---------------------------------------------------------ALL DELETES     
+         userDelete = connection.prepareStatement (
+                 "DELETE from usuarios WHERE id_user = ?"
          );
          
-         kpiGet = connection.prepareStatement(
-         "SELECT * FROM kpi ORDER BY idKPI DESC LIMIT 1");
+//--------------------------------------------------------ALL UPDATES         
+         userUpdate = connection.prepareStatement (
+                 "UPDATE usuarios SET user_name = ?, "
+                         + "name = ?, "
+                         + "password = ?, "
+                         + "privilege = ? WHERE id_user = ?"
+         );
          
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -197,7 +241,7 @@ public class LogConexion {
            resultSet1 = selectUser.executeQuery(); 
            resultSet2 = selectPass.executeQuery(); 
         while (resultSet1.next()){
-           if(resultSet1.getString("username").equals(name)){
+           if(resultSet1.getString("user_name").equals(name)){
                while(resultSet2.next()){
                    if(resultSet2.getString("password").equals(code)){
                        return resultSet1.getString("privilege");
@@ -226,11 +270,11 @@ public class LogConexion {
    public int getUId(String name){
        ResultSet resultSet = null;
        try {
-           getidUser.setString(1, name);
-           resultSet = getidUser.executeQuery(); 
+           selectUser.setString(1, name);
+           resultSet = selectUser.executeQuery(); 
            while (resultSet.next()){
-               if(resultSet.getString("username").equals(name)){
-                   return resultSet.getInt("iduser");
+               if(resultSet.getString("user_name").equals(name)){
+                   return resultSet.getInt("id_user");
                }
            }
        } catch (SQLException ex) {
@@ -251,11 +295,11 @@ public class LogConexion {
        int n = 0;
        ResultSet resultSet = null;
        try {
-           resultSet = getidUser.executeQuery("SELECT MAX(idregister) FROM register"); 
+           resultSet = lstUser.executeQuery(); 
            if (resultSet.next()){
                n = resultSet.getInt(1);
+               return n;
            }
-           return n;
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
        }finally{
@@ -268,22 +312,155 @@ public class LogConexion {
        }
        return n;
    }
+   
+   public int getKId(){
+       int n = 0;
+       ResultSet resultSet = null;
+       try {
+           resultSet = lstIdKpi.executeQuery(); 
+           if (resultSet.next()){
+               n = resultSet.getInt(1);
+               return n;
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+       }finally{
+           try {
+               resultSet.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+               close();
+           }
+       }
+       return n;
+   }
+   
+   public int getPId(){
+       int n = 0;
+       ResultSet resultSet = null;
+       try {
+           resultSet = lstIdPr.executeQuery(); 
+           if (resultSet.next()){
+               n = resultSet.getInt(1);
+               return n;
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+       }finally{
+           try {
+               resultSet.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+               close();
+           }
+       }
+       return n;
+   }
+   
+   public int getDId(){
+       int n = 0;
+       ResultSet resultSet = null;
+       try {
+           resultSet = lstIdDe.executeQuery(); 
+           if (resultSet.next()){
+               n = resultSet.getInt(1);
+               return n;
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+       }finally{
+           try {
+               resultSet.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+               close();
+           }
+       }
+       return n;
+   }
+   
+   public int getGId(){
+       int n = 0;
+       ResultSet resultSet = null;
+       try {
+           resultSet = lstIdGr.executeQuery(); 
+           if (resultSet.next()){
+               n = resultSet.getInt(1);
+               return n;
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+       }finally{
+           try {
+               resultSet.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+               close();
+           }
+       }
+       return n;
+   }
+   
+   public int getPaId(){
+       int n = 0;
+       ResultSet resultSet = null;
+       try {
+           resultSet = lstIdPa.executeQuery(); 
+           if (resultSet.next()){
+               n = resultSet.getInt(1);
+               return n;
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+       }finally{
+           try {
+               resultSet.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+               close();
+           }
+       }
+       return n;
+   }
+   
+   public int getMiId(){
+       int n = 0;
+       ResultSet resultSet = null;
+       try {
+           resultSet = lstIdMi.executeQuery(); 
+           if (resultSet.next()){
+               n = resultSet.getInt(1);
+               return n;
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+       }finally{
+           try {
+               resultSet.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+               close();
+           }
+       }
+       return n;
+   }
+   
+   
 //---------------------------------------CAPTURE AND ADMIN   
-   public int addRegister(int idreg, String f_anal, String clave,
+   public int addRegister(String f_anal, String clave,
            String f_prd, int n_cocina, String stat_final, String opera,
-           int u_id, int idparam, int idmicro){
+           int u_id, int m_id, int p_id){
         int result = 0;
        try {
-           insertCapture.setInt(1, idreg);
-           insertCapture.setString(2, f_anal);
-           insertCapture.setString(3, clave);
-           insertCapture.setString(4, f_prd);
-           insertCapture.setInt(5, n_cocina);
-           insertCapture.setString(6, stat_final);
-           insertCapture.setString(7, opera);
-           insertCapture.setInt(8, u_id);
-           insertCapture.setInt(9, idparam);
-           insertCapture.setInt(10, idmicro);
+           insertCapture.setString(1, f_anal);
+           insertCapture.setString(2, clave);
+           insertCapture.setString(3, f_prd);
+           insertCapture.setInt(4, n_cocina);
+           insertCapture.setString(5, stat_final);
+           insertCapture.setString(6, opera);
+           insertCapture.setInt(7, u_id);
+           insertCapture.setInt(8, m_id);
+           insertCapture.setInt(9, p_id);
            
            result = insertCapture.executeUpdate();
            
@@ -294,22 +471,21 @@ public class LogConexion {
        return result;
    }
    
-   public int addPara(int idparam, String espec, float brix, float ph,
+   public int addPara(String espec, float brix, float ph,
            float consis, String apa, float visco, float acid, String obs,
            String stat_fq, String stat_fun){
        int result = 0;
        try{
-           insertPar.setInt(1, idparam);
-           insertPar.setString(2, espec);
-           insertPar.setFloat(3, brix);
-           insertPar.setFloat(4, ph);
-           insertPar.setFloat(5, consis);
-           insertPar.setString(6, apa);
-           insertPar.setFloat(7, visco);
-           insertPar.setFloat(8, acid);
-           insertPar.setString(9, obs);
-           insertPar.setString(10, stat_fq);
-           insertPar.setString(11, stat_fun);
+           insertPar.setString(1, espec);
+           insertPar.setFloat(2, brix);
+           insertPar.setFloat(3, ph);
+           insertPar.setFloat(4, consis);
+           insertPar.setString(5, apa);
+           insertPar.setFloat(6, visco);
+           insertPar.setFloat(7, acid);
+           insertPar.setString(8, obs);
+           insertPar.setString(9, stat_fq);
+           insertPar.setString(10, stat_fun);
            
            result = insertPar.executeUpdate();
        }catch (SQLException ex){
@@ -319,16 +495,15 @@ public class LogConexion {
        return result;
    }
    
-   public int addMicro(int idmicro, String coli, String cuenta, String hongo,
+   public int addMicro(String coli, String cuenta, String hongo,
            String leva, String sta_micro){
        int result = 0;
        try{
-           insertMic.setInt(1, idmicro);
-           insertMic.setString(2, coli);
-           insertMic.setString(3, cuenta);
-           insertMic.setString(4, hongo);
-           insertMic.setString(5, leva);
-           insertMic.setString(6, sta_micro);
+           insertMic.setString(1, coli);
+           insertMic.setString(2, cuenta);
+           insertMic.setString(3, hongo);
+           insertMic.setString(4, leva);
+           insertMic.setString(5, sta_micro);
            
            result = insertMic.executeUpdate();
        }catch (SQLException ex){
@@ -339,12 +514,14 @@ public class LogConexion {
    }
    
    //-------------------------------ADMIN CONTROL
-   public int addUser(String name, String pass, int privilege){
+   public int addUser(String nick, String name, String pass, int privilege){
        int result = 0;
        try {
-           insertUser.setString(1, name);
-           insertUser.setString(2, pass);
-           insertUser.setInt(3, privilege);
+           insertUser.setString(1, nick);
+           insertUser.setString(2, name);
+           insertUser.setString(3, pass);
+           insertUser.setInt(4, privilege);
+           
            result = insertUser.executeUpdate();
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -354,7 +531,7 @@ public class LogConexion {
    }
    
    public String[] searchUser(int numUser){
-       String [] dato = new String [3];
+       String [] dato = new String [4];
        ResultSet resultSet = null;
        try {
            userData.setInt(1, numUser);
@@ -363,6 +540,7 @@ public class LogConexion {
                dato[0]=resultSet.getString(1);
                dato[1]=resultSet.getString(2);
                dato[2]=resultSet.getString(3);
+               dato[3]=resultSet.getString(4);
            }
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -371,13 +549,15 @@ public class LogConexion {
        return dato;
    } 
    
-   public int changeUser(int id, String name, String pass, int priv){
+   public int changeUser(int id, String nick, String name, String pass, int priv){
        int result = 0;
        try {
-           userUpdate.setString(1, name);
-           userUpdate.setString(2, pass);
-           userUpdate.setInt(3, priv);
-           userUpdate.setInt(4, id);
+           userUpdate.setString(1, nick);
+           userUpdate.setString(2, name);
+           userUpdate.setString(3, pass);
+           userUpdate.setInt(4, priv);
+           userUpdate.setInt(5, id);
+           
            result = userUpdate.executeUpdate();
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -398,9 +578,9 @@ public class LogConexion {
        return result;
    }
    
-//-----------------------------------VIEWER          
+//-----------------------------------VIEWER     
    public String[][] getReg(String fecha){
-       String [][] dato = new String [8][100];
+       String [][] dato = new String [10][100];
        ResultSet resultSet = null;
        try {
            dateSearch.setString(1, fecha);
@@ -415,6 +595,8 @@ public class LogConexion {
                dato[5][i]=resultSet.getString(6);
                dato[6][i]=resultSet.getString(7);
                dato[7][i]=resultSet.getString(8);
+               dato[8][i]=resultSet.getString(9);
+               dato[9][i]=resultSet.getString(10);
                i++;
            }
        } catch (SQLException ex) {
@@ -457,50 +639,6 @@ public class LogConexion {
                Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
                close();
            }
-       }
-       return dato;
-   }
-      
-   public float[] getMin(String fi, String ff, String clv){
-       float [] dato = new float [5];
-       ResultSet resultSet = null;
-       try {
-           minData.setString(1, clv);
-           minData.setString(2, fi);
-           minData.setString(3, ff);
-           resultSet = minData.executeQuery();
-           while (resultSet.next()){
-               dato[0]=resultSet.getFloat(1);
-               dato[1]=resultSet.getFloat(2);
-               dato[2]=resultSet.getFloat(3);
-               dato[3]=resultSet.getFloat(4);
-               dato[4]=resultSet.getFloat(5);
-           }
-       } catch (SQLException ex) {
-           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
-           close();
-       }
-       return dato;
-   }
-   
-    public float[] getMax(String fi, String ff, String clv){
-       float [] dato = new float [5];
-       ResultSet resultSet = null;
-       try {
-           maxData.setString(1, clv);
-           maxData.setString(2, fi);
-           maxData.setString(3, ff);
-           resultSet = maxData.executeQuery();
-           while (resultSet.next()){
-               dato[0]=resultSet.getFloat(1);
-               dato[1]=resultSet.getFloat(2);
-               dato[2]=resultSet.getFloat(3);
-               dato[3]=resultSet.getFloat(4);
-               dato[4]=resultSet.getFloat(5);
-           }
-       } catch (SQLException ex) {
-           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
-           close();
        }
        return dato;
    }
@@ -548,37 +686,72 @@ public class LogConexion {
        }
        return dato;
    }
-    
-   public String[] gKPI(){
-       String [] dato = new String [24];
-       ResultSet resultSet = null;
+//--------------obtener el ultimo registro de kpis    
+    public String[] gKPI(){
+       String [] dato = new String [16];
+       ResultSet resultSet1 = null;
+       ResultSet resultSet2 = null;
+       ResultSet resultSet3 = null;
        try {
-           resultSet = kpiGet.executeQuery();
-           while (resultSet.next()){
-               dato[0]=resultSet.getString(1);
-               dato[1]=""+resultSet.getDate(2);
-               dato[2]=""+resultSet.getFloat(3);
-               dato[3]=""+resultSet.getFloat(4);
-               dato[4]=""+resultSet.getFloat(5);
-               dato[5]=""+resultSet.getFloat(6);
-               dato[6]=""+resultSet.getFloat(7);
-               dato[7]=""+resultSet.getFloat(8);
-               dato[8]=""+resultSet.getFloat(9);
-               dato[9]=""+resultSet.getFloat(10);
-               dato[10]=""+resultSet.getFloat(11);
-               dato[11]=""+resultSet.getFloat(12);
-               dato[12]=""+resultSet.getFloat(13);
-               dato[13]=""+resultSet.getFloat(14);
-               dato[14]=""+resultSet.getFloat(15);
-               dato[15]=""+resultSet.getFloat(16);
-               dato[16]=""+resultSet.getFloat(17);
-               dato[17]=""+resultSet.getFloat(18);
-               dato[18]=""+resultSet.getFloat(19);
-               dato[19]=""+resultSet.getFloat(20);
-               dato[20]=""+resultSet.getFloat(21);
-               dato[21]=""+resultSet.getFloat(22);
-               dato[22]=resultSet.getString(23);
-               dato[23]=resultSet.getString(24);
+           resultSet1 = lstKpi.executeQuery();
+           resultSet2 = lstPrm.executeQuery();
+           resultSet3 = lstDsv.executeQuery();
+           while (resultSet1.next()){
+               dato[0]=""+resultSet1.getInt(1);
+               dato[1]=""+resultSet1.getDate(2);
+               dato[2]=resultSet1.getString(3);
+               dato[3]=resultSet1.getString(4);
+               dato[4]=""+resultSet1.getDate(5);
+               dato[5]=""+resultSet1.getDate(6);
+           }
+           while (resultSet2.next()){
+               dato[6]=""+resultSet2.getFloat(1);
+               dato[7]=""+resultSet2.getFloat(2);
+               dato[8]=""+resultSet2.getFloat(3);
+               dato[9]=""+resultSet2.getFloat(4);
+               dato[10]=""+resultSet2.getFloat(5);
+           }
+           while (resultSet3.next()){
+               dato[11]=""+resultSet3.getFloat(1);
+               dato[12]=""+resultSet3.getFloat(2);
+               dato[13]=""+resultSet3.getFloat(3);
+               dato[14]=""+resultSet3.getFloat(4);
+               dato[15]=""+resultSet3.getFloat(5);
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return dato;
+   }
+
+//--------------------ontiene la data de un kpi_id
+//id_kpi, date_kpi, clave, description, fi, ff, prom_brix, prom_ph, prom_consistencia, prom_viscocidad, prom_acidez,
+   //desv_brix, desv_ph, desv_consistencia, desv_viscocidad, desv_acidez
+    public String[] gKPI_2(int id){
+       String [] dato = new String [16];
+       ResultSet resultSet1 = null;
+       try {
+           kpiData.setInt(1, id);
+           resultSet1 = kpiData.executeQuery();
+
+           while (resultSet1.next()){
+               dato[0]=""+resultSet1.getInt(1);
+               dato[1]=""+resultSet1.getDate(2);
+               dato[2]=resultSet1.getString(3);
+               dato[3]=resultSet1.getString(4);
+               dato[4]=""+resultSet1.getDate(5);
+               dato[5]=""+resultSet1.getDate(6);
+               dato[6]=""+resultSet1.getFloat(7);
+               dato[7]=""+resultSet1.getFloat(8);
+               dato[8]=""+resultSet1.getFloat(9);
+               dato[9]=""+resultSet1.getFloat(10);
+               dato[10]=""+resultSet1.getFloat(11);
+               dato[11]=""+resultSet1.getFloat(12);
+               dato[12]=""+resultSet1.getFloat(13);
+               dato[13]=""+resultSet1.getFloat(14);
+               dato[14]=""+resultSet1.getFloat(15);
+               dato[15]=""+resultSet1.getFloat(16);
            }
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -587,35 +760,82 @@ public class LogConexion {
        return dato;
    }
    
-   public int sKPI(String date_kpi, float min_brix, float min_ph, float min_consistencia, float min_viscocidad, float min_acidez, float max_brix, float max_ph,
-           float max_consistencia, float max_viscocidad, float max_acidez, float prom_brix, float prom_ph, float prom_consistencia, float prom_viscocidad, 
-           float prom_acidez, float desv_brix, float desv_ph, float desv_consistencia, float desv_viscocidad, float desv_acidez, String clave, String descripcion){
+    /*public Blob[] gGraphs(int id){
+       Blob [] dato = new Blob [5];
+       ResultSet resultSet = null;
+       try {
+           grpData.setInt(1, id);
+           resultSet = grpData.executeQuery();
+
+           while (resultSet.next()){
+               dato[0]=resultSet.getBlob(1);
+               dato[1]=resultSet.getBlob(2);
+               dato[2]=resultSet.getBlob(3);
+               dato[3]=resultSet.getBlob(4);
+               dato[4]=resultSet.getBlob(5);
+           }
+
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return dato;
+   }*/
+   
+//INSERT INTO kpis (date_kpi, clave, description, fi, ff, id_user) VALUES (?, ?, ?, ?, ?, ?)
+//INSERT INTO desviaciones (desv_brix, desv_ph, desv_consistencia, desv_viscocidad, desv_acidez, id_kpi) VALUES (?, ?, ?, ?, ?, ?)  
+//INSERT INTO promedios (prom_brix, prom_ph, prom_consistencia, prom_viscocidad, prom_acidez, id_kpi) VALUES (?, ?, ?, ?, ?, ?)  
+//INSERT INTO graficas (g_brix, g_ph, g_consistencia, g_viscocidad, g_acidez, id_kpi) VALUES (?, ?, ?, ?, ?, ?)      
+   public int sKPI(String date_kpi, String clave, String description, String fi, String ff, int id_user, int id_avg, int id_desv, int id_graph){
        int result = 0;
        try {
-           kpiSet.setString(1, date_kpi);
-           kpiSet.setFloat(2, min_brix);
-           kpiSet.setFloat(3, min_ph);
-           kpiSet.setFloat(4, min_consistencia);
-           kpiSet.setFloat(5, min_viscocidad);
-           kpiSet.setFloat(6, min_acidez);
-           kpiSet.setFloat(7, max_brix);
-           kpiSet.setFloat(8, max_ph);
-           kpiSet.setFloat(9, max_consistencia);
-           kpiSet.setFloat(10, max_viscocidad);
-           kpiSet.setFloat(11, max_acidez);
-           kpiSet.setFloat(12, prom_brix);
-           kpiSet.setFloat(13, prom_ph);
-           kpiSet.setFloat(14, prom_consistencia);
-           kpiSet.setFloat(15, prom_viscocidad);
-           kpiSet.setFloat(16, prom_acidez);
-           kpiSet.setFloat(17, desv_brix);
-           kpiSet.setFloat(18, desv_ph);
-           kpiSet.setFloat(19, desv_consistencia);
-           kpiSet.setFloat(20, desv_viscocidad);
-           kpiSet.setFloat(21, desv_acidez);
-           kpiSet.setString(22, clave);
-           kpiSet.setString(23, descripcion);
-           result = kpiSet.executeUpdate();
+           insertKpi.setString(1, date_kpi);
+           insertKpi.setString(2, clave);
+           insertKpi.setString(3, description);
+           insertKpi.setString(4, fi);
+           insertKpi.setString(5, ff);
+           insertKpi.setInt(6, id_user);
+           insertKpi.setInt(7, id_avg);
+           insertKpi.setInt(8, id_desv);
+           insertKpi.setInt(9, id_graph);
+           
+           result = insertKpi.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+   
+   public int sDSV(float desv_brix, float desv_ph, float desv_consistencia, float desv_viscocidad, 
+           float desv_acidez){
+       int result = 0;
+       try {
+           insertDesv.setFloat(1, desv_brix);
+           insertDesv.setFloat(2, desv_ph);
+           insertDesv.setFloat(3, desv_consistencia);
+           insertDesv.setFloat(4, desv_viscocidad);
+           insertDesv.setFloat(5, desv_acidez);
+           
+           result = insertDesv.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+   
+   public int sPRM(float prm_brix, float prm_ph, float prm_consistencia, float prm_viscocidad, 
+           float prm_acidez){
+       int result = 0;
+       try {
+           insertProm.setFloat(1, prm_brix);
+           insertProm.setFloat(2, prm_ph);
+           insertProm.setFloat(3, prm_consistencia);
+           insertProm.setFloat(4, prm_viscocidad);
+           insertProm.setFloat(5, prm_acidez);
+           
+           result = insertProm.executeUpdate();
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
            close();
@@ -623,6 +843,29 @@ public class LogConexion {
        return result;
    }
        
+   public int sGR(String gbrix, String gph, String gconsistencia, String gviscocidad, 
+           String gacidez) throws FileNotFoundException{
+       int result = 0;
+       try {
+           FileInputStream brix = new FileInputStream(gbrix);
+           FileInputStream ph = new FileInputStream(gph);
+           FileInputStream consistencia = new FileInputStream(gconsistencia);
+           FileInputStream viscocidad = new FileInputStream(gviscocidad);
+           FileInputStream acidez = new FileInputStream(gacidez);
+           
+           insertGraf.setBlob(1, brix);
+           insertGraf.setBlob(2, ph);
+           insertGraf.setBlob(3, consistencia);
+           insertGraf.setBlob(4, viscocidad);
+           insertGraf.setBlob(5, acidez);
+           
+           result = insertGraf.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
              
    public void close(){
       try {
