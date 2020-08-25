@@ -60,6 +60,14 @@ public class LogConexion {
    private PreparedStatement lstIdGr;
    private PreparedStatement lstIdPa;
    private PreparedStatement lstIdMi;
+   private PreparedStatement dataReg;
+   private PreparedStatement updateReg;
+   private PreparedStatement updatePar;
+   private PreparedStatement updateMic;
+   private PreparedStatement getParMicId;
+   private PreparedStatement regDelete;
+   private PreparedStatement paramDelete;
+   private PreparedStatement microDelete;
    
    public void open(){
         Properties p = new Properties();
@@ -146,6 +154,13 @@ public class LogConexion {
                          + "and fecha_analisis <= ?;"
          );
          
+         dataReg = connection.prepareStatement (
+                 "SELECT fecha_analisis, clave, fecha_produccion, no_cocinada, estatus_final, operador, " +
+                    "coliformes, cuenta_estandar, hongos, levaduras, estatus_micro, " +
+                    "espec, brix, ph, consistencia, apariencia, viscosidad, acidez, observaciones, estatus_fq, estatus_funcional " +
+                    "FROM registros JOIN micros JOIN params ON registros.id_micro = micros.id_micro AND registros.id_params = params.id_params " +
+                    "WHERE registros.id_register = ?;");
+         
          
          lstKpi = connection.prepareStatement(
          "SELECT id_kpi, date_kpi, clave, description, fi, ff FROM kpis ORDER BY id_kpi DESC LIMIT 1");
@@ -167,6 +182,9 @@ public class LogConexion {
                     "AND kpis.id_avg = promedios.id_avg " +
                     "WHERE " +
                     "kpis.id_kpi = ?");
+         
+         getParMicId = connection.prepareStatement(
+                 "SELECT id_params, id_micro FROM registros WHERE id_register = ?");
          
 //-----------------------------------------------------------ALL INSERTS
 
@@ -216,6 +234,18 @@ public class LogConexion {
                  "DELETE from usuarios WHERE id_user = ?"
          );
          
+         regDelete = connection.prepareStatement  (
+                 "DELETE from registros WHERE id_register = ?"
+         );
+         
+         paramDelete = connection.prepareStatement  (
+                 "DELETE from params WHERE id_params = ?"
+         );
+         
+         microDelete = connection.prepareStatement  (
+                 "DELETE from micros WHERE id_micro = ?"
+         );
+         
 //--------------------------------------------------------ALL UPDATES         
          userUpdate = connection.prepareStatement (
                  "UPDATE usuarios SET user_name = ?, "
@@ -223,6 +253,18 @@ public class LogConexion {
                          + "password = ?, "
                          + "privilege = ? WHERE id_user = ?"
          );
+         
+         updateReg = connection.prepareStatement (
+                 "UPDATE registros SET  fecha_analisis = ?, clave = ?, fecha_produccion = ?, no_cocinada = ?, estatus_final = ?, operador = ? "
+                         + "WHERE id_register = ?");
+         
+         updatePar = connection.prepareStatement (
+                 "UPDATE params SET espec = ?, brix = ?, ph = ?, consistencia = ?, apariencia = ?, viscosidad = ?, acidez = ?, observaciones = ?, estatus_fq = ?, estatus_funcional = ? "
+                         + "WHERE id_params = ?;");
+         
+         updateMic = connection.prepareStatement (
+                 "UPDATE micros SET coliformes = ?, cuenta_estandar = ?, hongos = ?, levaduras = ?, estatus_micro = ? "
+                         + "WHERE id_micro = ?;");
          
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -445,7 +487,29 @@ public class LogConexion {
        return n;
    }
    
-   
+   public int[] getRegIds(int id){
+       int [] i = new int[2];
+       ResultSet resultSet = null;
+       try {
+           getParMicId.setInt(1, id);
+           resultSet = getParMicId.executeQuery(); 
+           while (resultSet.next()){
+               i[0] = resultSet.getInt(1);
+               i[1] = resultSet.getInt(2);
+               }
+           return i;
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+       } finally{
+           try {
+               resultSet.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+               close();
+           }
+       }
+       return i;
+   }
 //---------------------------------------CAPTURE AND ADMIN   
    public int addRegister(String f_anal, String clave,
            String f_prd, int n_cocina, String stat_final, String opera,
@@ -578,6 +642,134 @@ public class LogConexion {
        return result;
    }
    
+   public int deleReg(int id_rg, int id_para, int id_mic){
+       int a = 0;
+       int b = 0;
+       int c = 0;
+       try {
+           regDelete.setInt(1, id_rg);
+           a = regDelete.executeUpdate();
+           paramDelete.setInt(1, id_para);
+           b = paramDelete.executeUpdate();
+           microDelete.setInt(1, id_mic);
+           c = microDelete.executeUpdate();
+           
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       if ((a!=0)&&(b!=0)&&(c!=0)){
+           return 1;
+       }else{
+           return 0;
+       }
+   }
+   
+   public String[] allRegister(int id){
+       String [] dato = new String [21]; 
+       ResultSet resultSet = null;
+       try{
+           dataReg.setInt(1, id);
+           resultSet = dataReg.executeQuery();
+           while (resultSet.next()){
+               dato[0]=""+resultSet.getDate(1);
+               dato[1]=""+resultSet.getString(2);
+               dato[2]=""+resultSet.getDate(3);
+               dato[3]=""+resultSet.getInt(4);
+               dato[4]=""+resultSet.getString(5);
+               dato[5]=""+resultSet.getString(6);
+               dato[6]=""+resultSet.getString(7);
+               dato[7]=""+resultSet.getString(8);
+               dato[8]=""+resultSet.getString(9);
+               dato[9]=""+resultSet.getString(10);
+               dato[10]=""+resultSet.getString(11);
+               dato[11]=""+resultSet.getString(12);
+               dato[12]=""+resultSet.getFloat(13);
+               dato[13]=""+resultSet.getFloat(14);
+               dato[14]=""+resultSet.getFloat(15);
+               dato[15]=""+resultSet.getString(16);
+               dato[16]=""+resultSet.getFloat(17);
+               dato[17]=""+resultSet.getFloat(18);
+               dato[18]=""+resultSet.getString(19);
+               dato[19]=""+resultSet.getString(20);
+               dato[20]=""+resultSet.getString(21);
+           }
+       }catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+       } finally{
+           try {
+               resultSet.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+               close();
+           }
+       }
+       return dato;
+   }
+   
+   //fecha_analisis, clave, fecha_produccion, no_cocinada, estatus_final, operador
+   public int upReg(String fecha_analisis, String clave, String fecha_produccion, int no_cocinada, String estatus_final, String operador, int id_reg){
+       int result = 0;
+       try {
+           updateReg.setString(1, fecha_analisis);
+           updateReg.setString(2, clave);
+           updateReg.setString(3, fecha_produccion);
+           updateReg.setInt(4, no_cocinada);
+           updateReg.setString(5, estatus_final);
+           updateReg.setString(6, operador);
+           updateReg.setInt(7, id_reg);
+           
+           result = updateReg.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+   
+   //espec, brix, ph, consistencia, apariencia, viscosidad, acidez, observaciones, estatus_fq, estatus_funcional
+   public int upPar(String espec, float brix, float ph, float consistencia, String apariencia, float viscosidad, 
+           float acidez, String observaciones, String estatus_fq, String estatus_funcional, int id_par){
+       int result = 0;
+       try {
+           updatePar.setString(1, espec);
+           updatePar.setFloat(2, brix);
+           updatePar.setFloat(3, ph);
+           updatePar.setFloat(4, consistencia);
+           updatePar.setString(5, apariencia);
+           updatePar.setFloat(6, viscosidad);
+           updatePar.setFloat(7, acidez);
+           updatePar.setString(8, observaciones);
+           updatePar.setString(9, estatus_fq);
+           updatePar.setString(10, estatus_funcional);
+           updatePar.setInt(11, id_par);
+           
+           result = updatePar.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+   
+   //coliformes, cuenta_estandar, hongos, levaduras, estatus_micro
+   public int upMic(String coliformes, String cuenta_estandar, String hongos, String levaduras, String estatus_micro, int id_par){
+       int result = 0;
+       try {
+           updateMic.setString(1, coliformes);
+           updateMic.setString(2, cuenta_estandar);
+           updateMic.setString(3, hongos);
+           updateMic.setString(4, levaduras);
+           updateMic.setString(5, estatus_micro);
+           updateMic.setInt(6, id_par);
+           
+           result = updateMic.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
 //-----------------------------------VIEWER     
    public String[][] getReg(String fecha){
        String [][] dato = new String [10][100];
@@ -759,28 +951,6 @@ public class LogConexion {
        }
        return dato;
    }
-   
-    /*public Blob[] gGraphs(int id){
-       Blob [] dato = new Blob [5];
-       ResultSet resultSet = null;
-       try {
-           grpData.setInt(1, id);
-           resultSet = grpData.executeQuery();
-
-           while (resultSet.next()){
-               dato[0]=resultSet.getBlob(1);
-               dato[1]=resultSet.getBlob(2);
-               dato[2]=resultSet.getBlob(3);
-               dato[3]=resultSet.getBlob(4);
-               dato[4]=resultSet.getBlob(5);
-           }
-
-       } catch (SQLException ex) {
-           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
-           close();
-       }
-       return dato;
-   }*/
    
 //INSERT INTO kpis (date_kpi, clave, description, fi, ff, id_user) VALUES (?, ?, ?, ?, ?, ?)
 //INSERT INTO desviaciones (desv_brix, desv_ph, desv_consistencia, desv_viscocidad, desv_acidez, id_kpi) VALUES (?, ?, ?, ?, ?, ?)  

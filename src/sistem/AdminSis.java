@@ -84,7 +84,7 @@ public class AdminSis extends javax.swing.JFrame {
         registerPane = new javax.swing.JTabbedPane();
         modifyRTab = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        upfield = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -102,33 +102,38 @@ public class AdminSis extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
-        jTextField9 = new javax.swing.JTextField();
-        jTextField10 = new javax.swing.JTextField();
-        jTextField11 = new javax.swing.JTextField();
-        jTextField12 = new javax.swing.JTextField();
-        jTextField13 = new javax.swing.JTextField();
-        jTextField14 = new javax.swing.JTextField();
-        jTextField15 = new javax.swing.JTextField();
-        jTextField16 = new javax.swing.JTextField();
-        jTextField17 = new javax.swing.JTextField();
-        jTextField18 = new javax.swing.JTextField();
-        jTextField19 = new javax.swing.JTextField();
-        jTextField20 = new javax.swing.JTextField();
-        jTextField21 = new javax.swing.JTextField();
-        jTextField22 = new javax.swing.JTextField();
-        jTextField23 = new javax.swing.JTextField();
+        f1 = new javax.swing.JTextField();
+        f2 = new javax.swing.JTextField();
+        f3 = new javax.swing.JTextField();
+        f4 = new javax.swing.JTextField();
+        f12 = new javax.swing.JTextField();
+        f13 = new javax.swing.JTextField();
+        f14 = new javax.swing.JTextField();
+        f15 = new javax.swing.JTextField();
+        f16 = new javax.swing.JTextField();
+        f17 = new javax.swing.JTextField();
+        f18 = new javax.swing.JTextField();
+        f20 = new javax.swing.JTextField();
+        f21 = new javax.swing.JTextField();
+        f7 = new javax.swing.JTextField();
+        f8 = new javax.swing.JTextField();
         jLabel29 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
         jLabel31 = new javax.swing.JLabel();
         jLabel32 = new javax.swing.JLabel();
-        jTextField24 = new javax.swing.JTextField();
-        jTextField25 = new javax.swing.JTextField();
-        jTextField26 = new javax.swing.JTextField();
-        jTextField27 = new javax.swing.JTextField();
+        f9 = new javax.swing.JTextField();
+        f10 = new javax.swing.JTextField();
+        f11 = new javax.swing.JTextField();
+        f5 = new javax.swing.JTextField();
         jLabel54 = new javax.swing.JLabel();
+        f6 = new javax.swing.JTextField();
+        jLabel49 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        f19 = new javax.swing.JTextField();
+        jLabel58 = new javax.swing.JLabel();
         eraseRTab = new javax.swing.JPanel();
         jLabel33 = new javax.swing.JLabel();
-        jTextField28 = new javax.swing.JTextField();
+        delRegField = new javax.swing.JTextField();
         jButton8 = new javax.swing.JButton();
         jLabel55 = new javax.swing.JLabel();
         alarmCtrl = new javax.swing.JPanel();
@@ -492,6 +497,11 @@ public class AdminSis extends javax.swing.JFrame {
         jLabel13.setText("ID");
 
         jButton6.setText("Search");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jLabel14.setText("Fecha Analisis");
 
@@ -530,40 +540,40 @@ public class AdminSis extends javax.swing.JFrame {
             }
         });
 
-        jTextField9.setBackground(new java.awt.Color(204, 204, 204));
+        f1.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField10.setBackground(new java.awt.Color(204, 204, 204));
-        jTextField10.addActionListener(new java.awt.event.ActionListener() {
+        f2.setBackground(new java.awt.Color(204, 204, 204));
+        f2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField10ActionPerformed(evt);
+                f2ActionPerformed(evt);
             }
         });
 
-        jTextField11.setBackground(new java.awt.Color(204, 204, 204));
+        f3.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField12.setBackground(new java.awt.Color(204, 204, 204));
+        f4.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField13.setBackground(new java.awt.Color(204, 204, 204));
+        f12.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField14.setBackground(new java.awt.Color(204, 204, 204));
+        f13.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField15.setBackground(new java.awt.Color(204, 204, 204));
+        f14.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField16.setBackground(new java.awt.Color(204, 204, 204));
+        f15.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField17.setBackground(new java.awt.Color(204, 204, 204));
+        f16.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField18.setBackground(new java.awt.Color(204, 204, 204));
+        f17.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField19.setBackground(new java.awt.Color(204, 204, 204));
+        f18.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField20.setBackground(new java.awt.Color(204, 204, 204));
+        f20.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField21.setBackground(new java.awt.Color(204, 204, 204));
+        f21.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField22.setBackground(new java.awt.Color(204, 204, 204));
+        f7.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField23.setBackground(new java.awt.Color(204, 204, 204));
+        f8.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel29.setText("Hongos");
 
@@ -573,15 +583,24 @@ public class AdminSis extends javax.swing.JFrame {
 
         jLabel32.setText("Estatus Final");
 
-        jTextField24.setBackground(new java.awt.Color(204, 204, 204));
+        f9.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField25.setBackground(new java.awt.Color(204, 204, 204));
+        f10.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField26.setBackground(new java.awt.Color(204, 204, 204));
+        f11.setBackground(new java.awt.Color(204, 204, 204));
 
-        jTextField27.setBackground(new java.awt.Color(204, 204, 204));
+        f5.setBackground(new java.awt.Color(204, 204, 204));
 
         jLabel54.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/logo.png"))); // NOI18N
+
+        f6.setBackground(new java.awt.Color(204, 204, 204));
+
+        jLabel49.setText("Operador");
+
+        f19.setBackground(new java.awt.Color(204, 204, 204));
+        jScrollPane1.setViewportView(f19);
+
+        jLabel58.setText("Observaciones");
 
         javax.swing.GroupLayout modifyRTabLayout = new javax.swing.GroupLayout(modifyRTab);
         modifyRTab.setLayout(modifyRTabLayout);
@@ -593,7 +612,7 @@ public class AdminSis extends javax.swing.JFrame {
                     .addGroup(modifyRTabLayout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(35, 35, 35)
-                        .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(upfield, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(jButton6)
                         .addGap(36, 36, 36))
@@ -616,42 +635,49 @@ public class AdminSis extends javax.swing.JFrame {
                             .addComponent(jLabel28))
                         .addGap(25, 25, 25)
                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField9, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
-                            .addComponent(jTextField10)
-                            .addComponent(jTextField11)
-                            .addComponent(jTextField12)
-                            .addComponent(jTextField13)
-                            .addComponent(jTextField14)
-                            .addComponent(jTextField15)
-                            .addComponent(jTextField16)
-                            .addComponent(jTextField17)
-                            .addComponent(jTextField18)
-                            .addComponent(jTextField19)
-                            .addComponent(jTextField20)
-                            .addComponent(jTextField21)
-                            .addComponent(jTextField22)
-                            .addComponent(jTextField23))
+                            .addComponent(f1, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                            .addComponent(f2)
+                            .addComponent(f3)
+                            .addComponent(f4)
+                            .addComponent(f12)
+                            .addComponent(f13)
+                            .addComponent(f14)
+                            .addComponent(f15)
+                            .addComponent(f16)
+                            .addComponent(f17)
+                            .addComponent(f18)
+                            .addComponent(f20)
+                            .addComponent(f21)
+                            .addComponent(f7)
+                            .addComponent(f8))
                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyRTabLayout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton7)
+                                .addGap(75, 75, 75))
                             .addGroup(modifyRTabLayout.createSequentialGroup()
-                                .addGap(18, 18, 18)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(modifyRTabLayout.createSequentialGroup()
+                                    .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, 201, Short.MAX_VALUE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyRTabLayout.createSequentialGroup()
                                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel31)
                                             .addComponent(jLabel30)
                                             .addComponent(jLabel29)
-                                            .addComponent(jLabel32))
+                                            .addComponent(jLabel32)
+                                            .addComponent(jLabel49))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jTextField24, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
-                                            .addComponent(jTextField25)
-                                            .addComponent(jTextField26)
-                                            .addComponent(jTextField27)))
-                                    .addComponent(jLabel54, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                            .addGroup(modifyRTabLayout.createSequentialGroup()
-                                .addGap(79, 79, 79)
-                                .addComponent(jButton7)))
-                        .addContainerGap())))
+                                            .addComponent(f6)
+                                            .addComponent(f9, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                                            .addComponent(f10)
+                                            .addComponent(f11)
+                                            .addComponent(f5)))
+                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(modifyRTabLayout.createSequentialGroup()
+                                        .addComponent(jLabel58)
+                                        .addGap(0, 0, Short.MAX_VALUE)))
+                                .addContainerGap())))))
         );
         modifyRTabLayout.setVerticalGroup(
             modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -659,81 +685,89 @@ public class AdminSis extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(upfield, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(f1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel29)
-                    .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(f9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(f2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel30)
-                    .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(f10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel16)
-                    .addComponent(jTextField11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(f3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel31)
-                    .addComponent(jTextField26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(f11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel17)
-                    .addComponent(jTextField12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(f4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel32)
-                    .addComponent(jTextField27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(f5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
-                    .addComponent(jTextField13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(f12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(f6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel49))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(jTextField14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton7))
+                .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel19)
+                        .addComponent(f13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel58, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(modifyRTabLayout.createSequentialGroup()
                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel20)
-                            .addComponent(jTextField15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(f14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel21)
-                            .addComponent(jTextField16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(f15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel22)
-                            .addComponent(jTextField17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(f16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel23)
-                            .addComponent(jTextField18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(f17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel24)
-                            .addComponent(jTextField19, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(f18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel25)
-                            .addComponent(jTextField20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(f20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel26)
-                            .addComponent(jTextField21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(f21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel27)
-                            .addComponent(jTextField22, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(f7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(modifyRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel28)
-                            .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel54))
-                .addContainerGap(33, Short.MAX_VALUE))
+                            .addComponent(f8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(modifyRTabLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(89, 89, 89)
+                        .addComponent(jButton7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel54)))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         registerPane.addTab("Modify Register", modifyRTab);
@@ -741,7 +775,18 @@ public class AdminSis extends javax.swing.JFrame {
 
         jLabel33.setText("ID");
 
+        delRegField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                delRegFieldActionPerformed(evt);
+            }
+        });
+
         jButton8.setText("Delete");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         jLabel55.setIcon(new javax.swing.ImageIcon(getClass().getResource("/sistem/logo.png"))); // NOI18N
 
@@ -755,7 +800,7 @@ public class AdminSis extends javax.swing.JFrame {
                         .addGap(73, 73, 73)
                         .addComponent(jLabel33)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(delRegField, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(eraseRTabLayout.createSequentialGroup()
                         .addGap(189, 189, 189)
                         .addComponent(jButton8)))
@@ -771,7 +816,7 @@ public class AdminSis extends javax.swing.JFrame {
                 .addGap(77, 77, 77)
                 .addGroup(eraseRTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel33)
-                    .addComponent(jTextField28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(delRegField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addComponent(jButton8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
@@ -1000,7 +1045,7 @@ public class AdminSis extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        // Muestra información de usuario:
         String [] ok = null;
         LogConexion conex = new LogConexion();
         conex.open();
@@ -1011,12 +1056,54 @@ public class AdminSis extends javax.swing.JFrame {
         u_res_3.setText(ok[3]);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jTextField10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField10ActionPerformed
+    private void f2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_f2ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField10ActionPerformed
+    }//GEN-LAST:event_f2ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
+        // MODIFICA LA INFORMACIÓN DE LOS REGISTROS:
+        int [] xtra = new int[2];
+        int id = Integer.parseInt(upfield.getText());
+        
+        LogConexion upt = new LogConexion();
+        upt.open();
+        xtra = upt.getRegIds(id);
+                //micros
+        String m1 = f7.getText();
+        String m2 = f8.getText();
+        String m3 = f9.getText();
+        String m4 = f10.getText();
+        String m5 = f11.getText();
+        int resp1 = upt.upMic(m1, m2, m3, m4, m5, id);
+                //parameters
+        String p1 = f12.getText();
+        float p2 = Float.parseFloat(f13.getText());
+        float p3 = Float.parseFloat(f14.getText());
+        float p4 = Float.parseFloat(f15.getText());
+        String p5 = f16.getText();
+        float p6 = Float.parseFloat(f17.getText());
+        float p7 = Float.parseFloat(f18.getText());
+        String p8 = f19.getText();
+        String p9 = f20.getText();
+        String p10 = f21.getText();
+        int resp2 = upt.upPar(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, xtra[0]);
+                //registers
+        String r1 = f1.getText();
+        String r2 = f2.getText();
+        String r3 = f3.getText();
+        int r4 = Integer.parseInt(f4.getText());
+        String r5 = f5.getText();
+        String r6 = f6.getText();
+        int resp3 = upt.upReg(r1, r2, r3, r4, r5, r6, xtra[1]);
+        upt.close();
+        
+        if((resp1 != 0)&&(resp2 != 0)&&(resp3 != 0)){
+            JOptionPane.showMessageDialog(this,"REGISTRO MODIFICADO",
+                         "System",JOptionPane.PLAIN_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this,"NO MODIFICADO!!",
+                         "System",JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
@@ -1043,7 +1130,7 @@ public class AdminSis extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        // Muestra usuario para eliminar:
         String [] ok = null;
         LogConexion conex = new LogConexion();
         conex.open();
@@ -1053,7 +1140,6 @@ public class AdminSis extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void euser_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_euser_buttonActionPerformed
-        // TODO add your handling code here:
         //Kill de usuarios
         int ok = 0;
         int id = Integer.parseInt(u_search_field.getText());        
@@ -1120,6 +1206,60 @@ public class AdminSis extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_u_res_1ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // Mostrar toda la info del registro:
+        String [] datas = new String[21];
+        LogConexion reg = new LogConexion();
+        reg.open();
+        int id = Integer.parseInt(upfield.getText());
+        datas = reg.allRegister(id);
+        reg.close();
+        f1.setText(datas[0]);
+        f2.setText(datas[1]);
+        f3.setText(datas[2]);
+        f4.setText(datas[3]);
+        f5.setText(datas[4]);
+        f6.setText(datas[5]);
+        f7.setText(datas[6]);
+        f8.setText(datas[7]);
+        f9.setText(datas[8]);
+        f10.setText(datas[9]);
+        f11.setText(datas[10]);
+        f12.setText(datas[11]);
+        f13.setText(datas[12]);
+        f14.setText(datas[13]);
+        f15.setText(datas[14]);
+        f16.setText(datas[15]);
+        f17.setText(datas[16]);
+        f18.setText(datas[17]);
+        f19.setText(datas[18]);
+        f20.setText(datas[19]);
+        f21.setText(datas[20]);
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // Borrar un registro:
+        int id = Integer.parseInt(delRegField.getText());
+        int [] xtra = new int[2];
+        
+        LogConexion del = new LogConexion();
+        del.open();
+        xtra = del.getRegIds(id);
+        int result = del.deleReg(id, xtra[0], xtra[1]);
+        
+        if(result != 0){
+            JOptionPane.showMessageDialog(this,"REGISTRO ELIMINADO!",
+                "System",JOptionPane.PLAIN_MESSAGE);
+        }else{
+            JOptionPane.showMessageDialog(this,"ELIMINACIÓN FALLIDA...",
+                "System",JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void delRegFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delRegFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_delRegFieldActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1168,10 +1308,32 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JPanel createUTAb;
     private javax.swing.JTextField cusernameField;
     private javax.swing.JButton cusr_button;
+    private javax.swing.JTextField delRegField;
     private javax.swing.JPanel eraseATab;
     private javax.swing.JPanel eraseRTab;
     private javax.swing.JPanel eraseUTab;
     private javax.swing.JButton euser_button;
+    private javax.swing.JTextField f1;
+    private javax.swing.JTextField f10;
+    private javax.swing.JTextField f11;
+    private javax.swing.JTextField f12;
+    private javax.swing.JTextField f13;
+    private javax.swing.JTextField f14;
+    private javax.swing.JTextField f15;
+    private javax.swing.JTextField f16;
+    private javax.swing.JTextField f17;
+    private javax.swing.JTextField f18;
+    private javax.swing.JTextField f19;
+    private javax.swing.JTextField f2;
+    private javax.swing.JTextField f20;
+    private javax.swing.JTextField f21;
+    private javax.swing.JTextField f3;
+    private javax.swing.JTextField f4;
+    private javax.swing.JTextField f5;
+    private javax.swing.JTextField f6;
+    private javax.swing.JTextField f7;
+    private javax.swing.JTextField f8;
+    private javax.swing.JTextField f9;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
@@ -1225,6 +1387,7 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel46;
     private javax.swing.JLabel jLabel47;
     private javax.swing.JLabel jLabel48;
+    private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
@@ -1234,34 +1397,15 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel55;
     private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel57;
+    private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTextField jTextField10;
-    private javax.swing.JTextField jTextField11;
-    private javax.swing.JTextField jTextField12;
-    private javax.swing.JTextField jTextField13;
-    private javax.swing.JTextField jTextField14;
-    private javax.swing.JTextField jTextField15;
-    private javax.swing.JTextField jTextField16;
-    private javax.swing.JTextField jTextField17;
-    private javax.swing.JTextField jTextField18;
-    private javax.swing.JTextField jTextField19;
-    private javax.swing.JTextField jTextField20;
-    private javax.swing.JTextField jTextField21;
-    private javax.swing.JTextField jTextField22;
-    private javax.swing.JTextField jTextField23;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
-    private javax.swing.JTextField jTextField26;
-    private javax.swing.JTextField jTextField27;
-    private javax.swing.JTextField jTextField28;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField29;
     private javax.swing.JTextField jTextField30;
     private javax.swing.JTextField jTextField31;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JPanel modifyRTab;
     private javax.swing.JPanel modifyUTab;
     private javax.swing.JTabbedPane muser_button;
@@ -1276,6 +1420,7 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JTextField u_res_3;
     private javax.swing.JTextField u_res_4;
     private javax.swing.JTextField u_search_field;
+    private javax.swing.JTextField upfield;
     private javax.swing.JPanel userCtrl;
     private javax.swing.JLabel user_etiqueta;
     private javax.swing.JTextField user_search_field;
