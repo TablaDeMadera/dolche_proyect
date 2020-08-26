@@ -60,6 +60,7 @@ public class LogConexion {
    private PreparedStatement lstIdGr;
    private PreparedStatement lstIdPa;
    private PreparedStatement lstIdMi;
+   private PreparedStatement lstAlarm;
    private PreparedStatement dataReg;
    private PreparedStatement updateReg;
    private PreparedStatement updatePar;
@@ -68,6 +69,8 @@ public class LogConexion {
    private PreparedStatement regDelete;
    private PreparedStatement paramDelete;
    private PreparedStatement microDelete;
+   private PreparedStatement alarmDelete;
+   private PreparedStatement selectAlarm;
    
    public void open(){
         Properties p = new Properties();
@@ -95,6 +98,9 @@ public class LogConexion {
          
          lstUser = connection.prepareStatement(
             "SELECT MAX(id_register) FROM registros");
+         
+         lstAlarm = connection.prepareStatement(
+            "SELECT MAX(id_alarm) FROM alarmas");
          
          lstIdKpi = connection.prepareStatement(
             "SELECT MAX(id_kpi) FROM kpis");
@@ -186,6 +192,8 @@ public class LogConexion {
          getParMicId = connection.prepareStatement(
                  "SELECT id_params, id_micro FROM registros WHERE id_register = ?");
          
+         selectAlarm = connection.prepareStatement(
+                 "SELECT parameter_target, low_limit, high_limit, create_date, id_alarm FROM alarmas WHERE id_alarm = ?");
 //-----------------------------------------------------------ALL INSERTS
 
          insertCapture = connection.prepareStatement (
@@ -226,8 +234,8 @@ public class LogConexion {
                     + "VALUES (?, ?, ?, ?, ?)");
          
          insertAlarm = connection.prepareStatement(
-            "INSERT INTO alarmas (create_date, parameter_target, low_limit, high_limit, description, shot, shot_date) "
-                    + "VALUES (?, ?, ?, ?, ?, ?, ?)");
+            "INSERT INTO alarmas (create_date, parameter_target, low_limit, high_limit, description) "
+                    + "VALUES (NOW(), ?, ?, ?, ?)");
                  
 //---------------------------------------------------------ALL DELETES     
          userDelete = connection.prepareStatement (
@@ -246,6 +254,9 @@ public class LogConexion {
                  "DELETE from micros WHERE id_micro = ?"
          );
          
+         alarmDelete = connection.prepareStatement  (
+                 "DELETE from alarmas WHERE id_alarm = ?"
+         );
 //--------------------------------------------------------ALL UPDATES         
          userUpdate = connection.prepareStatement (
                  "UPDATE usuarios SET user_name = ?, "
@@ -443,11 +454,34 @@ public class LogConexion {
        return n;
    }
    
+   
    public int getPaId(){
        int n = 0;
        ResultSet resultSet = null;
        try {
            resultSet = lstIdPa.executeQuery(); 
+           if (resultSet.next()){
+               n = resultSet.getInt(1);
+               return n;
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+       }finally{
+           try {
+               resultSet.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+               close();
+           }
+       }
+       return n;
+   }
+   
+   public int getAlId(){
+       int n = 0;
+       ResultSet resultSet = null;
+       try {
+           resultSet = lstAlarm.executeQuery(); 
            if (resultSet.next()){
                n = resultSet.getInt(1);
                return n;
@@ -486,6 +520,7 @@ public class LogConexion {
        }
        return n;
    }
+   
    
    public int[] getRegIds(int id){
        int [] i = new int[2];
@@ -593,6 +628,54 @@ public class LogConexion {
        }
        return result;
    }
+   
+   public int addAlarm(String param, float low, float high, String descript){
+       int result = 0;
+       try {
+           insertAlarm.setString(1, param);
+           insertAlarm.setFloat(2, low);
+           insertAlarm.setFloat(3, high);
+           insertAlarm.setString(4, descript);
+           
+           result = insertAlarm.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+   
+   public int alarmDele(int id){
+       int result = 0;
+       try {
+           alarmDelete.setInt(1, id);
+           result = alarmDelete.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+   
+   public String[] searchAlarm(int id){
+       String [] dato = new String [5];
+       ResultSet resultSet = null;
+       try {
+           selectAlarm.setInt(1, id);
+           resultSet = selectAlarm.executeQuery();
+           while (resultSet.next()){
+               dato[0]=resultSet.getString(1);
+               dato[1]=""+resultSet.getInt(2);
+               dato[2]=""+resultSet.getInt(3);
+               dato[3]=resultSet.getString(4);
+               dato[4]=""+resultSet.getInt(5);
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return dato;
+   } 
    
    public String[] searchUser(int numUser){
        String [] dato = new String [4];
