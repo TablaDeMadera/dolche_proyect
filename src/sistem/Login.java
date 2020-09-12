@@ -31,7 +31,10 @@ public class Login extends javax.swing.JFrame {
     public String level;
     public String URL;
     public String usuario;
+    public String preUser;
+    public int tr = 3;
     public int id_usr;
+    public boolean status;
     //public static String URL = "jdbc:mysql://127.0.0.1:3306/dolche?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     /**
      * Creates new form Login
@@ -166,7 +169,14 @@ public class Login extends javax.swing.JFrame {
         conex.open();
         level=conex.compare(user, pass);
         id_usr = conex.getUId(usuario);
+        status = conex.userStatus(id_usr);
         if(level!=null){
+            if(status == false){
+                JOptionPane.showMessageDialog(this,"USUARIO BLOQUEADO: contactar"
+                            + " al administrador",
+                            "System",JOptionPane.PLAIN_MESSAGE);
+                System.exit(0);
+            }
             JOptionPane.showMessageDialog(this,"ENTRADA CONCEDIDA NIVEL: "+level,
                          "System",JOptionPane.PLAIN_MESSAGE);
             conex.addEvent(id_usr, "Inicia Sesion");
@@ -179,6 +189,19 @@ public class Login extends javax.swing.JFrame {
         else{
             JOptionPane.showMessageDialog(this,"ENTRADA DENEGADA",
                          "System",JOptionPane.PLAIN_MESSAGE);
+            if(id_usr != 0){
+                if(usuario.equals(preUser) && tr>0){
+                    tr--;
+                }
+                if(tr==0){
+                    JOptionPane.showMessageDialog(this,"USUARIO BLOQUEADO: contactar"
+                            + " al administrador",
+                            "System",JOptionPane.PLAIN_MESSAGE);
+                    conex.userBlock(id_usr);
+                    System.exit(0);
+                }
+                preUser = usuario;
+            }
         }
         conex.close();
     }//GEN-LAST:event_jButton1ActionPerformed

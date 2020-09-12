@@ -73,6 +73,9 @@ public class LogConexion {
    private PreparedStatement selectAlarm;
    private PreparedStatement setEvent;
    private PreparedStatement getLogg;
+   private PreparedStatement getStat;
+   private PreparedStatement setStat;
+   private PreparedStatement freeStat;
    
    public void open(){
         Properties p = new Properties();
@@ -200,6 +203,9 @@ public class LogConexion {
          getLogg = connection.prepareStatement(
                  "SELECT * from sesiones WHERE ini_date >= ?"
                          + " AND ini_date < ?");
+         
+         getStat = connection.prepareStatement (
+                 "SELECT status from usuarios WHERE id_user = ?");
 //-----------------------------------------------------------ALL INSERTS
 
          insertCapture = connection.prepareStatement (
@@ -245,6 +251,7 @@ public class LogConexion {
                  
          setEvent = connection.prepareStatement ("INSERT INTO sesiones (ini_date, id_user, actv) "
                  + "VALUES (NOW(), ?, ?)");
+         
 //---------------------------------------------------------ALL DELETES     
          userDelete = connection.prepareStatement (
                  "DELETE from usuarios WHERE id_user = ?"
@@ -284,6 +291,12 @@ public class LogConexion {
          updateMic = connection.prepareStatement (
                  "UPDATE micros SET coliformes = ?, cuenta_estandar = ?, hongos = ?, levaduras = ?, estatus_micro = ? "
                          + "WHERE id_micro = ?;");
+         
+         setStat = connection.prepareStatement ("UPDATE usuarios SET status = false "
+                 + "WHERE id_user = ? ");
+         
+         freeStat = connection.prepareStatement ("UPDATE usuarios SET status = true "
+                 + "WHERE id_user = ? ");
          
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -364,6 +377,52 @@ public class LogConexion {
        return result;
    }
    
+   public int userBlock(int user){
+       int result = 0;
+       try{
+           setStat.setInt(1, user);
+           result = setStat.executeUpdate();
+       }catch (SQLException ex){
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+   
+   public int userUnblock(int user){
+       int result = 0;
+       try{
+           freeStat.setInt(1, user);
+           result = freeStat.executeUpdate();
+       }catch (SQLException ex){
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+   
+   public boolean userStatus(int id){
+       boolean n = true;
+       ResultSet resultSet = null;
+       try {
+           getStat.setInt(1, id);
+           resultSet = getStat.executeQuery(); 
+           if (resultSet.next()){
+               n = resultSet.getBoolean(1);
+               return n;
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+       }finally{
+           try {
+               resultSet.close();
+           } catch (SQLException ex) {
+               Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+               close();
+           }
+       }
+       return n;
+   }
    //---------------------------------------------VARIUOS
    public int getRId(){
        int n = 0;

@@ -76,6 +76,7 @@ public class AdminSis extends javax.swing.JFrame {
         jLabel48 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel44 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         eraseUTab = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -388,12 +389,23 @@ public class AdminSis extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jButton1.setText("Desbloquear");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout modifyUTabLayout = new javax.swing.GroupLayout(modifyUTab);
         modifyUTab.setLayout(modifyUTabLayout);
         modifyUTabLayout.setHorizontalGroup(
             modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modifyUTabLayout.createSequentialGroup()
                 .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyUTabLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(modifyUTabLayout.createSequentialGroup()
                         .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(modifyUTabLayout.createSequentialGroup()
@@ -408,19 +420,20 @@ public class AdminSis extends javax.swing.JFrame {
                                     .addComponent(jLabel8)
                                     .addComponent(jLabel9))
                                 .addGap(18, 18, 18)))
-                        .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(u_res_1)
-                            .addComponent(u_res_2)
-                            .addComponent(u_res_3, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
-                            .addComponent(u_res_4)
-                            .addComponent(user_search_field)
-                            .addComponent(jButton3))
-                        .addGap(25, 25, 25)
-                        .addComponent(jButton2)
-                        .addGap(0, 66, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modifyUTabLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(modifyUTabLayout.createSequentialGroup()
+                                .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(u_res_1)
+                                    .addComponent(u_res_2)
+                                    .addComponent(u_res_3, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE)
+                                    .addComponent(u_res_4)
+                                    .addComponent(user_search_field))
+                                .addGap(25, 25, 25)
+                                .addComponent(jButton2))
+                            .addGroup(modifyUTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jButton3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(0, 66, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         modifyUTabLayout.setVerticalGroup(
@@ -449,7 +462,9 @@ public class AdminSis extends javax.swing.JFrame {
                     .addComponent(jLabel9))
                 .addGap(26, 26, 26)
                 .addComponent(jButton3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -1656,6 +1671,26 @@ public class AdminSis extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_gt_buttonActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        int result = 0;
+        int idu = Integer.parseInt(user_search_field.getText());
+        if(idu != 0){
+            LogConexion loge = new LogConexion();
+            loge.open();
+            result = loge.userUnblock(idu);
+            if(result != 0){
+                loge.addEvent(sid, "Desbloquea usuario");
+                JOptionPane.showMessageDialog(this,"Usuario "+idu+" desbloqueado",
+                    "System",JOptionPane.PLAIN_MESSAGE);
+            }else{
+                JOptionPane.showMessageDialog(this,"ELIMINACIÓN FALLIDA...",
+                    "System",JOptionPane.WARNING_MESSAGE);
+            }
+            loge.close();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1746,6 +1781,7 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JTextField f8;
     private javax.swing.JTextField f9;
     private javax.swing.JButton gt_button;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
