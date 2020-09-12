@@ -72,6 +72,7 @@ public class LogConexion {
    private PreparedStatement alarmDelete;
    private PreparedStatement selectAlarm;
    private PreparedStatement setEvent;
+   private PreparedStatement getLogg;
    
    public void open(){
         Properties p = new Properties();
@@ -195,6 +196,10 @@ public class LogConexion {
          
          selectAlarm = connection.prepareStatement(
                  "SELECT parameter_target, low_limit, high_limit, create_date, id_alarm FROM alarmas WHERE id_alarm = ?");
+         
+         getLogg = connection.prepareStatement(
+                 "SELECT * from sesiones WHERE ini_date >= ?"
+                         + " AND ini_date < ?");
 //-----------------------------------------------------------ALL INSERTS
 
          insertCapture = connection.prepareStatement (
@@ -685,6 +690,27 @@ public class LogConexion {
                dato[2]=""+resultSet.getInt(3);
                dato[3]=resultSet.getString(4);
                dato[4]=""+resultSet.getInt(5);
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return dato;
+   } 
+   
+   public String logger(String fi, String ff){
+       String dato = "id\tfecha\t\tid_usuario\tactividad\n";
+       ResultSet resultSet = null;
+       try {
+           getLogg.setString(1, fi);
+           getLogg.setString(2, ff);
+           resultSet = getLogg.executeQuery();
+           while (resultSet.next()){
+               dato += resultSet.getString(1)+"\t";
+               dato += resultSet.getString(2)+"\t";
+               dato += resultSet.getString(3)+"\t";
+               dato += resultSet.getString(4)+"\t";
+               dato += "\n";
            }
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);

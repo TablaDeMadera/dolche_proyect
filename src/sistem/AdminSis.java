@@ -12,6 +12,7 @@ import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 /**
  *
  * @author Capital
@@ -180,6 +181,13 @@ public class AdminSis extends javax.swing.JFrame {
         jLabel51 = new javax.swing.JLabel();
         jLabel52 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
+        cho_1 = new com.toedter.calendar.JDateChooser();
+        cho_2 = new com.toedter.calendar.JDateChooser();
+        jLabel55 = new javax.swing.JLabel();
+        jLabel56 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        result_area = new javax.swing.JTextArea();
+        gt_button = new javax.swing.JButton();
 
         jLabel4.setText("jLabel4");
 
@@ -1281,15 +1289,65 @@ public class AdminSis extends javax.swing.JFrame {
 
         controlPane.addTab("Alarm Control", alarmCtrl);
 
+        cho_1.setDateFormatString("yyyy-MM-dd");
+
+        cho_2.setDateFormatString("yyyy-MM-dd");
+
+        jLabel55.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel55.setText("Fecha inicial");
+
+        jLabel56.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel56.setText("Fecha final");
+
+        result_area.setColumns(20);
+        result_area.setRows(5);
+        jScrollPane2.setViewportView(result_area);
+
+        gt_button.setText("GET");
+        gt_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                gt_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 461, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel55)
+                    .addComponent(jLabel56))
+                .addGap(28, 28, 28)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cho_2, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cho_1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(gt_button)
+                .addGap(18, 18, 18))
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 532, Short.MAX_VALUE)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel8Layout.createSequentialGroup()
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cho_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel55))
+                        .addGap(21, 21, 21)
+                        .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cho_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel56)))
+                    .addComponent(gt_button, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 405, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         controlPane.addTab("Action logger", jPanel8);
@@ -1573,7 +1631,6 @@ public class AdminSis extends javax.swing.JFrame {
         LogConexion dal = new LogConexion();
         dal.open();
         int result = dal.alarmDele(ida);
-
         if(result != 0){
             dal.addEvent(sid, "Elimina alarma");
             JOptionPane.showMessageDialog(this,"ALARMA ELIMINADA!!!",
@@ -1584,6 +1641,20 @@ public class AdminSis extends javax.swing.JFrame {
         }
         dal.close();
     }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void gt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gt_buttonActionPerformed
+        // TODO add your handling code here:
+        String dato = "";
+        String fi = ((JTextField)cho_1.getDateEditor().getUiComponent()).getText();
+        String ff = ((JTextField)cho_2.getDateEditor().getUiComponent()).getText();
+        if(!(fi.isEmpty() && ff.isEmpty())){
+            LogConexion log = new LogConexion();
+            log.open();
+            dato = log.logger(fi, ff);
+            log.close();
+            result_area.setText(dato);
+        }
+    }//GEN-LAST:event_gt_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1638,6 +1709,8 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JPanel alarmCtrl;
     private javax.swing.JLabel alarmIDLb;
     private javax.swing.JTabbedPane alarmPane;
+    private com.toedter.calendar.JDateChooser cho_1;
+    private com.toedter.calendar.JDateChooser cho_2;
     private javax.swing.JTextField cnamefield;
     private javax.swing.JTabbedPane controlPane;
     private javax.swing.JTextField cpasswordField;
@@ -1672,6 +1745,7 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JTextField f7;
     private javax.swing.JTextField f8;
     private javax.swing.JTextField f9;
+    private javax.swing.JButton gt_button;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
     private javax.swing.JButton jButton2;
@@ -1731,6 +1805,8 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel52;
     private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel54;
+    private javax.swing.JLabel jLabel55;
+    private javax.swing.JLabel jLabel56;
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel6;
@@ -1746,6 +1822,7 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField lookAlarm;
     private javax.swing.JPanel modifyRTab;
     private javax.swing.JPanel modifyUTab;
@@ -1753,6 +1830,7 @@ public class AdminSis extends javax.swing.JFrame {
     private javax.swing.JLabel privilegeLb;
     private javax.swing.JPanel regCtrl;
     private javax.swing.JTabbedPane registerPane;
+    private javax.swing.JTextArea result_area;
     private javax.swing.JLabel showNextID;
     private javax.swing.JLabel u_lb_1;
     private javax.swing.JLabel u_lb_2;
