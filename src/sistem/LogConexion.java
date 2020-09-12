@@ -71,6 +71,7 @@ public class LogConexion {
    private PreparedStatement microDelete;
    private PreparedStatement alarmDelete;
    private PreparedStatement selectAlarm;
+   private PreparedStatement setEvent;
    
    public void open(){
         Properties p = new Properties();
@@ -237,6 +238,8 @@ public class LogConexion {
             "INSERT INTO alarmas (create_date, parameter_target, low_limit, high_limit, description) "
                     + "VALUES (NOW(), ?, ?, ?, ?)");
                  
+         setEvent = connection.prepareStatement ("INSERT INTO sesiones (ini_date, id_user, actv) "
+                 + "VALUES (NOW(), ?, ?)");
 //---------------------------------------------------------ALL DELETES     
          userDelete = connection.prepareStatement (
                  "DELETE from usuarios WHERE id_user = ?"
@@ -341,6 +344,19 @@ public class LogConexion {
            }
        }
        return 0;
+   }
+   
+   public int addEvent(int user, String actv){
+       int result = 0;
+       try{
+           setEvent.setInt(1, user);
+           setEvent.setString(2, actv);
+           result = setEvent.executeUpdate();
+       }catch (SQLException ex){
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
    }
    
    //---------------------------------------------VARIUOS

@@ -31,6 +31,8 @@ import net.sf.jasperreports.view.JasperViewer;
  */
 public class Reporter extends javax.swing.JFrame {
     Connection conn; 
+    public String susuario;
+    public int sid;
     /**
      * Creates new form Reporter
      */
@@ -180,6 +182,7 @@ public class Reporter extends javax.swing.JFrame {
             JasperViewer view = new JasperViewer(jprint, false);
             view.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
             view.setVisible(true);
+            kpi.addEvent(sid,"Genera reporte");
             kpi.close();
         } catch (JRException ex) {
             java.util.logging.Logger.getLogger(Reporter.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
@@ -219,6 +222,11 @@ public class Reporter extends javax.swing.JFrame {
                 new Reporter().setVisible(true);
             }
         });
+    }
+    
+    public void setCurrentUser(String name, int id){
+        this.susuario = name;
+        this.sid = id;
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -12,6 +12,7 @@ package sistem;
  */
 public class TaskManager extends javax.swing.JFrame {
     public String susuario;
+    public int sid;
     /**
      * Creates new form TaskManager
      */
@@ -127,11 +128,13 @@ public class TaskManager extends javax.swing.JFrame {
         pressLabel.setText("-");
 
         jTextArea1.setEditable(false);
+        jTextArea1.setBackground(new java.awt.Color(240, 240, 240));
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
         jTextField1.setEditable(false);
+        jTextField1.setForeground(new java.awt.Color(153, 0, 0));
         jTextField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTextField1ActionPerformed(evt);
@@ -245,25 +248,27 @@ public class TaskManager extends javax.swing.JFrame {
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportButtonActionPerformed
         // TODO add your handling code here:
         Reporter repo = new Reporter();
+        repo.setCurrentUser(susuario, sid);
         repo.setVisible(true);
     }//GEN-LAST:event_reportButtonActionPerformed
 
     private void capButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capButtonActionPerformed
         Capture_2 capt = new Capture_2();
-        capt.setCurrentUser(susuario);
+        capt.setCurrentUser(susuario, sid);
         capt.setVisible(true);   
         //this.setVisible(false);
     }//GEN-LAST:event_capButtonActionPerformed
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
         AdminSis adm = new AdminSis();
+        adm.setCurrentUser(susuario, sid);
         adm.setVisible(true);   
         //this.setVisible(false);
     }//GEN-LAST:event_adminButtonActionPerformed
 
     private void staButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staButtonActionPerformed
         Stadistic sta = new Stadistic();
-        sta.setCurrentUser(susuario);
+        sta.setCurrentUser(susuario, sid);
         sta.setVisible(true);
         //this.setVisible(false);
     }//GEN-LAST:event_staButtonActionPerformed
@@ -315,8 +320,9 @@ public class TaskManager extends javax.swing.JFrame {
         
     }
     
-    public void setCurrentUser(String name){
+    public void setCurrentUser(String name, int id){
         this.susuario = name;
+        this.sid = id;
         pressLabel.setText("Bienvenido "+name);
     }
 

@@ -31,6 +31,7 @@ public class Login extends javax.swing.JFrame {
     public String level;
     public String URL;
     public String usuario;
+    public int id_usr;
     //public static String URL = "jdbc:mysql://127.0.0.1:3306/dolche?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
     /**
      * Creates new form Login
@@ -164,21 +165,22 @@ public class Login extends javax.swing.JFrame {
         LogConexion conex = new LogConexion();
         conex.open();
         level=conex.compare(user, pass);
+        id_usr = conex.getUId(usuario);
         if(level!=null){
-            conex.close();
             JOptionPane.showMessageDialog(this,"ENTRADA CONCEDIDA NIVEL: "+level,
                          "System",JOptionPane.PLAIN_MESSAGE);
+            conex.addEvent(id_usr, "Inicia Sesion");
             TaskManager control = new TaskManager();
             control.setVisible(true);   
-            control.setCurrentUser(userField.getText());
+            control.setCurrentUser(usuario, id_usr);
             control.setPrivileges(level);
             this.setVisible(false);
         }
         else{
-            conex.close();
             JOptionPane.showMessageDialog(this,"ENTRADA DENEGADA",
                          "System",JOptionPane.PLAIN_MESSAGE);
         }
+        conex.close();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed

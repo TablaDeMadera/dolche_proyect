@@ -37,7 +37,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jTabbedPane1" min="-2" pref="526" max="-2" attributes="0"/>
+          <Component id="jTabbedPane1" alignment="0" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -110,7 +110,7 @@
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <Component id="user_label" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="61" max="32767" attributes="0"/>
+                      <EmptySpace pref="92" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="operador_field" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -321,19 +321,28 @@
                               <Component id="jLabel19" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="brix_field" max="32767" attributes="0"/>
-                          <Component id="ph_field" max="32767" attributes="0"/>
-                          <Component id="consis_field" max="32767" attributes="0"/>
-                          <Component id="apa_field" max="32767" attributes="0"/>
-                          <Component id="visco_field" max="32767" attributes="0"/>
-                          <Component id="acid_field" max="32767" attributes="0"/>
-                          <Component id="jScrollPane1" max="32767" attributes="0"/>
-                          <Component id="sta_fq_combox" max="32767" attributes="0"/>
-                          <Component id="sta_fun_combox" max="32767" attributes="0"/>
+                      <EmptySpace pref="41" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jScrollPane1" alignment="1" min="-2" pref="177" max="-2" attributes="0"/>
+                                  <Component id="sta_fq_combox" alignment="1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="sta_fun_combox" alignment="1" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="42" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="ph_field" alignment="1" min="-2" pref="134" max="-2" attributes="0"/>
+                                  <Component id="brix_field" min="-2" pref="134" max="-2" attributes="0"/>
+                                  <Component id="consis_field" alignment="1" min="-2" pref="134" max="-2" attributes="0"/>
+                                  <Component id="visco_field" alignment="1" min="-2" pref="134" max="-2" attributes="0"/>
+                                  <Component id="acid_field" alignment="1" min="-2" pref="134" max="-2" attributes="0"/>
+                                  <Component id="apa_field" alignment="1" min="-2" pref="134" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -375,7 +384,7 @@
                           <Component id="jScrollPane1" min="-2" pref="70" max="-2" attributes="0"/>
                           <Component id="jLabel17" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                      <EmptySpace pref="63" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel18" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="sta_fq_combox" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -565,12 +574,14 @@
                                           <Component id="jLabel24" alignment="0" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="coliformes_field" max="32767" attributes="0"/>
-                                          <Component id="cuenta_field" max="32767" attributes="0"/>
-                                          <Component id="hongos_field" max="32767" attributes="0"/>
-                                          <Component id="levaduras_field" max="32767" attributes="0"/>
-                                          <Component id="sta_micro_combox" max="32767" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="sta_micro_combox" min="-2" max="-2" attributes="0"/>
+                                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                              <Component id="levaduras_field" alignment="0" pref="127" max="32767" attributes="0"/>
+                                              <Component id="hongos_field" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="cuenta_field" alignment="0" max="32767" attributes="0"/>
+                                              <Component id="coliformes_field" alignment="0" max="32767" attributes="0"/>
+                                          </Group>
                                       </Group>
                                   </Group>
                               </Group>
@@ -610,9 +621,9 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="generar_button" min="-2" pref="80" max="-2" attributes="0"/>
-                      <EmptySpace pref="12" max="32767" attributes="0"/>
+                      <EmptySpace pref="29" max="32767" attributes="0"/>
                       <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>

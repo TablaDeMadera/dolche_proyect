@@ -23,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Stadistic extends javax.swing.JFrame {
     public String susuario;
+    public int sid;
 
     /**
      * Creates new form Stadistic
@@ -33,8 +34,9 @@ public class Stadistic extends javax.swing.JFrame {
         this.setLocation(dim.width/2-this.getSize().width/2, dim.height/2-this.getSize().height/2);
     }
     
-    public void setCurrentUser(String name){
+    public void setCurrentUser(String name, int id){
         this.susuario = name;
+        this.sid = id;
     }
 
     /**
@@ -399,6 +401,7 @@ public class Stadistic extends javax.swing.JFrame {
             int c = graphics.getGId();        
             graphics.sKPI(hoy, clv, dscrip, fi, ff, id, a, b, c);
             last_kpi = graphics.gKPI();
+            graphics.addEvent(sid, "Calcula estadistico y genera graficos");
             graphics.close();
             
             DefaultTableModel model = new DefaultTableModel();
