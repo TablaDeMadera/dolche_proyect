@@ -76,6 +76,8 @@ public class LogConexion {
    private PreparedStatement getStat;
    private PreparedStatement setStat;
    private PreparedStatement freeStat;
+   private PreparedStatement setMsg;
+   private PreparedStatement getMsg;
    
    public void open(){
         Properties p = new Properties();
@@ -206,6 +208,9 @@ public class LogConexion {
          
          getStat = connection.prepareStatement (
                  "SELECT status from usuarios WHERE id_user = ?");
+         
+         getMsg = connection.prepareStatement (
+                 "SELECT user_name, fecha_crea, msg FROM mensages INNER JOIN usuarios ON mensages.id_user = usuarios.id_user");
 //-----------------------------------------------------------ALL INSERTS
 
          insertCapture = connection.prepareStatement (
@@ -251,6 +256,9 @@ public class LogConexion {
                  
          setEvent = connection.prepareStatement ("INSERT INTO sesiones (ini_date, id_user, actv) "
                  + "VALUES (NOW(), ?, ?)");
+         
+         setMsg = connection.prepareStatement ("INSERT INTO mensages (msg, fecha_crea, id_user) "
+                 + "VALUES (?, NOW(), ?)");
          
 //---------------------------------------------------------ALL DELETES     
          userDelete = connection.prepareStatement (
@@ -1214,6 +1222,38 @@ public class LogConexion {
            insertGraf.setBlob(5, acidez);
            
            result = insertGraf.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;
+   }
+   
+   //-----------------------TASK MANAGER
+   public String gMensage(){
+       String dato = "";
+       ResultSet resultSet = null;
+       try {
+           resultSet = getMsg.executeQuery();
+           while (resultSet.next()){
+               dato += resultSet.getString(1)+"\t";
+               dato += resultSet.getString(2)+"\t";
+               dato += resultSet.getString(3)+"\n";
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return dato;
+   }
+   
+   public int sMensage(String msg, int id){
+       int result = 0;
+       try {
+           setMsg.setString(1, msg);
+           setMsg.setInt(2, id);
+           
+           result = setMsg.executeUpdate();
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
            close();

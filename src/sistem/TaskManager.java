@@ -64,11 +64,11 @@ public class TaskManager extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextField1 = new javax.swing.JTextField();
+        msg_dpl = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        msg_field = new javax.swing.JTextField();
+        msg_button = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -133,14 +133,17 @@ public class TaskManager extends javax.swing.JFrame {
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
 
-        jTextField1.setEditable(false);
-        jTextField1.setForeground(new java.awt.Color(153, 0, 0));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jScrollPane2.setViewportView(jTextField1);
+        msg_dpl.setEditable(false);
+        msg_dpl.setBackground(new java.awt.Color(240, 240, 240));
+        msg_dpl.setColumns(20);
+        msg_dpl.setRows(5);
+        jScrollPane2.setViewportView(msg_dpl);
+        String data = "";
+        LogConexion dis = new LogConexion();
+        dis.open();
+        data = dis.gMensage();
+        dis.close();
+        msg_dpl.setText(data);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Recados:");
@@ -148,9 +151,14 @@ public class TaskManager extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Alertas:");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jButton1.setText("Enviar");
-        jButton1.setToolTipText("Envia un recado a visualizarpor todos los usuarios");
+        msg_button.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        msg_button.setText("Enviar");
+        msg_button.setToolTipText("Envia un recado a visualizarpor todos los usuarios");
+        msg_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                msg_buttonActionPerformed(evt);
+            }
+        });
 
         jPanel1.setBackground(java.awt.Color.black);
         jPanel1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 0, 0), 4, true));
@@ -193,11 +201,11 @@ public class TaskManager extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jTextField2)
+                                .addComponent(msg_field)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(levelLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton1)))))
+                                    .addComponent(msg_button)))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(138, 138, 138)
                         .addComponent(pressLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -236,8 +244,8 @@ public class TaskManager extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1))))
+                            .addComponent(msg_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(msg_button))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(levelLabel))
         );
@@ -246,7 +254,6 @@ public class TaskManager extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportButtonActionPerformed
-        // TODO add your handling code here:
         Reporter repo = new Reporter();
         repo.setCurrentUser(susuario, sid);
         repo.setVisible(true);
@@ -256,32 +263,38 @@ public class TaskManager extends javax.swing.JFrame {
         Capture_2 capt = new Capture_2();
         capt.setCurrentUser(susuario, sid);
         capt.setVisible(true);   
-        //this.setVisible(false);
     }//GEN-LAST:event_capButtonActionPerformed
 
     private void adminButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_adminButtonActionPerformed
         AdminSis adm = new AdminSis();
         adm.setCurrentUser(susuario, sid);
         adm.setVisible(true);   
-        //this.setVisible(false);
     }//GEN-LAST:event_adminButtonActionPerformed
 
     private void staButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staButtonActionPerformed
         Stadistic sta = new Stadistic();
         sta.setCurrentUser(susuario, sid);
         sta.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_staButtonActionPerformed
 
     private void viewerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewerButtonActionPerformed
         Viewer vie = new Viewer();
         vie.setVisible(true);
-        //this.setVisible(false);
     }//GEN-LAST:event_viewerButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void msg_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_msg_buttonActionPerformed
+        // Grabar mensages:
+        String data = "";
+        String msg = msg_field.getText();
+        if(!msg.isEmpty()){
+            LogConexion men = new LogConexion();
+            men.open();
+            men.sMensage(msg, sid);
+            data =  men.gMensage();
+            msg_dpl.setText(data);
+            men.close();
+        }
+    }//GEN-LAST:event_msg_buttonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -329,7 +342,6 @@ public class TaskManager extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton adminButton;
     private javax.swing.JButton capButton;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -337,9 +349,10 @@ public class TaskManager extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     public static javax.swing.JLabel levelLabel;
+    private javax.swing.JButton msg_button;
+    private javax.swing.JTextArea msg_dpl;
+    private javax.swing.JTextField msg_field;
     private javax.swing.JLabel pressLabel;
     private javax.swing.JButton reportButton;
     private javax.swing.JButton staButton;
