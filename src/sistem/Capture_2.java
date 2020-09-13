@@ -39,7 +39,6 @@ public class Capture_2 extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -47,7 +46,6 @@ public class Capture_2 extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        id_reg_label = new java.awt.Label();
         f_anal_chooser = new com.toedter.calendar.JDateChooser();
         user_label = new javax.swing.JLabel();
         operador_field = new javax.swing.JTextField();
@@ -91,6 +89,7 @@ public class Capture_2 extends javax.swing.JFrame {
         sta_micro_combox = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel25 = new javax.swing.JLabel();
+        id_reg_label = new javax.swing.JLabel();
 
         jLabel3.setText("Usuario");
 
@@ -99,9 +98,6 @@ public class Capture_2 extends javax.swing.JFrame {
         setResizable(false);
 
         jTabbedPane1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel1.setText("ID");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setText("Usuario");
@@ -123,9 +119,6 @@ public class Capture_2 extends javax.swing.JFrame {
 
         jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Estatus final");
-
-        id_reg_label.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
-        id_reg_label.setText("-----------------------");
 
         f_anal_chooser.setDateFormatString("yyyy-MM-dd");
 
@@ -167,7 +160,6 @@ public class Capture_2 extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addComponent(jLabel5)
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
@@ -179,7 +171,6 @@ public class Capture_2 extends javax.swing.JFrame {
                 .addGap(59, 59, 59)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(user_label)
-                    .addComponent(id_reg_label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(f_anal_chooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(operador_field)
                     .addComponent(clave_field)
@@ -192,11 +183,7 @@ public class Capture_2 extends javax.swing.JFrame {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(id_reg_label, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(f_anal_chooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -204,19 +191,19 @@ public class Capture_2 extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(user_label))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addGap(53, 53, 53)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(operador_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGap(34, 34, 34)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel6)
                     .addComponent(clave_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(37, 37, 37)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel7)
                     .addComponent(f_prod_chooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(25, 25, 25)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
                     .addComponent(cocinada_field, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -355,7 +342,7 @@ public class Capture_2 extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel18)
                     .addComponent(sta_fq_combox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -421,6 +408,9 @@ public class Capture_2 extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        id_reg_label.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        id_reg_label.setText("-");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -428,12 +418,8 @@ public class Capture_2 extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addComponent(generar_button, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel20)
@@ -448,7 +434,13 @@ public class Capture_2 extends javax.swing.JFrame {
                                         .addComponent(levaduras_field, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                                         .addComponent(hongos_field, javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(cuenta_field, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(coliformes_field, javax.swing.GroupLayout.Alignment.LEADING)))))))
+                                        .addComponent(coliformes_field, javax.swing.GroupLayout.Alignment.LEADING))))
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(83, 83, 83)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(id_reg_label)
+                            .addComponent(generar_button, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -476,9 +468,11 @@ public class Capture_2 extends javax.swing.JFrame {
                     .addComponent(sta_micro_combox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(generar_button, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(id_reg_label)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Microbiología", jPanel3);
@@ -529,12 +523,16 @@ public class Capture_2 extends javax.swing.JFrame {
         String p7 = operador_field.getText();
         //------------------------------------
         String p10 = espec_field.getText();
-        float p11 = Float.parseFloat(brix_field.getText());
-        float p12 = Float.parseFloat(ph_field.getText());
-        float p13 = Float.parseFloat(consis_field.getText());
         String p14 = apa_field.getText();
-        float p15 = Float.parseFloat(visco_field.getText());
-        float p16 = Float.parseFloat(acid_field.getText());
+        
+        float p11 = Float.parseFloat(brix_field.getText());     //BRIX
+        float p12 = Float.parseFloat(ph_field.getText());       //PH  
+        float p13 = Float.parseFloat(consis_field.getText());   //CONSISTENCIA
+        float p15 = Float.parseFloat(visco_field.getText());    //VISCOCIDAD
+        float p16 = Float.parseFloat(acid_field.getText());     //ACIDEZ
+        
+        checkLimits(p11, p12, p13, p15, p16);
+        
         String p17 = jTextArea1.getText();
         String p18 = (String)sta_fq_combox.getSelectedItem();
         String p19 = (String)sta_fun_combox.getSelectedItem();
@@ -546,11 +544,10 @@ public class Capture_2 extends javax.swing.JFrame {
         String p24 = (String)sta_micro_combox.getSelectedItem();
         
         LogConexion registrar = new LogConexion();
-        
         registrar.open();
         p1= registrar.getRId();
         id = registrar.getUId(susuario);
-        id_reg_label.setText(Integer.toString(p1+1));
+        id_reg_label.setText("Creado con el ID: "+Integer.toString(p1+1));
         
         int con1 = registrar.addPara(p10,p11,p12,p13,p14,p15,p16,p17,p18,p19);
         int con2 = registrar.addMicro(p20,p21,p22,p23,p24);
@@ -620,6 +617,33 @@ public class Capture_2 extends javax.swing.JFrame {
         this.sid = id;
         user_label.setText(name);
     }
+    
+    public void checkLimits(float brix, float ph, float consist, float visco, float acid){
+        int [] trigger = new int[1000];
+        LogConexion check = new LogConexion();
+        check.open();
+        trigger = check.alarmaCompara("Brix", brix);
+        for(int i=0; i<trigger.length; i++){
+            check.alarmaTrigg(trigger[i]);
+        }
+        trigger = check.alarmaCompara("Ph", ph);
+        for(int i=0; i<trigger.length; i++){
+            check.alarmaTrigg(trigger[i]);
+        }
+        trigger = check.alarmaCompara("Consistencia", consist);
+        for(int i=0; i<trigger.length; i++){
+            check.alarmaTrigg(trigger[i]);
+        }
+        trigger = check.alarmaCompara("Viscosidad", visco);
+        for(int i=0; i<trigger.length; i++){
+            check.alarmaTrigg(trigger[i]);
+        }
+        trigger = check.alarmaCompara("Acidez", acid);
+        for(int i=0; i<trigger.length; i++){
+            check.alarmaTrigg(trigger[i]);
+        }
+        check.close();
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField acid_field;
     private javax.swing.JTextField apa_field;
@@ -634,8 +658,7 @@ public class Capture_2 extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser f_prod_chooser;
     private javax.swing.JButton generar_button;
     private javax.swing.JTextField hongos_field;
-    private java.awt.Label id_reg_label;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel id_reg_label;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;

@@ -78,6 +78,9 @@ public class LogConexion {
    private PreparedStatement freeStat;
    private PreparedStatement setMsg;
    private PreparedStatement getMsg;
+   private PreparedStatement alrmComp;
+   private PreparedStatement alrmTrigger;
+   private PreparedStatement getAlm;
    
    public void open(){
         Properties p = new Properties();
@@ -210,7 +213,16 @@ public class LogConexion {
                  "SELECT status from usuarios WHERE id_user = ?");
          
          getMsg = connection.prepareStatement (
-                 "SELECT user_name, fecha_crea, msg FROM mensages INNER JOIN usuarios ON mensages.id_user = usuarios.id_user");
+                 "SELECT user_name, fecha_crea, msg FROM mensages INNER JOIN usuarios ON mensages.id_user = usuarios.id_user "
+                         + "ORDER BY fecha_crea ASC");
+         
+         getAlm = connection.prepareStatement (
+                 "SELECT id_alarm, parameter_target, shot_date FROM alarmas WHERE shot = true "
+                         + "ORDER BY shot_date ASC");
+         
+         alrmComp = connection.prepareStatement (
+                 "SELECT id_alarm FROM alarmas WHERE parameter_target = ? AND "
+                         + "(? <= low_limit OR ? >= high_limit)");
 //-----------------------------------------------------------ALL INSERTS
 
          insertCapture = connection.prepareStatement (
@@ -305,6 +317,10 @@ public class LogConexion {
          
          freeStat = connection.prepareStatement ("UPDATE usuarios SET status = true "
                  + "WHERE id_user = ? ");
+         
+         alrmTrigger = connection.prepareStatement (
+                 "UPDATE alarmas SET shot = true, shot_date = NOW() WHERE"
+                         + " id_alarm = ?");
          
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
@@ -698,6 +714,40 @@ public class LogConexion {
            close();
        }
        return result;
+   }
+   
+   public int [] alarmaCompara(String param, float reg){
+       int [] dato = new int [1000];
+       ResultSet resultSet = null;
+       try {
+           alrmComp.setString(1, param);
+           alrmComp.setFloat(2, reg);
+           alrmComp.setFloat(3, reg);
+           resultSet = alrmComp.executeQuery();
+           int i = 0;
+           while (resultSet.next()){
+               dato[i]=resultSet.getInt(1);
+               i++;
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return dato;
+   }
+   
+   //alrmTrigger
+   public int alarmaTrigg(int id_alarm){
+       int result = 0;
+       try {
+           alrmTrigger.setInt(1, id_alarm);
+           
+           result = alrmTrigger.executeUpdate();
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return result;     
    }
    
    //-------------------------------ADMIN CONTROL
@@ -1239,6 +1289,24 @@ public class LogConexion {
                dato += resultSet.getString(1)+"\t";
                dato += resultSet.getString(2)+"\t";
                dato += resultSet.getString(3)+"\n";
+           }
+       } catch (SQLException ex) {
+           Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);
+           close();
+       }
+       return dato;
+   }
+   
+
+   public String gAlarmOn(){
+       String dato = "";
+       ResultSet resultSet = null;
+       try {
+           resultSet = getAlm.executeQuery();
+           while (resultSet.next()){
+               dato += "Parametro: "+resultSet.getString(2)+" fuera de limites,\t";
+               dato += "Fecha de evento: "+resultSet.getString(3)+",\t";
+               dato += "ID: "+resultSet.getString(1)+"\n";
            }
        } catch (SQLException ex) {
            Logger.getLogger(LogConexion.class.getName()).log(Level.SEVERE, null, ex);

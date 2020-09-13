@@ -19,6 +19,7 @@ public class TaskManager extends javax.swing.JFrame {
     public TaskManager() {
         initComponents();
         this.setLocationRelativeTo(null);
+        pressLabel.setText("Bienvenido "+susuario);
     }
     
     public void setPrivileges(String level){
@@ -60,9 +61,10 @@ public class TaskManager extends javax.swing.JFrame {
         reportButton = new javax.swing.JButton();
         viewerButton = new javax.swing.JButton();
         levelLabel = new javax.swing.JLabel();
-        pressLabel = new javax.swing.JLabel("Bienvenido "+susuario);
+        pressLabel = new javax.swing.JLabel();
+        pressLabel.setText("Bienvenido "+susuario);
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        alert_area = new javax.swing.JTextArea();
         jScrollPane2 = new javax.swing.JScrollPane();
         msg_dpl = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
@@ -71,6 +73,7 @@ public class TaskManager extends javax.swing.JFrame {
         msg_button = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        act_button = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Task Manager");
@@ -127,11 +130,18 @@ public class TaskManager extends javax.swing.JFrame {
         pressLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         pressLabel.setText("-");
 
-        jTextArea1.setEditable(false);
-        jTextArea1.setBackground(new java.awt.Color(240, 240, 240));
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        alert_area.setEditable(false);
+        alert_area.setBackground(new java.awt.Color(240, 240, 240));
+        alert_area.setColumns(20);
+        alert_area.setForeground(new java.awt.Color(153, 0, 51));
+        alert_area.setRows(5);
+        jScrollPane1.setViewportView(alert_area);
+        String dato = "";
+        LogConexion dos = new LogConexion();
+        dos.open();
+        dato = dos.gAlarmOn();
+        dos.close();
+        alert_area.setText(dato);
 
         msg_dpl.setEditable(false);
         msg_dpl.setBackground(new java.awt.Color(240, 240, 240));
@@ -179,6 +189,13 @@ public class TaskManager extends javax.swing.JFrame {
             .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING)
         );
 
+        act_button.setText("Actualizar");
+        act_button.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                act_buttonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -198,7 +215,10 @@ public class TaskManager extends javax.swing.JFrame {
                             .addComponent(jLabel2)
                             .addComponent(jScrollPane2)
                             .addComponent(jScrollPane1)
-                            .addComponent(jLabel3)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(act_button))
                             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(msg_field)
@@ -226,8 +246,10 @@ public class TaskManager extends javax.swing.JFrame {
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel3))
+                        .addGap(45, 45, 45)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(act_button)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(viewerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -249,6 +271,8 @@ public class TaskManager extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(levelLabel))
         );
+
+        pressLabel.setText("Bienvenido "+susuario);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -296,6 +320,15 @@ public class TaskManager extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_msg_buttonActionPerformed
 
+    private void act_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_act_buttonActionPerformed
+        String da = "";
+        LogConexion di = new LogConexion();
+        di.open();
+        da = di.gAlarmOn();
+        di.close();
+        alert_area.setText(da);
+    }//GEN-LAST:event_act_buttonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -340,7 +373,9 @@ public class TaskManager extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton act_button;
     private javax.swing.JButton adminButton;
+    private javax.swing.JTextArea alert_area;
     private javax.swing.JButton capButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -348,12 +383,11 @@ public class TaskManager extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
     public static javax.swing.JLabel levelLabel;
     private javax.swing.JButton msg_button;
     private javax.swing.JTextArea msg_dpl;
     private javax.swing.JTextField msg_field;
-    private javax.swing.JLabel pressLabel;
+    public javax.swing.JLabel pressLabel;
     private javax.swing.JButton reportButton;
     private javax.swing.JButton staButton;
     private javax.swing.JButton viewerButton;
