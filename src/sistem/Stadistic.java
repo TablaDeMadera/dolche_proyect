@@ -293,12 +293,6 @@ public class Stadistic extends javax.swing.JFrame {
         System.out.println(hoy);
         
         if(!(clv.isEmpty()||fi.isEmpty()||ff.isEmpty())){
-            float [] brix = new float[5];
-            float [] ph = new float[5];
-            float [] consist = new float[5];
-            float [] visco = new float[5];
-            float [] acid = new float[5];
-            
             float [] prom = null;
             float [] ds = null;
             int id = 0;
@@ -315,12 +309,20 @@ public class Stadistic extends javax.swing.JFrame {
             reg_kpi.sPRM(prom[0],prom[1],prom[2],prom[3],prom[4]);
             reg_kpi.close();
             
-            for(int i=0; i<sample.length; i++){
-                    brix[i]=sample[i][0];
-                    ph[i]=sample[i][1];
-                    consist[i]=sample[i][2];
-                    visco[i]=sample[i][3];
-                    acid[i]=sample[i][4];
+            float [] brix = new float[sample[0].length];
+            float [] ph = new float[sample[1].length];
+            float [] consist = new float[sample[2].length];
+            float [] visco = new float[sample[3].length];
+            float [] acid = new float[sample[4].length];
+            
+            for(int i=0; i<sample[0].length; i++){
+                    if(sample[0][i]!=0&&sample[1][i]!=0&&sample[2][i]!=0&&sample[3][i]!=0&&sample[4][i]!=0){
+                        brix[i]=sample[0][i];
+                        ph[i]=sample[1][i];
+                        consist[i]=sample[2][i];
+                        visco[i]=sample[3][i];
+                        acid[i]=sample[4][i];
+                    }
             }  
 
             String gb = "";

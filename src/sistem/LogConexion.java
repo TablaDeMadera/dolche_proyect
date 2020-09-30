@@ -1048,7 +1048,7 @@ public class LogConexion {
    
    //-----------------------------------------STADISTICS AND KPI GRAPHER
       public float[][] getSample(String fi, String ff, String clv){
-       float [][] dato = new float [5][100];
+       float [][] dato = new float [5][10000];
        ResultSet resultSet = null;
        try {
            sample.setString(1, clv);
@@ -1057,11 +1057,11 @@ public class LogConexion {
            resultSet = sample.executeQuery(); 
            int i = 0;
            while (resultSet.next()){
-               dato[i][0]=resultSet.getFloat(1);
-               dato[i][1]=resultSet.getFloat(2);
-               dato[i][2]=resultSet.getFloat(3);
-               dato[i][3]=resultSet.getFloat(4);
-               dato[i][4]=resultSet.getFloat(5);
+               dato[0][i]=resultSet.getFloat(1);
+               dato[1][i]=resultSet.getFloat(2);
+               dato[2][i]=resultSet.getFloat(3);
+               dato[3][i]=resultSet.getFloat(4);
+               dato[4][i]=resultSet.getFloat(5);
                i++;
            }
        } catch (SQLException ex) {

@@ -59,26 +59,30 @@ public class Chart extends JDialog {
  
     private static  XYDataset createDataset(float [] y, float prom, float desu) {
         XYSeriesCollection ds = new XYSeriesCollection();
+        int count = 0;
         //---graficar muestras
         XYSeries serie0 = new XYSeries("Samples");
         for(int j=0; j<y.length-1; j++){
-                serie0.add(j, y[j]);
+                if(y[j]!=0){
+                    serie0.add(j, y[j]);
+                    count ++;
+                }
         }
         ds.addSeries(serie0);
         //---graficar promedio
         XYSeries serie1= new XYSeries("Prom");
         serie1.add(0, prom);
-        serie1.add(y.length-2, prom);
+        serie1.add(count-1, prom);
         ds.addSeries(serie1);
         //---graficar limite sup
         XYSeries serie2= new XYSeries("LSup");
         serie2.add(0, prom+desu);
-        serie2.add(y.length-2, prom+desu);
+        serie2.add(count-1, prom+desu);
         ds.addSeries(serie2);
         //---graficar limite inf
         XYSeries serie3= new XYSeries("LInf");
         serie3.add(0, prom-desu);
-        serie3.add(y.length-2, prom-desu);
+        serie3.add(count-1, prom-desu);
         ds.addSeries(serie3);
         return ds;
     }

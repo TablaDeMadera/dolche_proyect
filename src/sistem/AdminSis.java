@@ -30,7 +30,7 @@ public class AdminSis extends javax.swing.JFrame {
         LogConexion tyu = new LogConexion();
         tyu.open();
         int id = tyu.getAlId();
-        jLabel50.setText(""+id);
+        jLabel50.setText(""+(id+1));
     }
 
     /**
