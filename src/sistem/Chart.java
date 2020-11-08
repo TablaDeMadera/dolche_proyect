@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistem;
 
 import java.awt.BasicStroke;
@@ -10,15 +5,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
-import java.util.HashSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JDialog;
-
 import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
 import org.jfree.chart.ChartUtils;
@@ -26,14 +14,13 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.renderer.xy.XYLineAndShapeRenderer;
-import org.jfree.data.category.DefaultCategoryDataset;
-import org.jfree.data.xy.DefaultXYDataset;
 import org.jfree.data.xy.XYDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 /**
  *
- * @author Capital
+ * @author Abraham Ascencio
+ * Modulo que trabaja la libreria de creación de graficos
  */
 public class Chart extends JDialog {
     public JFrame parentFrame;
@@ -60,7 +47,7 @@ public class Chart extends JDialog {
     private static  XYDataset createDataset(float [] y, float prom, float desu) {
         XYSeriesCollection ds = new XYSeriesCollection();
         int count = 0;
-        //---graficar muestras
+        //---graficar muestras en rango de tiempo seleccioando
         XYSeries serie0 = new XYSeries("Samples");
         for(int j=0; j<y.length-1; j++){
                 if(y[j]!=0){
@@ -86,21 +73,16 @@ public class Chart extends JDialog {
         ds.addSeries(serie3);
         return ds;
     }
-    
+    //personaliza grafico para que tenga colores y titulos
     public void customizeChart(JFreeChart chart){
         XYPlot plot = chart.getXYPlot();
         XYLineAndShapeRenderer renderer =new XYLineAndShapeRenderer();
-        
         renderer.setSeriesStroke(0,new BasicStroke(4.0f));
         renderer.setSeriesStroke(0,new BasicStroke(4.0f));
         renderer.setSeriesStroke(0,new BasicStroke(4.0f));
-        
         plot.setRenderer(renderer);
-        
         plot.setBackgroundPaint(Color.BLACK);
-        
         plot.setRangeGridlinesVisible(true);
         plot.setRangeGridlinePaint(Color.GRAY);
-        
     }
 }

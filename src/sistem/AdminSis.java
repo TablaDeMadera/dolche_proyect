@@ -1,21 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistem;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 /**
  *
- * @author Capital
+ * @author Abraham Ascencio
+ * Modulo de control del sistema; creación, modificación y eliminación
+ * de usuarios, alarmas, registros y el visor de acciones de control
  */
 public class AdminSis extends javax.swing.JFrame {
     public String URL;
@@ -209,19 +200,9 @@ public class AdminSis extends javax.swing.JFrame {
         jLabel3.setText("Privileges");
 
         cusernameField.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        cusernameField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cusernameFieldActionPerformed(evt);
-            }
-        });
 
         cprivilegeCombo.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         cprivilegeCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Production ", "Quality", "Administrator" }));
-        cprivilegeCombo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cprivilegeComboActionPerformed(evt);
-            }
-        });
 
         cusr_button.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         cusr_button.setText("Crear");
@@ -356,11 +337,6 @@ public class AdminSis extends javax.swing.JFrame {
         });
 
         u_res_1.setBackground(new java.awt.Color(204, 204, 204));
-        u_res_1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                u_res_1ActionPerformed(evt);
-            }
-        });
 
         u_res_2.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -677,11 +653,6 @@ public class AdminSis extends javax.swing.JFrame {
         f1.setBackground(new java.awt.Color(204, 204, 204));
 
         f2.setBackground(new java.awt.Color(204, 204, 204));
-        f2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                f2ActionPerformed(evt);
-            }
-        });
 
         f3.setBackground(new java.awt.Color(204, 204, 204));
 
@@ -941,12 +912,6 @@ public class AdminSis extends javax.swing.JFrame {
 
         jLabel33.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel33.setText("ID");
-
-        delRegField.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                delRegFieldActionPerformed(evt);
-            }
-        });
 
         jButton8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jButton8.setText("Borrar");
@@ -1393,10 +1358,6 @@ public class AdminSis extends javax.swing.JFrame {
         u_res_3.setText(ok[3]);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void f2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_f2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_f2ActionPerformed
-
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // MODIFICA LA INFORMACIÓN DE LOS REGISTROS:
         int [] xtra = new int[2];
@@ -1535,18 +1496,6 @@ public class AdminSis extends javax.swing.JFrame {
         conex.close();
     }//GEN-LAST:event_cusr_buttonActionPerformed
 
-    private void cprivilegeComboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cprivilegeComboActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cprivilegeComboActionPerformed
-
-    private void cusernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cusernameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cusernameFieldActionPerformed
-
-    private void u_res_1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_u_res_1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_u_res_1ActionPerformed
-
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // Mostrar toda la info del registro:
         String [] datas = new String[21];
@@ -1598,10 +1547,6 @@ public class AdminSis extends javax.swing.JFrame {
         del.close();
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void delRegFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_delRegFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_delRegFieldActionPerformed
-
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         // Create alarm:
         String ca1 = a1.getSelectedItem().toString();
@@ -1641,7 +1586,7 @@ public class AdminSis extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton10ActionPerformed
 
     private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-        // TODO add your handling code here:
+        // Elimina una alarma:
         int ida = Integer.parseInt(lookAlarm.getText());
         LogConexion dal = new LogConexion();
         dal.open();
@@ -1658,7 +1603,7 @@ public class AdminSis extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton11ActionPerformed
 
     private void gt_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gt_buttonActionPerformed
-        // TODO add your handling code here:
+        // Muestra las acciones en rango de fechas de los usuarios del sistema:
         String dato = "";
         String fi = ((JTextField)cho_1.getDateEditor().getUiComponent()).getText();
         String ff = ((JTextField)cho_2.getDateEditor().getUiComponent()).getText();
@@ -1672,7 +1617,7 @@ public class AdminSis extends javax.swing.JFrame {
     }//GEN-LAST:event_gt_buttonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // Boton de desbloqueo de usuario de3 errorneo:
         int result = 0;
         int idu = Integer.parseInt(user_search_field.getText());
         if(idu != 0){
@@ -1726,7 +1671,7 @@ public class AdminSis extends javax.swing.JFrame {
             }
         });
     }
-    
+    //identifica al usuario actual
     public void setCurrentUser(String name, int id){
         this.susuario = name;
         this.sid = id;

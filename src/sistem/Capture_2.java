@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistem;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 /**
  *
- * @author Capital
+ * @author Abraham Ascencio
+ * Modulo que permite la captura de los registros de producción
  */
 public class Capture_2 extends javax.swing.JFrame {
     public String susuario;
@@ -126,32 +119,17 @@ public class Capture_2 extends javax.swing.JFrame {
         user_label.setText("-----------------------");
 
         clave_field.setToolTipText("Clave de producto");
-        clave_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clave_fieldActionPerformed(evt);
-            }
-        });
 
         f_prod_chooser.setDateFormatString("yyyy-MM-dd");
 
         stat_final_combox.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         stat_final_combox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "LIBERADO", "RECHAZADO" }));
         stat_final_combox.setToolTipText("Llenar siguiente pestaña...");
-        stat_final_combox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stat_final_comboxActionPerformed(evt);
-            }
-        });
 
         jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("Espec.");
 
         espec_field.setToolTipText("Llenar siguiente pestaña...");
-        espec_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                espec_fieldActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -246,18 +224,6 @@ public class Capture_2 extends javax.swing.JFrame {
 
         jLabel19.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel19.setText("Estatus funcional");
-
-        brix_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                brix_fieldActionPerformed(evt);
-            }
-        });
-
-        ph_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ph_fieldActionPerformed(evt);
-            }
-        });
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
@@ -378,12 +344,6 @@ public class Capture_2 extends javax.swing.JFrame {
             }
         });
 
-        coliformes_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                coliformes_fieldActionPerformed(evt);
-            }
-        });
-
         sta_micro_combox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "LIBERADO", "LIBERADO CON DESVIACION", "RECHAZADO" }));
 
         jPanel4.setBackground(java.awt.Color.black);
@@ -490,27 +450,7 @@ public class Capture_2 extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void clave_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clave_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clave_fieldActionPerformed
-
-    private void stat_final_comboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stat_final_comboxActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_stat_final_comboxActionPerformed
-
-    private void espec_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_espec_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_espec_fieldActionPerformed
-
-    private void brix_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_brix_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_brix_fieldActionPerformed
-
-    private void ph_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ph_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ph_fieldActionPerformed
-
+//accion de boton que adquiere toda la información de los campos y la registra en la base dedatos
     private void generar_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_generar_buttonActionPerformed
         int p1, p8, p9 = 0;
         int id = 0;
@@ -567,15 +507,7 @@ public class Capture_2 extends javax.swing.JFrame {
         }
         
         registrar.close();
-        /*For debug
-        JOptionPane.showMessageDialog(this,p2+"\n"+p3+"\n"+p4+"\n"+p5+"\n"+p6+"\n"+p7+"\n"+p10+"\n"+p11+"\n"+p12+"\n"+p13+
-                "\n"+p14+"\n"+p15+"\n"+p16+"\n"+p17+"\n"+p18+"\n"+p19+"\n"+p20+"\n"+p21+"\n"+p22+"\n"+p22+"\n"+p23+"\n"+p24,
-                         "System",JOptionPane.PLAIN_MESSAGE);*/
     }//GEN-LAST:event_generar_buttonActionPerformed
-
-    private void coliformes_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_coliformes_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_coliformes_fieldActionPerformed
 
     /**
      * @param args the command line arguments
@@ -611,13 +543,14 @@ public class Capture_2 extends javax.swing.JFrame {
             }
         });
     }
-    
+    //adquiere la información del usuyario quehizo login en el sistema
     public void setCurrentUser(String name, int id){
         this.susuario = name;
         this.sid = id;
         user_label.setText(name);
     }
-    
+    //metodo que dispara las alarmas, realiza la comparación de limites
+    //y en caso de sobre pasar algun limite, se dispara una alarma
     public void checkLimits(float brix, float ph, float consist, float visco, float acid){
         int [] trigger = new int[1000];
         LogConexion check = new LogConexion();

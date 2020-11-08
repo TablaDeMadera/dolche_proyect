@@ -214,9 +214,6 @@
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Clave de producto"/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="clave_fieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="com.toedter.calendar.JDateChooser" name="f_prod_chooser">
               <Properties>
@@ -238,9 +235,6 @@
                 </Property>
                 <Property name="toolTipText" type="java.lang.String" value="Llenar siguiente pesta&#xf1;a..."/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="stat_final_comboxActionPerformed"/>
-              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value=""/>
               </AuxValues>
@@ -257,9 +251,6 @@
               <Properties>
                 <Property name="toolTipText" type="java.lang.String" value="Llenar siguiente pesta&#xf1;a..."/>
               </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="espec_fieldActionPerformed"/>
-              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -450,14 +441,8 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="brix_field">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="brix_fieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="ph_field">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ph_fieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="consis_field">
             </Component>
@@ -663,9 +648,6 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="coliformes_field">
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="coliformes_fieldActionPerformed"/>
-              </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="cuenta_field">
             </Component>

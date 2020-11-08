@@ -11,7 +11,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,7 +23,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Capital
+ * @author Abraham Ascencio
  */
 public class LogConexion {
    private static  String URL;
@@ -82,6 +81,8 @@ public class LogConexion {
    private PreparedStatement alrmTrigger;
    private PreparedStatement getAlm;
    
+   //Metodo que inicia conexión con la información
+   //del configurador y prepara las consultas a la base de datos
    public void open(){
         Properties p = new Properties();
         String ip = "";
@@ -329,7 +330,7 @@ public class LogConexion {
        }
    }
    
-   //-----------------------------------------------------------LOGIN 
+   //-----------------------------------------------------------LOGIN methods
    public String compare(String name, String code){
        ResultSet resultSet1 = null;
        ResultSet resultSet2 = null;
@@ -447,7 +448,7 @@ public class LogConexion {
        }
        return n;
    }
-   //---------------------------------------------VARIUOS
+   //---------------------------------------------VARIUOS methods
    public int getRId(){
        int n = 0;
        ResultSet resultSet = null;
@@ -649,7 +650,7 @@ public class LogConexion {
        }
        return i;
    }
-//---------------------------------------CAPTURE AND ADMIN   
+//---------------------------------------CAPTURE AND ADMIN  methods
    public int addRegister(String f_anal, String clave,
            String f_prd, int n_cocina, String stat_final, String opera,
            int u_id, int m_id, int p_id){
@@ -750,7 +751,7 @@ public class LogConexion {
        return result;     
    }
    
-   //-------------------------------ADMIN CONTROL
+   //-------------------------------ADMIN CONTROL methods
    public int addUser(String nick, String name, String pass, int privilege){
        int result = 0;
        try {
@@ -949,7 +950,6 @@ public class LogConexion {
        return dato;
    }
    
-   //fecha_analisis, clave, fecha_produccion, no_cocinada, estatus_final, operador
    public int upReg(String fecha_analisis, String clave, String fecha_produccion, int no_cocinada, String estatus_final, String operador, int id_reg){
        int result = 0;
        try {
@@ -969,7 +969,6 @@ public class LogConexion {
        return result;
    }
    
-   //espec, brix, ph, consistencia, apariencia, viscosidad, acidez, observaciones, estatus_fq, estatus_funcional
    public int upPar(String espec, float brix, float ph, float consistencia, String apariencia, float viscosidad, 
            float acidez, String observaciones, String estatus_fq, String estatus_funcional, int id_par){
        int result = 0;
@@ -994,7 +993,6 @@ public class LogConexion {
        return result;
    }
    
-   //coliformes, cuenta_estandar, hongos, levaduras, estatus_micro
    public int upMic(String coliformes, String cuenta_estandar, String hongos, String levaduras, String estatus_micro, int id_par){
        int result = 0;
        try {
@@ -1012,7 +1010,7 @@ public class LogConexion {
        }
        return result;
    }
-//-----------------------------------VIEWER     
+//-----------------------------------VIEWER     methods
    public String[][] getReg(String fecha){
        String [][] dato = new String [10][100];
        ResultSet resultSet = null;
@@ -1046,7 +1044,7 @@ public class LogConexion {
        return dato;
    }
    
-   //-----------------------------------------STADISTICS AND KPI GRAPHER
+   //-----------------------------------------STADISTICS AND KPI GRAPHER methods
       public float[][] getSample(String fi, String ff, String clv){
        float [][] dato = new float [5][10000];
        ResultSet resultSet = null;
@@ -1159,9 +1157,7 @@ public class LogConexion {
        return dato;
    }
 
-//--------------------ontiene la data de un kpi_id
-//id_kpi, date_kpi, clave, description, fi, ff, prom_brix, prom_ph, prom_consistencia, prom_viscocidad, prom_acidez,
-   //desv_brix, desv_ph, desv_consistencia, desv_viscocidad, desv_acidez
+//--------------------contiene la data de un kpi_id
     public String[] gKPI_2(int id){
        String [] dato = new String [16];
        ResultSet resultSet1 = null;
@@ -1194,10 +1190,6 @@ public class LogConexion {
        return dato;
    }
    
-//INSERT INTO kpis (date_kpi, clave, description, fi, ff, id_user) VALUES (?, ?, ?, ?, ?, ?)
-//INSERT INTO desviaciones (desv_brix, desv_ph, desv_consistencia, desv_viscocidad, desv_acidez, id_kpi) VALUES (?, ?, ?, ?, ?, ?)  
-//INSERT INTO promedios (prom_brix, prom_ph, prom_consistencia, prom_viscocidad, prom_acidez, id_kpi) VALUES (?, ?, ?, ?, ?, ?)  
-//INSERT INTO graficas (g_brix, g_ph, g_consistencia, g_viscocidad, g_acidez, id_kpi) VALUES (?, ?, ?, ?, ?, ?)      
    public int sKPI(String date_kpi, String clave, String description, String fi, String ff, int id_user, int id_avg, int id_desv, int id_graph){
        int result = 0;
        try {
@@ -1279,7 +1271,7 @@ public class LogConexion {
        return result;
    }
    
-   //-----------------------TASK MANAGER
+   //-----------------------TASK MANAGER methods
    public String gMensage(){
        String dato = "";
        ResultSet resultSet = null;

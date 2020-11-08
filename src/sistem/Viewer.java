@@ -1,17 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistem;
 
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Capital
+ * @author Abraham Ascencio
  */
 public class Viewer extends javax.swing.JFrame {
 
@@ -133,15 +127,12 @@ public class Viewer extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//accion del boton buscar, del cual adquiere el campo de fecha
     private void search_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search_buttonActionPerformed
         String p1 = null;
         String[][] qryRes = null;
         String []data = new String[8];
-
         p1 = ((JTextField)date_chooser.getDateEditor().getUiComponent()).getText();
-
-        
         DefaultTableModel model = new DefaultTableModel();
         model.addColumn("Id registro");
         model.addColumn("Fecha analisis");

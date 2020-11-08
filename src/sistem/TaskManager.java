@@ -1,14 +1,9 @@
 package sistem;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author Capital
+ * @author Abraham Ascencio
+ * Mudulo que realiza el selector de tareas y visualiza mensages y alarmase.
  */
 public class TaskManager extends javax.swing.JFrame {
     public String susuario;
@@ -22,6 +17,7 @@ public class TaskManager extends javax.swing.JFrame {
         pressLabel.setText("Bienvenido "+susuario);
     }
     
+    //Recive el privilegio del Login y permite al usuario pertinente la actividad.
     public void setPrivileges(String level){
         switch (level){
             case "1":
@@ -276,7 +272,7 @@ public class TaskManager extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//Iniciador de modulos al presionar sus respectivos botones
     private void reportButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reportButtonActionPerformed
         Reporter repo = new Reporter();
         repo.setCurrentUser(susuario, sid);
@@ -321,6 +317,7 @@ public class TaskManager extends javax.swing.JFrame {
     }//GEN-LAST:event_msg_buttonActionPerformed
 
     private void act_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_act_buttonActionPerformed
+        //Actualiza el campo de alarmas en busca de novedades en la base de datos
         String da = "";
         LogConexion di = new LogConexion();
         di.open();
@@ -366,6 +363,7 @@ public class TaskManager extends javax.swing.JFrame {
         
     }
     
+    //metodo para obtener el usuario actual
     public void setCurrentUser(String name, int id){
         this.susuario = name;
         this.sid = id;
@@ -392,5 +390,4 @@ public class TaskManager extends javax.swing.JFrame {
     private javax.swing.JButton staButton;
     private javax.swing.JButton viewerButton;
     // End of variables declaration//GEN-END:variables
-
 }

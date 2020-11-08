@@ -2,7 +2,6 @@ package sistem;
 
 
 import java.awt.GridLayout;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -16,15 +15,11 @@ import sistem.LogConexion;
 import javax.swing.JOptionPane;
 import javax.swing.*;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
  *
- * @author Capital
+ * @author Abraham Ascencio
+ * Modulo grafico de pantalla de acceso al sistema de información de Dolche
+ * 
  */
         
 public class Login extends javax.swing.JFrame {
@@ -35,7 +30,7 @@ public class Login extends javax.swing.JFrame {
     public int tr = 3;
     public int id_usr;
     public boolean status;
-    //public static String URL = "jdbc:mysql://127.0.0.1:3306/dolche?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+
     /**
      * Creates new form Login
      */
@@ -161,7 +156,7 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        // Función del boton para acceder al sistema
         String user =  userField.getText();
         usuario = userField.getText();
         String pass = passField.getText();
@@ -207,7 +202,7 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        // Boton que abre el configurador de conexión con la base de datos
         JOPtionPaneTest conex = new JOPtionPaneTest();
         try {
             conex.display();
@@ -264,6 +259,7 @@ public class Login extends javax.swing.JFrame {
 }
 
 class JOPtionPaneTest{
+    //Configuración de la ventana emergende de configuración de conexion a BD
     public static void display() throws IOException{
         Properties p = new Properties();
         p.load(new FileReader("config.properties"));

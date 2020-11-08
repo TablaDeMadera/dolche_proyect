@@ -207,9 +207,6 @@
                       <Properties>
                         <Property name="horizontalAlignment" type="int" value="2"/>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cusernameFieldActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="cpasswordField">
                     </Component>
@@ -226,9 +223,6 @@
                           </StringArray>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cprivilegeComboActionPerformed"/>
-                      </Events>
                       <AuxValues>
                         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                       </AuxValues>
@@ -477,9 +471,6 @@
                           <Color blue="cc" green="cc" red="cc" type="rgb"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="u_res_1ActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="u_res_2">
                       <Properties>
@@ -1207,9 +1198,6 @@
                           <Color blue="cc" green="cc" red="cc" type="rgb"/>
                         </Property>
                       </Properties>
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="f2ActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JTextField" name="f3">
                       <Properties>
@@ -1507,9 +1495,6 @@
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JTextField" name="delRegField">
-                      <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="delRegFieldActionPerformed"/>
-                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton8">
                       <Properties>

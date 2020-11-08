@@ -1,23 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistem;
 
-import com.itextpdf.text.log.Logger;
 import com.mysql.jdbc.Connection;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.Blob;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
@@ -27,7 +12,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
- * @author Capital
+ * @author Abraham Ascencio
  */
 public class Reporter extends javax.swing.JFrame {
     Connection conn; 
@@ -155,7 +140,7 @@ public class Reporter extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//el boton de consulta que adquiere una vista de la información del id estadistico
     private void load_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_load_buttonActionPerformed
         String [] description = new String [26];
         int id = Integer.parseInt(kpi_field.getText());
@@ -166,7 +151,7 @@ public class Reporter extends javax.swing.JFrame {
         description_area.setText("Clave de producto: "+description[2]+"\n\n"+description[3]+"\n\n\nDesde: "+description[4]+"\nHasta: "+description[5]);
         f_label.setText("Realizado el dia: "+description[1]);
     }//GEN-LAST:event_load_buttonActionPerformed
-
+//activa el generador del reporte en pdf
     private void gen_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_gen_buttonActionPerformed
         try {
             int id = Integer.parseInt(kpi_field.getText());
@@ -223,7 +208,7 @@ public class Reporter extends javax.swing.JFrame {
             }
         });
     }
-    
+    //recive la información del actual usuario
     public void setCurrentUser(String name, int id){
         this.susuario = name;
         this.sid = id;

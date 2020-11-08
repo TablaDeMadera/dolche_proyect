@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package sistem;
 
 import java.awt.Dimension;
@@ -19,7 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author Capital
+ * @author Abraham Ascencio
  */
 public class Stadistic extends javax.swing.JFrame {
     public String susuario;
@@ -99,11 +94,6 @@ public class Stadistic extends javax.swing.JFrame {
         fi_chooser.setDateFormatString("yyyy-MM-dd");
 
         clave_field.setToolTipText("Clave del producto");
-        clave_field.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                clave_fieldActionPerformed(evt);
-            }
-        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Descripción");
@@ -280,7 +270,8 @@ public class Stadistic extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+//acción del boton calcular, que llena la tabla con información estadistica
+    //del rango de fechas, y guarda los graficos de control pertinentes
     private void cal_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cal_buttonActionPerformed
 
         String fi = ((JTextField)fi_chooser.getDateEditor().getUiComponent()).getText();
@@ -299,7 +290,7 @@ public class Stadistic extends javax.swing.JFrame {
             String [] last_kpi = new String[16];
             float[][] sample = null;
 
-
+//adquisición de muestras en rango de fechas y clave de producto
             LogConexion reg_kpi = new LogConexion();
             reg_kpi.open();
             sample = reg_kpi.getSample(fi, ff, clv);
@@ -330,7 +321,7 @@ public class Stadistic extends javax.swing.JFrame {
             String gc = "";
             String gv = "";
             String ga = "";
-            
+            //creadores de graficos a selección de usuario
             if(c_brix.isSelected()){
                 Chart grafica1;
                 try {
@@ -405,7 +396,7 @@ public class Stadistic extends javax.swing.JFrame {
             last_kpi = graphics.gKPI();
             graphics.addEvent(sid, "Calcula estadistico y genera graficos");
             graphics.close();
-            
+            //llenado de tabla con inf. estadistica
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("ID");
             model.addColumn("Fecha");
@@ -432,10 +423,6 @@ public class Stadistic extends javax.swing.JFrame {
                          "System",JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_cal_buttonActionPerformed
-
-    private void clave_fieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clave_fieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_clave_fieldActionPerformed
 
     /**
      * @param args the command line arguments
